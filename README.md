@@ -8,9 +8,12 @@
 ## TODO Lists
 
 ### Coding
-1. [ ] Basic hello world web server
-    - [ ] Make git ignore for node modules
-    - [ ] Automate Workflow (using makefiles)
+1. [X] Basic hello world web server
+    - [X] Make git ignore for node modules
+    - [X] Automate Workflow (using makefiles)
+    - [X] Send a basic html
+    - [X] Use express-Handlebars for easier html creation
+    - [X] Set up Router
 
 2. [ ] Testing Basic DB and Website
 
@@ -19,7 +22,7 @@
 
 ### Misc 
 - [X] create git repository
-- [ ] talk about commit message format
+- [X] talk about commit message format
 - [ ] talk about front-end, back-end communication (interface)
 - [ ] decide on what libraries to use and __not__ use
 
