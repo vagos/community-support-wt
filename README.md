@@ -7,8 +7,6 @@
 
 ## TODO Lists
 
-<br>
-
 ### Coding
 1. [ ] Basic hello world web server
     - [ ] Make git ignore for node modules
@@ -28,8 +26,6 @@
 ---
 
 ## General Project information
-
-<br>
 
 ### Features
 
@@ -51,28 +47,21 @@
 ### General Ideas
 
 - Simultaneus Co-dev for first steps (3 hour intervals)
-
-- Code structure => [View] <-> [Controller] <-> [Model]
+- Code structure (try MVC)
 
 ---
 
 ## Code Information
 
-<br>
-
 ### Back-End
 
-> #### Frameworks:
-> - Express
-> - Node js
-> - SQL
-
-<br>   
+#### Frameworks:
+* Express
+* Node js
+* SQL
 
 ### Front-End
 
-> #### Frameworks:
-> - Node js
-> - Custom Framework
-
-
+#### Frameworks:
+* Node js
+* Custom Framework
