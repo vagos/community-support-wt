@@ -9,7 +9,19 @@ router.use((req , res, next) => {
 
 //define the home page route
 router.get('/', (req, res) => {
-    res.render('index');
+
+    a1 = {
+        name: 'vagos',
+        members: 12
+    };
+
+    a2 = {
+        name: 'tolis',
+        members: 66
+    };
+
+
+    res.render('index', {activities: [a1, a2]});
 });
 
 router.get('/authors', (req, res) => {

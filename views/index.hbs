@@ -1,3 +1,12 @@
+<h1>Activities</h1>
 
-WebDev project, a university project
-Now using handlebars
+
+<ul>
+{{#each activities}}
+<li>
+    <div style="margin-bottom:100px">
+        Name: {{this.name}} Members: {{this.members}} <br>
+    </div>
+</li>
+{{/each}}
+</ul>
