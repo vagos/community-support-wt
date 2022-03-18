@@ -46,6 +46,9 @@
 - Picture saving on DB
 - Hosting (Keruku?)
 - Chat Room
+- Post subscriptions
+- Post Reactions
+- Administration Features (post, comment deletion)
 
 ### General Ideas
 
