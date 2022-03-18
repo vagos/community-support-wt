@@ -16,13 +16,6 @@ app.engine('hbs', handlebars.engine({extname:'.hbs'}));
 app.set('view engine', 'hbs');
 app.set('views', './views')
 
-//request , response
-/*
-app.get('/', (req, res) => {
-    res.render('index');
-});
-/*/
-
 app.use('/', home);
 
 app.listen(port , () => {
