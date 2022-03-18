@@ -2,6 +2,7 @@
 
 ### Meetings
 - Initial meeting at 12/3/22
+- Basics meeting at 18/3/22
 
 ---
 
@@ -16,6 +17,10 @@
     - [X] Set up Router
 
 2. [ ] Testing Basic DB and Website
+    - [X] Create ERD
+    - [ ] Choose DB
+    - [ ] Create Tables
+    - [ ] Figure out how to do basic queries
 
 3. [ ] User login
 
@@ -23,8 +28,9 @@
 ### Misc 
 - [X] create git repository
 - [X] talk about commit message format
-- [ ] talk about front-end, back-end communication (interface)
-- [ ] decide on what libraries to use and __not__ use
+- [X] talk about front-end, back-end communication (interface)
+- [X] decide on what libraries to use and __not__ use
+- [X] basic front-end layout
 
 ---
 
