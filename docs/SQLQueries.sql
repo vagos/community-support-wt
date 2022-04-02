@@ -31,4 +31,3 @@ SELECT User.id FROM User JOIN Participation ON User.id == Participation.user_id 
 SELECT COUNT(*) FROM Post WHERE Post.activity_id = GIVEN_ID
 
 SELECT Post.id FROM Post WHERE Post.activity_id = GIVEN_ID
-
