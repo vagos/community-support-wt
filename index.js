@@ -2,7 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 
 //import routes
-const home = require('./routes/home.js');
+const indexRouter = require('./routes/index.js');
 
 //initialize app
 const app = express();
@@ -16,7 +16,7 @@ app.engine('hbs', handlebars.engine({extname:'.hbs'}));
 app.set('view engine', 'hbs');
 app.set('views', './views')
 
-app.use('/', home);
+app.use('/', indexRouter);
 
 app.listen(port , () => {
     console.log(`Example app listening on port ${port}`);
