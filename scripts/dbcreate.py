@@ -1,3 +1,15 @@
+"""
+db creation script
+
+usage: dbcreate > schema.sql
+
+$ mysql -p 
+> source ./schema.sql
+
+some entries will fail because of uniqueness/other constraints. that's ok.
+"""
+
+
 import random
 import string
 
@@ -15,22 +27,22 @@ with open(base + "/usernames.txt", "r") as member_name_file:
     NAMES = member_names.split('\n')
     SURNAMES = member_surnames.split('\n')
 
-# with open(base + "/events.txt", "r") as events_file:
-# 
-#     event_categories, event_name_verbs, event_name_cause, event_places = events_file.read().strip().split('\n\n')
-# 
-#     event_name_verbs = event_name_verbs.split('\n')
-#     event_name_cause = event_name_cause.split('\n')
-#     event_categories = event_categories.split('\n')
-#     event_places = event_places.split('\n')
-# 
-# with open(base + "/tasks.txt", "r") as tasks_file:
-# 
-#     task_verbs, task_targets = tasks_file.read().strip().split('\n\n')
-# 
-#     task_verbs = task_verbs.split('\n')
-#     task_targets = task_targets.split('\n')
+with open(base + "/activities.txt", "r") as tasks_file:
 
+    task_verbs, task_targets = tasks_file.read().strip().split('\n\n')
+
+    TARGETS = task_verbs.split('\n')
+    VERBS = task_targets.split('\n')
+
+def comment(s):
+    print(f"-- {s}")
+
+def create_activity_name():
+
+    target = random.choice(TARGETS)
+    verb = random.choice(VERBS)
+
+    return target + ' ' + verb
 
 def create_string(l=20):
     return ''.join((random.choice(string.ascii_letters + ' ') for i in range(l)))
@@ -78,7 +90,8 @@ CREATE TABLE IF NOT EXISTS friendship (
 
 activity_table = """
 CREATE TABLE IF NOT EXISTS activity (
-    name VARCHAR(255) PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE,
     description TEXT DEFAULT ''
 ) ENGINE=INNODB;
 """
@@ -86,11 +99,12 @@ CREATE TABLE IF NOT EXISTS activity (
 post_table = """
 CREATE TABLE IF NOT EXISTS post (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    creation_time DATE,
-    activity VARCHAR(255),
+    activity INT,
     creator INT,
+    creation_time DATE,
+    body TEXT,
     FOREIGN KEY (activity)
-        REFERENCES activity(name)
+        REFERENCES activity(id)
             ON UPDATE CASCADE
             ON DELETE CASCADE,
     FOREIGN KEY (creator)
@@ -106,6 +120,7 @@ CREATE TABLE IF NOT EXISTS comment (
     creation_time DATE,
     creator INT,
     post INT,
+    body TEXT,
     FOREIGN KEY (creator)
         REFERENCES user(id)
             ON UPDATE CASCADE
@@ -121,23 +136,46 @@ participation_table = """
 CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
-    activity VARCHAR(255),
+    activity INT,
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE
             ON DELETE CASCADE,
     FOREIGN KEY (activity)
-        REFERENCES activity(name)
+        REFERENCES activity(id),
+    UNIQUE(user, activity)
 ) ENGINE=INNODB;
 """
 
+N = 20
 
-def fill_user(n=10):
-
+def fill_table(table_name, n=10):
     for i in range(n):
-        
-        user_sql = "INSERT INTO user(name) VALUES('%s');" % create_username()
-        print(user_sql)
+        print(eval(f"create_{table_name}()"))
+
+
+def create_fk(table_name, row):
+    return str(random.randint(1, N))
+
+def create_user():
+    sql = "INSERT INTO user(name) VALUES('%s');" % create_username()
+    return sql
+
+def create_activity():
+    sql = "INSERT INTO activity(name) VALUES('%s');" % create_activity_name()
+    return sql
+
+def create_post():
+    post = (create_fk("activity", "id"), create_fk("user", "id"), create_date(), create_string(30))
+    sql = "INSERT INTO post(activity, creator, creation_time, body) VALUES(%s, %s, '%s', '%s');" % post
+    return sql
+
+def create_participation():
+    row = (create_fk("user", "id"), create_fk("activity", "id"))
+    sql = "INSERT INTO participation(user, activity) VALUES(%s, %s);" % row
+    return sql
+
+
 
 # def add_members(n=10):
 # 
@@ -823,9 +861,12 @@ def main():
     tables = ["user", "activity", "post", "friendship", "participation", "comment"]
 
     for t in tables:
-        print(eval(t + "_table"))
-
-    fill_user()
+        try:
+            print(f"DROP TABLE IF EXISTS {t};")
+            print(eval(t + "_table"))
+            fill_table(t, N)
+        except Exception as e:
+            comment(e)
 
 
 if __name__ == "__main__":

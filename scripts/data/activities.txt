@@ -1,4 +1,7 @@
 Draw
+Cooking
+Fish
+Mountain
 Create
 Prepare
 Select
@@ -11,10 +14,9 @@ Remove
 Paintings
 Food
 Posters
-Social Media Post
-a Sponsorship
-Media Outlet
-Rooms
-Ingredients
-the Public
 Shops
+Climbing
+Drinking
+Eating
+Running
+Swimming
