@@ -1,0 +1,17 @@
+<h1>Main Activities</h1>
+
+<link rel="stylesheet" href="./assets/css/basicPreview.css">
+
+<div class="PageContent">
+    <ul class="Activities">
+    {{#each activities}}
+    <li>
+        <div class="ActivityPreview">
+            <p>Name: {{this.name}}</p>
+            <p>Description: {{this.description}}</p>
+            <p>Members: {{this.members}}</p>
+        </div>
+    </li>
+    {{/each}}
+    </ul>
+</div>

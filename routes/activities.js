@@ -12,17 +12,19 @@ router.use((req , res, next) => {
 router.get('/', (req, res) => {
 
     a1 = {
-        name: 'vagosactivity',
+        name: 'activity1',
+        description: 'Description',
         members: 12
     };
 
     a2 = {
-        name: 'tolisactivity',
+        name: 'activity2',
+        description: 'Description',
         members: 66
     };
 
 
-    res.render('index', {activities: [a1, a2]});
+    res.render('activities', {activities: [a1, a2]});
 });
 
 router.get('/authors', (req, res) => {
