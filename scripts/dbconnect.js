@@ -4,21 +4,17 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
   password: 'admin',
-  database: 'testing'
+  database: 'test'
 })
 
-connection.connect()
+connection.connect();
 
-connection.query('select * from test', (err, rows, fields) => {
-  if (err) throw err
-    rows.forEach((row) => {
-        console.log(row.n);
-    }
-    );
-})
+function query(query, callback) {
 
-module.exports = {
-    'connection': connection
+    connection.query(query, callback);
+    // connection.end(); TODO: fix this
 }
 
-// connection.end()
+module.exports = {
+    query: query,
+}
