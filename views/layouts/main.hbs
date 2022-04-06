@@ -3,15 +3,20 @@
 <head>
     <meta charset="utf-8">
     <title>WebDev project</title>
+    {{!-- Stylesheet for navbar --}}
+    <link rel="stylesheet" href="./assets/css/basicStyle.css">
 </head>
 <body>
 
     <h1>{{title}}</h1>
 
-    <ul class="navbar">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/activities">Activities</a></li>
-    </ul>
+    <nav>
+        <ul class="navbar">
+            <li><a href="/">Home</a></li>
+            <li><a href="/activities">Activities</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
 
     {{{body}}}
 

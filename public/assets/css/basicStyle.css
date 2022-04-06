@@ -1,0 +1,36 @@
+html {
+    font-size: 10px;
+}
+
+nav {
+    background-color: #000;
+    padding: .5em;
+}
+
+.navbar {
+    
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar a {
+    color: #fff;
+    padding: .5em 1em;
+}
+
+.navbar {
+    display: flex;
+
+    list-style-type: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+  
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.navbar li {
+    flex: 1 1 auto;
+}
