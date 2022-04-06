@@ -9,7 +9,7 @@ router.use((req , res, next) => {
 
 /* testing */
 
-const db = require('../scripts/dbconnect');
+const db = require('../scripts/db');
 
 //define the home page route
 router.get('/', (req, res) => {
