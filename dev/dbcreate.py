@@ -15,7 +15,7 @@ import string
 
 # random.seed(999)
 
-base = "./data"
+base = "./random_data"
 
 def execute_sql(cursor, sql):
     return cursor.execute(sql)
