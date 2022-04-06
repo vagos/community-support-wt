@@ -2,32 +2,43 @@
 -- user related querries
 -- GIVEN_ID is the USER id to give for querry
 
+-- get user password
 SELECT password FROM User WHERE User.id=GIVEN_ID
 
+-- get user info
 SELECT name, email, join_date FROM User WHERE User.id = GIVEN_ID
 
+-- get user activities
+SELECT name FROM Participation JOIN Activity ON user WHERE user = GIVEN_ID
 
-SELECT name FROM Participation JOIN Activity ON user_id WHERE user_id = GIVEN_ID
+-- get user friend count
+SELECT COUNT(user_second) FROM Friendship WHERE user_first=GIVEN_ID
 
--- SELECT COUNT() FROM has_friendship_with GROUP BY
+-- get user friends
+SELECT user_second FROM Friendship WHERE user_first=GIVEN_ID
 
--- SELECT id FROM has_friendship_with
+-- get user posts
+SELECT Post.id FROM Post JOIN User ON Post.creator = User.id WHERE User.id = GIVEN_ID
 
-SELECT Post.id FROM Post JOIN User ON Post.user_id = User.id WHERE User.id = GIVEN_ID
-
-SELECT Comment.id FROM Comment JOIN User ON Comment.user_id = User.id WHERE User.id = GIVEN_ID
+-- get user comments
+SELECT * FROM Comment JOIN User ON Comment.creator = User.id WHERE User.id = GIVEN_ID
 
 
 -- Activity relAted querries
--- GIVEN_ID is the Activity id to give for querry
+-- GIVEN_NAME is the Activity name to give for querry
 
-SELECT name, description FROM Activity WHERE Activity.id = GIVEN_ID
+-- get activity info
+SELECT name, description FROM Activity WHERE Activity.name = GIVEN_NAME
 
-SELECT COUNT(*) FROM Participation WHERE Participation.activity_id = GIVEN_ID
+-- get Participant count
+SELECT COUNT(*) FROM Participation WHERE Participation.activity = GIVEN_NAME
 
+-- get all participants
 -- Maybe this can be better with group by?
-SELECT User.id FROM User JOIN Participation ON User.id == Participation.user_id WHERE Participation.activity_id = GIVEN_ID
+SELECT User FROM User JOIN Participation ON User.id == Participation.user WHERE Participation.activity = GIVEN_NAME
 
-SELECT COUNT(*) FROM Post WHERE Post.activity_id = GIVEN_ID
+-- get activity post count
+SELECT COUNT(*) FROM Post WHERE Post.activity = GIVEN_NAME
 
-SELECT Post.id FROM Post WHERE Post.activity_id = GIVEN_ID
+-- get activity posts
+SELECT Post.id FROM Post WHERE Post.activity = GIVEN_NAME

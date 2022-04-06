@@ -12,7 +12,7 @@
 #### Activity related
 1. Get Activity info
 2. Get Total Participations (total users count)
-3. Get Total User's 
+3. Get All Participants 
 4. Get Activity Posts count
 4. Get Activity Posts
 
