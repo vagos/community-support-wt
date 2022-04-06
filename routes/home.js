@@ -7,21 +7,17 @@ router.use((req , res, next) => {
     next();
 });
 
+/* testing */
+
+const db = require('../scripts/dbconnect');
+
 //define the home page route
 router.get('/', (req, res) => {
 
-    a1 = {
-        name: 'vagos',
-        members: 12
-    };
+    db.query('SELECT * FROM activity', (err, results) => {
+        res.render('index', { activities : results });
+    });
 
-    a2 = {
-        name: 'tolis',
-        members: 66
-    };
-
-
-    res.render('index', {activities: [a1, a2]});
 });
 
 router.get('/authors', (req, res) => {
