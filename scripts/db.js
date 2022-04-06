@@ -17,4 +17,5 @@ function query(query, callback) {
 
 module.exports = {
     query: query,
+    db : connection
 }
