@@ -7,9 +7,17 @@ router.use((req , res, next) => {
     next();
 });
 
+/* testing */
+
+const db = require('../scripts/db');
+
 //define the home page route
 router.get('/', (req, res) => {
-    res.render('index');
+
+    db.query('SELECT * FROM activity', (err, results) => {
+        res.render('index', { activities : results });
+    });
+
 });
 
 router.get('/authors', (req, res) => {
