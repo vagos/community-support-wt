@@ -13,18 +13,18 @@ router.get('/', (req, res) => {
 
     a1 = {
         name: 'activity1',
-        description: 'Description',
+        description: 'Description1',
         members: 12
     };
 
     a2 = {
         name: 'activity2',
-        description: 'Description',
+        description: 'Description2 this is a super long description basically to test how many character we want in a simple description before it gets to much to show. I think these are enough. But in case they are not here are some more epic character to look at',
         members: 66
     };
 
-
-    res.render('activities', {activities: [a1, a2]});
+    
+    res.render('activities',{title:"ActivitiesTitle" ,activities: [a1, a2]});
 });
 
 router.get('/authors', (req, res) => {
