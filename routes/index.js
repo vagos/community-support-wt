@@ -1,5 +1,6 @@
 const express = require('express');
 const req = require('express/lib/request');
+
 const router = express.Router();
 const activitiesRouter = require('./activities.js');
 const profileRouter = require('./profile.js');
@@ -14,15 +15,21 @@ router.use((req , res, next) => {
 
 });
 
-
 //Switch router for /activities
 router.use('/activities',activitiesRouter);
 router.use('/profile',profileRouter);
+/* testing */
+
+const db = require('../scripts/db');
 
 //define the home page route
 router.get('/', (req, res) => {
 
     res.render('home');
+    // db.query('SELECT * FROM activity', (err, results) => {
+    //     res.render('index', { activities : results });
+    // });
+
 });
 
 router.get('/authors', (req, res) => {
