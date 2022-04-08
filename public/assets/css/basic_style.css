@@ -83,3 +83,24 @@ nav {
 .navbar li {
     flex: 1 1 auto;
 }
+
+/* page navigation styling */
+
+.grid {
+    margin: 0 auto;
+    padding: 0;
+    /* max-width: ; */
+}
+
+.grid {
+    display: grid;
+
+    grid-template-columns: 1fr 5fr;
+
+    /* column-gap: 2em; */
+    column-width: auto;
+
+    justify-self: stretch;
+
+    grid-auto-columns: auto;
+}
