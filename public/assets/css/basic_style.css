@@ -1,0 +1,99 @@
+/* header styling */
+header {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    /* this make them take up all the space of the container and evenly divide left space */
+    justify-content: space-between;
+
+    min-width: 400px;
+}
+
+.logo {
+    /* 128x96 img */
+    width: 128px;
+    height: 96px;
+
+}
+
+.quote {
+    margin: 0;
+    /* make flexbox inside to align text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+/* the actual quote text */
+.quote p {
+    font-size: 2em;
+}
+
+
+.profile_img {
+    width: 128px;
+    height: 96px;
+
+}
+
+/* Navbar styling */
+nav {
+    font-size: 1.8em;
+    background-color: #000;
+    padding: .5em;
+
+    position: sticky;
+    top: 0;
+}
+
+.navbar {
+    
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar a {
+    color: #fff;
+    padding: .5em 1em;
+}
+
+.navbar {
+    display: flex;
+
+    list-style-type: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+  
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.navbar li {
+    flex: 1 1 auto;
+}
+
+/* page navigation styling */
+
+.grid {
+    margin: 0 auto;
+    padding: 0;
+    /* max-width: ; */
+}
+
+.grid {
+    display: grid;
+
+    grid-template-columns: 1fr 5fr;
+
+    /* column-gap: 2em; */
+    column-width: auto;
+
+    justify-self: stretch;
+
+    grid-auto-columns: auto;
+}

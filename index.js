@@ -1,8 +1,10 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 
+const db = require('./controllers/db.js');
+
 //import routes
-const home = require('./routes/home.js');
+const index_router = require('./routes/index.js');
 
 //initialize app
 const app = express();
@@ -16,8 +18,15 @@ app.engine('hbs', handlebars.engine({extname:'.hbs'}));
 app.set('view engine', 'hbs');
 app.set('views', './views')
 
-app.use('/', home);
+app.use('/', index_router);
 
 app.listen(port , () => {
     console.log(`Example app listening on port ${port}`);
+    
+    db.connection.connect( (err) => {
+        console.log('Connected to db!');
+    });
+
 });
+
+

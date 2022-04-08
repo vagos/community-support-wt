@@ -3,20 +3,20 @@ const router = express.Router();
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
+    console.log('greetings from activities')
     console.log(`Time:${Date.now()} Request:${req.url}`);
     next();
 });
 
-/* testing */
+const controller = require('../controllers/activites');
 
-const db = require('../scripts/db');
-
-//define the home page route
+//define the home page route for activities
 router.get('/', (req, res) => {
 
-    db.query('SELECT * FROM activity', (err, results) => {
-        res.render('index', { activities : results });
+    controller.get_all( (result) => {
+        res.render('activities',{title:"ActivitiesTitle" ,activities: result});
     });
+
 
 });
 

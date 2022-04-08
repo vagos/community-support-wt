@@ -3,17 +3,36 @@
 <head>
     <meta charset="utf-8">
     <title>WebDev project</title>
+    <link rel="stylesheet" href="./assets/css/basic_style.css">
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
 </head>
 <body>
 
-    <h1>{{title}}</h1>
+    <header>
+        <img src="./assets/img/logo.png" alt="Logohere" class="logo">
+        <div class="quote"><p>This is a daily quote!</p></div>
+        <img src="./assets/img/logo.png" alt="profile_img" class="profile_img">
+    </header>
 
-    <ul class="navbar">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/profile">Profile</a></li>
-    </ul>
+    <nav>
+        <ul class="navbar">
+            <li><a href="/">Home</a></li>
+            <li><a href="/activities">Activities</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
 
-    {{{body}}}
+    <main class="grid">
+        <aside class="pageNavigation">
+            <p>Here we will put page specific Navigation</p>
+        </aside>
+
+        <div  class="pageContentContainer">
+            <h1>{{title}}</h1>
+
+            {{{body}}}
+        </div>
+    </main>
 
 </body>
 </html>

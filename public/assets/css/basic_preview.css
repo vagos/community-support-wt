@@ -1,0 +1,19 @@
+.Activities {
+    font-size: 2em;
+    
+    /* Remove styling from list, also remove indetation */
+    list-style: none;
+    padding: 0;
+}
+
+.Activities li {
+    background-color: blueviolet;
+    
+    margin-top: 1em;
+}
+
+.ActivityPreview {
+    color: black;
+
+    /* make display grid or box */
+}
