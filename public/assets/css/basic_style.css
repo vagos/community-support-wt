@@ -1,7 +1,3 @@
-html {
-    font-size: 10px;
-}
-
 /* header styling */
 header {
     margin: 0;
@@ -16,16 +12,13 @@ header {
 
 .logo {
     /* 128x96 img */
-    width: 12.8em;
-    height: 9.6em;
+    width: 128px;
+    height: 96px;
 
 }
 
 .quote {
     margin: 0;
-    width: 51.2em;
-    height: 9.6em;
-
     /* make flexbox inside to align text */
     display: flex;
     align-items: center;
@@ -41,8 +34,8 @@ header {
 
 
 .profile_img {
-    width: 12.8em;
-    height: 9.6em;
+    width: 128px;
+    height: 96px;
 
 }
 
