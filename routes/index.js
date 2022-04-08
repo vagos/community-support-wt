@@ -20,16 +20,9 @@ router.use('/activities',activitiesRouter);
 router.use('/profile',profileRouter);
 /* testing */
 
-const db = require('../scripts/db');
-
 //define the home page route
 router.get('/', (req, res) => {
-
     res.render('home');
-    // db.query('SELECT * FROM activity', (err, results) => {
-    //     res.render('index', { activities : results });
-    // });
-
 });
 
 router.get('/authors', (req, res) => {

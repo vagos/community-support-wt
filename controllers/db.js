@@ -7,15 +7,6 @@ const connection = mysql.createConnection({
   database: 'test'
 })
 
-connection.connect();
-
-function query(query, callback) {
-
-    connection.query(query, callback);
-    // connection.end(); TODO: fix this
-}
-
 module.exports = {
-    query: query,
-    db : connection
+    connection : connection
 }
