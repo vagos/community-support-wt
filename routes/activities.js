@@ -14,7 +14,7 @@ const controller = require('../controllers/activites');
 router.get('/', (req, res) => {
 
     controller.get_all( (result) => {
-        res.render('activities',{title:"ActivitiesTitle" ,activities: result});
+        res.render('activities',{title:"activities" ,activities: result});
     });
 
 

@@ -22,7 +22,7 @@ router.use('/profile',profileRouter);
 
 //define the home page route
 router.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {title:'home'});
 });
 
 router.get('/authors', (req, res) => {
