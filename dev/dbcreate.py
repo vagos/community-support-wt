@@ -1,7 +1,7 @@
 """
 db creation script
 
-usage: dbcreate > schema.sql
+usage: python dbcreate.py > schema.sql
 
 $ mysql -p 
 > source ./schema.sql
@@ -142,7 +142,9 @@ CREATE TABLE IF NOT EXISTS participation (
             ON UPDATE CASCADE
             ON DELETE CASCADE,
     FOREIGN KEY (activity)
-        REFERENCES activity(id),
+        REFERENCES activity(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 """
@@ -162,7 +164,8 @@ def create_user():
     return sql
 
 def create_activity():
-    sql = "INSERT INTO activity(name) VALUES('%s');" % create_activity_name()
+    activity = ( create_activity_name(), create_string(30) )
+    sql = "INSERT INTO activity(name, description) VALUES('%s', '%s');" % activity
     return sql
 
 def create_post():

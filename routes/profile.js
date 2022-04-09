@@ -8,7 +8,7 @@ router.use((req , res, next) => {
 
 router.get('/', (req, res) => {
 
-    res.render('profile', { title:"Profile Title" });
+    res.render('profile', { title:"profile" });
 });
 
 module.exports = router;

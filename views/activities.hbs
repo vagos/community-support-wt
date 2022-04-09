@@ -1,17 +1,24 @@
-<h1>Main Activities</h1>
-
 <link rel="stylesheet" href="./assets/css/basic_preview.css">
 
 <div class="PageContent">
-    <ul class="Activities">
-    {{#each activities}}
-    <li>
-        <div class="ActivityPreview">
-            <p>Name: {{this.name}}</p>
-            <p>Description: {{this.description}}</p>
-            <p>Members: {{this.members}}</p>
-        </div>
-    </li>
-    {{/each}}
-    </ul>
+    <div class="accordion" id="accordionActivity">
+        {{#each activities}}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{this.id}}" 
+                        aria-expanded="false" aria-controls="collapse{{this.id}}">
+                    {{this.name}}
+                    </button>
+                </h2>
+                <div id="collapse{{this.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{this.id}}" data-bs-parent="#accordionActivity">
+                    <div class="accordion-body">
+                        <p>{{this.description}}</p>
+                        <p>members: {{this.members}}</p>
+                        <a href="/activities/{{this.name}}">view posts</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
 </div>
