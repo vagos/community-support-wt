@@ -11,11 +11,16 @@ const controller = require('../controllers/activites');
 //define the home page route for activities
 router.get('/', (req, res) => {
 
-    controller.get_all( (result) => {
-        res.render('activities',{title:"activities" ,activities: result});
+    controller.getAll( (result) => {
+        const activities = result;
+        res.render('activities',{title:"activities" ,activities: activities});
     });
 
 
+});
+
+router.get('/:activityId', (req, res) => {
+    res.render('activity', {name : req.params.activityId });
 });
 
 module.exports = router;

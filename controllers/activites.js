@@ -4,10 +4,19 @@
  */
 const db = require('./db');
 
-exports.get_all = ( cb ) => {
+exports.getAll = ( cb ) => {
     
-    db.connection.query('SELECT * FROM activity', (err, rows) => {
+    db.connection.query('SELECT name, id FROM activity', (err, rows) => {
         cb(rows);
     });
 
 };
+
+/*
+exports.getMembers = ( activityName, cb ) => {
+    
+    db.connection.query(`SELECT COUNT(user) FROM 
+        participation WHERE participation.name = ${activityName}`,
+        (err, rows) => { cb(rows) });
+};
+ */
