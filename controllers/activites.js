@@ -12,6 +12,18 @@ exports.getAll = ( cb ) => {
 
 };
 
+exports.getPosts = (activityName, cb) => {
+
+    db.connection.query(`
+    SELECT post.id, post.body FROM post JOIN activity ON 
+        activity.id = post.activity WHERE 
+        activity.name = '${activityName}'`,
+    (err, rows) => { 
+        if (err) throw err;
+        cb(rows) 
+    });
+};
+
 /*
 exports.getMembers = ( activityName, cb ) => {
     

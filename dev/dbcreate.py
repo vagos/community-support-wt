@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS activity (
 post_table = """
 CREATE TABLE IF NOT EXISTS post (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
     activity INT,
     creator INT,
     creation_time DATE,
