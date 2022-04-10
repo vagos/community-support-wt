@@ -10,13 +10,13 @@ const controller = require('../controllers/activites');
 
 //define the home page route for activities
 router.get('/', (req, res) => {
+
     controller.getAll( (result) => {
         const activities = result;
     
         activities.forEach( (v) => {
             v.color = `rgb( ${Math.random() * (255)}, ${Math.random() * (255)}, ${Math.random() * (255)})`;
         });
-
 
         res.render('activities',{title:"activities" ,activities: activities});
     });
@@ -25,14 +25,16 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:activityId', (req, res) => {
+    
     activityName = req.params.activityId;
-
+    
     controller.getPosts(activityName, (posts) => {
+        
         res.render('activity', { name : activityName, 
             posts: posts
+
         });
     });
-
 });
 
 module.exports = router;
