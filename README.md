@@ -16,11 +16,11 @@
     - [X] Use express-Handlebars for easier html creation
     - [X] Set up Router
 
-2. [ ] Testing Basic DB and Website
+2. [X] Testing Basic DB and Website
     - [X] Create ERD
-    - [ ] Choose DB
-    - [ ] Create Tables
-    - [ ] Figure out how to do basic queries
+    - [X] Choose DB
+    - [X] Create Tables
+    - [X] Figure out how to do basic queries
 
 3. [ ] User login
 
