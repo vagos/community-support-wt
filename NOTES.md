@@ -41,10 +41,18 @@ After that we referance it using /assets/css/myfile.css
 
 - Tools tips for forms (https://www.w3schools.com/bootstrap4/bootstrap_tooltip.asp)
 
+- spinners for loading (https://www.w3schools.com/bootstrap4/bootstrap_spinners.asp)
+
+- utilities instead of only cards (https://www.w3schools.com/bootstrap4/bootstrap_utilities.asp)
+
+- row column for auto resizing (https://www.w3schools.com/bootstrap4/bootstrap_grid_examples.asp)
 
 - bootstrap 4 supports flexbox (https://www.w3schools.com/bootstrap4/bootstrap_flex.asp)
 
 - maybe look into making our own bootstrap templates? (https://www.w3schools.com/bootstrap4/bootstrap_templates.asp)
+
+
+- moving text to the right in bootstrap with css(https://stackoverflow.com/questions/31815881/set-bootstrap-right-side-or-left-side)
 
 ### Workspace Notes
 
