@@ -25,29 +25,31 @@ After that we referance it using /assets/css/myfile.css
 
 ### Styling notes
 
-- badges in bootstrap are a nice way to add notificcations (https://www.w3schools.com/bootstrap4/bootstrap_badges.asp)
+- badges in bootstrap are a nice way to add notificcations (https://www.w3schools.com/bootstrap5/bootstrap_badges.php)
 
-- pagination in bootstrap will be nice on posts (https://www.w3schools.com/bootstrap4/bootstrap_pagination.asp)
+- pagination in bootstrap will be nice on posts (https://www.w3schools.com/bootstrap5/bootstrap_pagination.php)
 
-- Collapsables will be nice to organize comment threads (https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp)
+- Collapsables will be nice to organize comment threads (https://www.w3schools.com/bootstrap5/bootstrap_collapse.php)
 
-- Bootstrap Navbar with a search will be a nice replacement (https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp)
+- Bootstrap Navbar with a search will be a nice replacement (https://www.w3schools.com/bootstrap5/bootstrap_navbar.php)
 
-- Media objects can be nested nicely for comment threads (https://www.w3schools.com/bootstrap4/bootstrap_media_objects.asp)
+- maybe change sidebar to offcanvas for small screens? (https://www.w3schools.com/bootstrap5/bootstrap_offcanvas.php)
 
-- Carousel for many pictures (https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp)
+- Media objects no longer exist in bootstrap 5 here is an alternative with flex (https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-media-objects.php) (https://stackoverflow.com/questions/64045201/in-bootstrap-v5-0-0-alpha1-what-can-i-use-for-media-bs-3-4)
 
-- Modals for login? (https://www.w3schools.com/bootstrap4/bootstrap_modal.asp)
+- Carousel for many pictures (https://www.w3schools.com/bootstrap5/bootstrap_carousel.php)
 
-- Tools tips for forms (https://www.w3schools.com/bootstrap4/bootstrap_tooltip.asp)
+- Modals for login? (https://www.w3schools.com/bootstrap5/bootstrap_modal.php)
 
-- spinners for loading (https://www.w3schools.com/bootstrap4/bootstrap_spinners.asp)
+- Tools tips for forms (https://www.w3schools.com/bootstrap5/bootstrap_tooltip.php)
 
-- utilities instead of only cards (https://www.w3schools.com/bootstrap4/bootstrap_utilities.asp)
+- spinners for loading (https://www.w3schools.com/bootstrap5/bootstrap_spinners.php)
 
-- row column for auto resizing (https://www.w3schools.com/bootstrap4/bootstrap_grid_examples.asp)
+- utilities instead of only cards (https://www.w3schools.com/bootstrap5/bootstrap_utilities.php)
 
-- bootstrap 4 supports flexbox (https://www.w3schools.com/bootstrap4/bootstrap_flex.asp)
+- row column for auto resizing (https://www.w3schools.com/bootstrap5/bootstrap_grid_examples.php)
+
+- bootstrap 4 supports flexbox (https://www.w3schools.com/bootstrap5/bootstrap_flex.php)
 
 - maybe look into making our own bootstrap templates? (https://www.w3schools.com/bootstrap4/bootstrap_templates.asp)
 
