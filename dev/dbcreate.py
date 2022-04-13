@@ -179,6 +179,10 @@ def create_participation():
     sql = "INSERT INTO participation(user, activity) VALUES(%s, %s);" % row
     return sql
 
+def create_comment():
+    comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string(30))
+    sql = "INSERT INTO comment(creation_time, creator, post, body) VALUES(%s, %s, '%s', '%s');" % comment
+    return sql
 
 
 # def add_members(n=10):
