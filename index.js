@@ -3,18 +3,20 @@ const handlebars = require('express-handlebars');
 
 const db = require('./controllers/db.js');
 
-//import routes
+// Routes
 const index_router = require('./routes/index.js');
 
-//initialize app
 const app = express();
 const port = 3000;
 
-//Intermediary for public files (Makes life easier and more secure) 
+// Intermediary for public files (Makes life easier and more secure) 
 app.use(express.static(__dirname + '/public'));
 
-//Set rendering engine (file ext name will be .hbs)
-app.engine('hbs', handlebars.engine({extname:'.hbs'})); 
+// Set rendering engine (file ext name will be .hbs)
+app.engine('hbs', handlebars.engine({
+  extname: '.hbs',
+  helpers: require('./views/handlebars-helpers') //only need this
+}));
 app.set('view engine', 'hbs');
 app.set('views', './views')
 

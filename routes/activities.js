@@ -3,8 +3,6 @@ const router = express.Router();
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
-    console.log('greetings from activities')
-    console.log(`Time:${Date.now()} Request:${req.url}`);
     next();
 });
 
@@ -13,15 +11,30 @@ const controller = require('../controllers/activites');
 //define the home page route for activities
 router.get('/', (req, res) => {
 
-    controller.get_all( (result) => {
-        res.render('activities',{title:"ActivitiesTitle" ,activities: result});
+    controller.getAll( (result) => {
+        const activities = result;
+    
+        activities.forEach( (v) => {
+            v.color = `rgb( ${Math.random() * (255)}, ${Math.random() * (255)}, ${Math.random() * (255)})`;
+        });
+
+        res.render('activities',{title:"activities" ,activities: activities});
     });
 
 
 });
 
-router.get('/authors', (req, res) => {
-    res.sendFile('epic.gif', {root: './public'});
+router.get('/:activityId', (req, res) => {
+    
+    activityName = req.params.activityId;
+    
+    controller.getPosts(activityName, (posts) => {
+        
+        res.render('activity', { name : activityName, 
+            posts: posts
+
+        });
+    });
 });
 
 module.exports = router;

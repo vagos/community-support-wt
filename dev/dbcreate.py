@@ -1,12 +1,25 @@
 """
 db creation script
 
-usage: dbcreate > schema.sql
+usage: python dbcreate.py > schema.sql
 
 $ mysql -p 
 > source ./schema.sql
 
 some entries will fail because of uniqueness/other constraints. that's ok.
+"""
+
+"""
+db creation script process for windows
+
+first take prints from console of dbcreate.py and insert them into schema.sql
+
+then open cmd and run:
+$ mysql -u admin -p
+> enter password
+
+>use test //this will use the test database
+>source ./schema.sql // this will run the schema.sql and load the db
 """
 
 
@@ -99,6 +112,7 @@ CREATE TABLE IF NOT EXISTS activity (
 post_table = """
 CREATE TABLE IF NOT EXISTS post (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
     activity INT,
     creator INT,
     creation_time DATE,
@@ -142,7 +156,9 @@ CREATE TABLE IF NOT EXISTS participation (
             ON UPDATE CASCADE
             ON DELETE CASCADE,
     FOREIGN KEY (activity)
-        REFERENCES activity(id),
+        REFERENCES activity(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 """
@@ -162,7 +178,8 @@ def create_user():
     return sql
 
 def create_activity():
-    sql = "INSERT INTO activity(name) VALUES('%s');" % create_activity_name()
+    activity = ( create_activity_name(), create_string(30) )
+    sql = "INSERT INTO activity(name, description) VALUES('%s', '%s');" % activity
     return sql
 
 def create_post():
@@ -175,6 +192,10 @@ def create_participation():
     sql = "INSERT INTO participation(user, activity) VALUES(%s, %s);" % row
     return sql
 
+def create_comment():
+    comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string(30))
+    sql = "INSERT INTO comment(creation_time, creator, post, body) VALUES('%s', %s, %s, '%s');" % comment
+    return sql
 
 
 # def add_members(n=10):

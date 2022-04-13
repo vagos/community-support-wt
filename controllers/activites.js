@@ -4,10 +4,17 @@
  */
 const db = require('./db');
 
-exports.get_all = ( cb ) => {
+exports.getAll = ( cb ) => {
     
-    db.connection.query('SELECT * FROM activity', (err, rows) => {
+    db.connection.query('SELECT name, id FROM activity', (err, rows) => {
         cb(rows);
     });
 
+};
+
+exports.getPosts = (activityName, cb) => {
+
+    db.connection.query(`SELECT post.id, post.body FROM post 
+        JOIN activity ON activity.id = post.activity WHERE activity.name = ?`, activityName,
+    (err, rows) => { if (err) throw err; cb(rows) });
 };

@@ -1,17 +1,15 @@
-<h1>Main Activities</h1>
-
-<link rel="stylesheet" href="./assets/css/basic_preview.css">
-
 <div class="PageContent">
-    <ul class="Activities">
-    {{#each activities}}
-    <li>
-        <div class="ActivityPreview">
-            <p>Name: {{this.name}}</p>
-            <p>Description: {{this.description}}</p>
-            <p>Members: {{this.members}}</p>
-        </div>
-    </li>
-    {{/each}}
-    </ul>
+    <div class="accordion" id="accordionActivity">
+        {{#each activities}}
+            <div class="card" style="width: 80%;">
+                <p style="width: 100%; height: 50px; background-color: {{this.color}};"></p>
+              <div class="card-body">
+                  <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.description}}</p>
+                <a href="/activities/{{this.name}}" class="btn btn-primary">view posts</a>
+              </div>
+            </div>
+        {{/each}}
+    </div>
+
 </div>
