@@ -77,3 +77,18 @@
 #### Frameworks:
 * Node js
 * Custom Framework
+
+# Running
+
+## Regular
+
+```
+$ make run
+```
+
+## Docker
+
+```bash 
+$ docker-compose build
+$ docker-compose up
+```
