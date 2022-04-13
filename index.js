@@ -1,6 +1,8 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 
+require('dotenv').config();
+
 const db = require('./controllers/db.js');
 
 // Routes
@@ -26,6 +28,7 @@ app.listen(port , () => {
     console.log(`Example app listening on port ${port}`);
     
     db.connection.connect( (err) => {
+        if (err) throw err;
         console.log('Connected to db!');
     });
 });

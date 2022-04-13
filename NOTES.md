@@ -24,3 +24,8 @@ After that we referance it using /assets/css/myfile.css
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css
+
+### Docker Links
+
+https://stackoverflow.com/questions/17666249/how-do-i-import-an-sql-file-using-the-command-line-in-mysql
+https://developer.ibm.com/tutorials/docker-dev-db/
