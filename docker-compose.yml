@@ -9,8 +9,8 @@ services:
       - MYSQL_DATABASE=$MYSQL_DATABASE
     ports:
       - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
-    volumes:
-      - db:/var/lib/mysql
+#    volumes:
+#      - db:/var/lib/mysql
   app:
     depends_on:
       - mysqldb
