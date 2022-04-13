@@ -25,25 +25,26 @@ After that we referance it using /assets/css/myfile.css
 
 ### Styling notes
 
-- badges in bootstrap are a nice way to add notificcations (https://www.w3schools.com/bootstrap/bootstrap_badges_labels.asp)
+- badges in bootstrap are a nice way to add notificcations (https://www.w3schools.com/bootstrap4/bootstrap_badges.asp)
 
-- pagination in bootstrap will be nice on posts (https://www.w3schools.com/bootstrap/bootstrap_pagination.asp)
+- pagination in bootstrap will be nice on posts (https://www.w3schools.com/bootstrap4/bootstrap_pagination.asp)
 
-- Collapsables will be nice to organize comment threads (https://www.w3schools.com/bootstrap/bootstrap_collapse.asp)
+- Collapsables will be nice to organize comment threads (https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp)
 
-- Bootstrap Navbar with a search will be a nice replacement (https://www.w3schools.com/bootstrap/bootstrap_navbar.asp)
+- Bootstrap Navbar with a search will be a nice replacement (https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp)
 
-- Media objects can be nested nicely for comment threads (https://www.w3schools.com/bootstrap/bootstrap_media_objects.asp)
+- Media objects can be nested nicely for comment threads (https://www.w3schools.com/bootstrap4/bootstrap_media_objects.asp)
 
-- Carousel for many pictures (https://www.w3schools.com/bootstrap/bootstrap_carousel.asp)
+- Carousel for many pictures (https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp)
 
-- Modals for login? (https://www.w3schools.com/bootstrap/bootstrap_modal.asp)
+- Modals for login? (https://www.w3schools.com/bootstrap4/bootstrap_modal.asp)
 
-- Tools tips for forms (https://www.w3schools.com/bootstrap/bootstrap_tooltip.asp)
+- Tools tips for forms (https://www.w3schools.com/bootstrap4/bootstrap_tooltip.asp)
 
-- Affix to lock items in display (https://www.w3schools.com/bootstrap/bootstrap_affix.asp)
 
-- maybe look into making our own bootstrap templates? (https://www.w3schools.com/bootstrap/bootstrap_templates.asp)
+- bootstrap 4 supports flexbox (https://www.w3schools.com/bootstrap4/bootstrap_flex.asp)
+
+- maybe look into making our own bootstrap templates? (https://www.w3schools.com/bootstrap4/bootstrap_templates.asp)
 
 ### Workspace Notes
 
