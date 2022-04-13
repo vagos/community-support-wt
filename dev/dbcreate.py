@@ -92,7 +92,7 @@ activity_table = """
 CREATE TABLE IF NOT EXISTS activity (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) UNIQUE,
-    description TEXT DEFAULT ''
+    description VARCHAR(255) DEFAULT ''
 ) ENGINE=INNODB;
 """
 
