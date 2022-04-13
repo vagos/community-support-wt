@@ -3,6 +3,110 @@
 <link rel="stylesheet" href="./assets/css/basic_preview.css">
 
 <div class="PageContent">
-    This is temporary profile page <br>
-    Here will go all the profile info we want to display
+    <div class="container-fluid">
+        <div class="card card-lg">
+            <div class="row">
+                <img src="/assets/img/logo.png" alt="" class="rounded col-sm-3">
+                <div class="row col-sm-8">
+                    <h2 class="row">John Doe noCapios</h2>
+                    <p class="row font-weight-light"> BIOGRAPHY ASDLJGHAKUGHASKJHGKJSHDGJKHSKJGHSKJG</p>
+                </div>
+            </div>
+            <p class="small text-muted">Joined on 1/1/1969 </p>
+        </div>
+    </div>
+
+    {{!-- horizontal divider --}}
+    <hr> 
+
+    <div class="ActivitiesSection">
+        <div class="container-fluid">
+            <div class="ActivitiesHeader d-flex">
+                <h1>Activities</h1> 
+                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">60</div>
+                <div class="p-2" style="margin-left: auto;">Total points:1234</div>
+            </div>
+
+            <div class="ActivitiesFacts accordion" id="myaccordion">
+
+                <div class="ActivityFact accordion-item">
+                    <div class="accordion-header" id="headingOne"> 
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LongestAct">Longest activity</button>
+                    </div>
+                    <div id="LongestAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
+                        <div class="card-body">
+                            <h5 class="card-title">Activity name</h5>
+                            <p class="card-text">ActivityDescription</p>
+                            <a href="" class="btn btn-primary">view posts</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ActivityFact accordion-item">
+                    <div class="accordion-header" id="headingTwo"> 
+                        <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#LatestAct">Latest activity</button>
+                    </div>
+                    <div id="LatestAct" class="accordion-collapse collapse show" data-bs-parent="#myaccordion">
+                        <div class="card-body">
+                            <h5 class="card-title">Activity name</h5>
+                            <p class="card-text">ActivityDescription</p>
+                            <a href="" class="btn btn-primary">view posts</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ActivityFact accordion-item">
+                    <div class="accordion-header" id="headingThree"> 
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#MostAct">Most active</button>
+                    </div>
+                    <div id="MostAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
+                        <div class="card-body">
+                            <h5 class="card-title">Activity name</h5>
+                            <p class="card-text">ActivityDescription</p>
+                            <a href="" class="btn btn-primary">view posts</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    {{!-- horizontal divider --}}
+    <hr> 
+
+    <div class="FriendsSection">
+        <div class="container-fluid">
+            <div class="FriendsHeader d-flex">
+                <h1>Friends</h1> 
+                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">3</div>
+            </div>
+
+            <div class="FriendsList">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

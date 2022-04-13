@@ -9,6 +9,19 @@ $ mysql -p
 some entries will fail because of uniqueness/other constraints. that's ok.
 """
 
+"""
+db creation script process for windows
+
+first take prints from console of dbcreate.py and insert them into schema.sql
+
+then open cmd and run:
+$ mysql -u admin -p
+> enter password
+
+>use test //this will use the test database
+>source ./schema.sql // this will run the schema.sql and load the db
+"""
+
 
 import random
 import string
@@ -179,6 +192,10 @@ def create_participation():
     sql = "INSERT INTO participation(user, activity) VALUES(%s, %s);" % row
     return sql
 
+def create_comment():
+    comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string(30))
+    sql = "INSERT INTO comment(creation_time, creator, post, body) VALUES('%s', %s, %s, '%s');" % comment
+    return sql
 
 
 # def add_members(n=10):
