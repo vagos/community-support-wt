@@ -60,6 +60,8 @@ After that we referance it using /assets/css/myfile.css
 
 - accordion bootstrap (https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-accordion.php)
 
+- nice lists in bootstrap (https://getbootstrap.com/docs/4.0/components/list-group/#custom-content)
+
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css

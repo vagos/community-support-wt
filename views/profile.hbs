@@ -1,6 +1,6 @@
 <h1>Main Profile info</h1>
 
-{{!-- <link rel="stylesheet" href="./assets/css/basic_preview.css"> --}}
+<link rel="stylesheet" href="./assets/css/basic_preview.css">
 
 <div class="PageContent">
     <div class="container-fluid">
@@ -12,7 +12,7 @@
                     <p class="row font-weight-light"> BIOGRAPHY ASDLJGHAKUGHASKJHGKJSHDGJKHSKJGHSKJG</p>
                 </div>
             </div>
-            <p class="small">Joined on 1/1/1969 </p>
+            <p class="small text-muted">Joined on 1/1/1969 </p>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
 
                 <div class="ActivityFact accordion-item">
                     <div class="accordion-header" id="headingThree"> 
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#MostAct">most activity</button>
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#MostAct">Most active</button>
                     </div>
                     <div id="MostAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
                         <div class="card-body">
@@ -74,7 +74,39 @@
         </div>
     </div>
 
+    {{!-- horizontal divider --}}
+    <hr> 
+
     <div class="FriendsSection">
-        Here will no of friends, and a list of friends
+        <div class="container-fluid">
+            <div class="FriendsHeader d-flex">
+                <h1>Friends</h1> 
+                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">3</div>
+            </div>
+
+            <div class="FriendsList">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 h-100">
+                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
+                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
