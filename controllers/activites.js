@@ -6,10 +6,7 @@ const db = require('./db');
 
 exports.getAll = ( cb ) => {
     
-    db.connection.query('SELECT name, id FROM activity', (err, rows) => {
-        cb(rows);
-    });
-
+    db.connection.query('SELECT name, id FROM activity', (err, rows) => { if (err) throw err; cb(rows); });
 };
 
 exports.getPosts = (activityName, cb) => {

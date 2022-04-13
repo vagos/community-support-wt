@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS user (
     name VARCHAR(255) NOT NULL DEFAULT ''
 ) ENGINE=INNODB;
 
+
 INSERT INTO user(name) VALUES('Ioanna Cramberry');
 INSERT INTO user(name) VALUES('Vagos Triangle');  
 INSERT INTO user(name) VALUES('Konstantina Pokahontas');
@@ -25,13 +26,16 @@ INSERT INTO user(name) VALUES('Orestis Triangle');
 INSERT INTO user(name) VALUES('Orestis Johnas');
 INSERT INTO user(name) VALUES('Kostas Looper');
 INSERT INTO user(name) VALUES('Kostas Zelda');
+
+
 DROP TABLE IF EXISTS activity;
 
 CREATE TABLE IF NOT EXISTS activity (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) UNIQUE,
-    description TEXT DEFAULT ''
+    description VARCHAR(255) DEFAULT ''
 ) ENGINE=INNODB;
+
 
 INSERT INTO activity(name, description) VALUES('Collect Running', 'xedSqMsiNDlUSRkYYUeOuOAlunHBsF');
 INSERT INTO activity(name, description) VALUES('Select Swimming', 'qxSQgRCmiZFxIGYnNPkyLNzRzTBU L');
@@ -53,6 +57,7 @@ INSERT INTO activity(name, description) VALUES('Prepare Shops', 'NDtIzmgTWaAeOh 
 INSERT INTO activity(name, description) VALUES('Cooking Running', 'CRrlGvOPqNpipzhTgdfSRbwTBmWCOC');
 INSERT INTO activity(name, description) VALUES('Fish Food', 'sWJEowftTfm wZzbmTcrAYTBtrlcET');
 INSERT INTO activity(name, description) VALUES('Fish Running', 'RAeLxyJfmBZXeQPzE HAHUuhgqJdst');
+
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE IF NOT EXISTS post (
@@ -71,6 +76,7 @@ CREATE TABLE IF NOT EXISTS post (
             ON UPDATE CASCADE
             ON DELETE CASCADE
 ) ENGINE=INNODB;
+
 
 INSERT INTO post(activity, creator, creation_time, body) VALUES(2, 20, '2022-10-02', 'NRyKEjJqbacBHIPRDKsKUhECYueCAg');
 INSERT INTO post(activity, creator, creation_time, body) VALUES(11, 16, '2022-03-30', 'jOxoJSIkCAVFVYCwbSHNsHSVedZYrQ');
@@ -92,6 +98,7 @@ INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 8, '2021-03-
 INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 6, '2021-06-01', 'UKCkqcOaXwZDXuQHuDqdTleCVDYsSL');
 INSERT INTO post(activity, creator, creation_time, body) VALUES(3, 7, '2020-07-09', 'CGewKaGahyWRDnrsPKVOfDWUyzXCcl');
 INSERT INTO post(activity, creator, creation_time, body) VALUES(15, 3, '2022-03-21', 'GrmIuOMjymWufhWHqAEeeWTYvQhWUl');
+
 DROP TABLE IF EXISTS friendship;
 
 CREATE TABLE IF NOT EXISTS friendship (
@@ -126,6 +133,7 @@ CREATE TABLE IF NOT EXISTS participation (
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 
+
 INSERT INTO participation(user, activity) VALUES(7, 13);
 INSERT INTO participation(user, activity) VALUES(15, 12);
 INSERT INTO participation(user, activity) VALUES(10, 5);
@@ -146,6 +154,7 @@ INSERT INTO participation(user, activity) VALUES(2, 15);
 INSERT INTO participation(user, activity) VALUES(18, 11);
 INSERT INTO participation(user, activity) VALUES(2, 14);
 INSERT INTO participation(user, activity) VALUES(16, 4);
+
 DROP TABLE IF EXISTS comment;
 
 CREATE TABLE IF NOT EXISTS comment (
