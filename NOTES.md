@@ -25,7 +25,7 @@ After that we referance it using /assets/css/myfile.css
 
 ### Styling notes
 
-- badges in bootstrap are a nice way to add notificcations (https://www.w3schools.com/bootstrap5/bootstrap_badges.php)
+- badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)
 
 - pagination in bootstrap will be nice on posts (https://www.w3schools.com/bootstrap5/bootstrap_pagination.php)
 
@@ -55,6 +55,10 @@ After that we referance it using /assets/css/myfile.css
 
 
 - moving text to the right in bootstrap with css(https://stackoverflow.com/questions/31815881/set-bootstrap-right-side-or-left-side)
+
+- bootstrap spacing (https://getbootstrap.com/docs/4.0/utilities/spacing/)
+
+- accordion bootstrap (https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-accordion.php)
 
 ### Workspace Notes
 
