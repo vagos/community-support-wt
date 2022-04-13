@@ -17,3 +17,10 @@
 
     /* make display grid or box */
 }
+
+.FriendPicture {
+  /* 128x96 img */
+  width: 128px;
+  height: 96px;
+
+}
