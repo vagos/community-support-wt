@@ -58,7 +58,7 @@ def create_activity_name():
     return target + ' ' + verb
 
 def create_string(l=20):
-    return ''.join((random.choice(string.ascii_letters + ' ') for i in range(l)))
+    return ''.join((random.choice(string.ascii_letters + ' ') for _ in range(l)))
 
 def create_username():
 
@@ -81,7 +81,9 @@ def create_date(previous_date = "2020-1-1"):
 user_table = """
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL DEFAULT ''
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    hashed_password CHAR(32),
+    salt CHAR(32)
 ) ENGINE=INNODB;
 """
 
@@ -166,7 +168,7 @@ CREATE TABLE IF NOT EXISTS participation (
 N = 20
 
 def fill_table(table_name, n=10):
-    for i in range(n):
+    for _ in range(n):
         print(eval(f"create_{table_name}()"))
 
 
