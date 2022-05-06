@@ -82,8 +82,8 @@ user_table = """
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL DEFAULT '',
-    hashed_password CHAR(32),
-    salt CHAR(32)
+    hashed_password BINARY(32),
+    salt BINARY(16)
 ) ENGINE=INNODB;
 """
 

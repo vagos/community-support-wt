@@ -7,7 +7,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
 
     db.connection.query('SELECT * FROM user WHERE name = ?', [username], function(err, row) {
         if (err) { throw err; }
-        if (!row.length) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+        if (row.length === 0) { return cb(null, false, { message: 'Incorrect username or password.' }); }
 
         row = row[0];
 
