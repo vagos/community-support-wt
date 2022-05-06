@@ -4,6 +4,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
+const flash = require('connect-flash');
 
 const SQLiteStore = require('connect-sqlite3')(session); // store for sessions
 
@@ -21,18 +22,21 @@ const port = process.env.NODE_DOCKER_PORT || 8080;
 app.use(express.static(__dirname + '/public'));
 
 app.use(logger('dev'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
 app.use(session({
     secret: 'mysecret',
     resave: false,
     saveUninitialized: false,
     store: new SQLiteStore({ db: 'sessions.db', dir: './dev/db' })
 }));
+app.use(flash());
 
 app.use(passport.authenticate('session'));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 // Set rendering engine 
 app.engine('hbs', handlebars.engine({
