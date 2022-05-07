@@ -8,21 +8,56 @@
             <div class="row">
                 <img src="/assets/img/logo.png" alt="" class="rounded col-sm-3">
                 <div class="row col-sm-8">
-                    <h2 class="row">John Doe noCapios</h2>
-                    <p class="row font-weight-light"> BIOGRAPHY ASDLJGHAKUGHASKJHGKJSHDGJKHSKJGHSKJG</p>
+                    <h2 class="row">{{user.name}}</h2>
+                    <div class="input-group">
+                      <div class="input-group-prepend" id="button-edit-bio">
+                        <span style="height: 100%;" class="input-group-text">Bio</span>
+                      </div>
+                      <span class="form-control" aria-label="Bio" id="text-bio">{{user.bio}}</span>
+                      <textarea class="form-control" aria-label="Bio" id="text-area-bio"></textarea>
+                    </div>
                 </div>
             </div>
-            <p class="small text-muted">Joined on 1/1/1969 </p>
+            <p class="small text-muted">Joined on {{user.join_date}}</p>
         </div>
     </div>
 
-    {{!-- horizontal divider --}}
     <hr> 
+
+    <div class="userActivitiesSection">
+        <div class="container-fluid">
+            <div class="userActivitiesHeader d-flex">
+                <h1>Activities</h1> 
+            </div>
+            <div class="userActivities accordion" id="#userActivitiesAccordion">
+                <div class="activityFact accordion-item">
+                    <div class="accordion-header" id="headingOne"> 
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#allAct">All Activities</button>
+                    </div>
+                    <div id="allAct" class="accordion-collapse collapse" data-bs-parent="#userActivitiesAccordion">
+                {{#each user.activities}}
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <a href="/activities/{{this.name}}" class="btn btn-primary">view posts</a>
+                        </div>
+                    {{else}}
+                        <div class="card-body">
+                            <h5 class="card-title">Go join some activities!</h5>
+                            <a href="/activities" class="btn btn-primary">Activities</a>
+                        </div>
+                {{/each}}
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <hr>
 
     <div class="ActivitiesSection">
         <div class="container-fluid">
             <div class="ActivitiesHeader d-flex">
-                <h1>Activities</h1> 
+                <h1>Summary</h1> 
                 <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">60</div>
                 <div class="p-2" style="margin-left: auto;">Total points:1234</div>
             </div>
@@ -44,9 +79,9 @@
 
                 <div class="ActivityFact accordion-item">
                     <div class="accordion-header" id="headingTwo"> 
-                        <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#LatestAct">Latest activity</button>
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LatestAct">Latest activity</button>
                     </div>
-                    <div id="LatestAct" class="accordion-collapse collapse show" data-bs-parent="#myaccordion">
+                    <div id="LatestAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
                         <div class="card-body">
                             <h5 class="card-title">Activity name</h5>
                             <p class="card-text">ActivityDescription</p>
@@ -68,45 +103,40 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 
-    {{!-- horizontal divider --}}
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
     <hr> 
 
     <div class="FriendsSection">
         <div class="container-fluid">
             <div class="FriendsHeader d-flex">
                 <h1>Friends</h1> 
-                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">3</div>
+                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">{{user.friends.length}}</div>
             </div>
 
-            <div class="FriendsList">
+            <div class="friendsList">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    {{#each user.friends}}
+                        <a href="/user/{{this.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 h-100">
                             <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
-                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
+                            <h5 class="m-2 align-self-center">{{this.name}}</h5>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 h-100">
-                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
-                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 h-100">
-                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
-                            <h5 class="m-2 align-self-center">Friend Name Cap</h5>
-                        </div>
-                    </a>
+                    {{else}}
+                        Go make some friends!
+                    {{/each}}
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/scripts/profile.js"></script>
