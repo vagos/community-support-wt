@@ -1,6 +1,6 @@
 <h1>Main Profile info</h1>
 
-<link rel="stylesheet" href="./assets/css/basic_preview.css">
+<link rel="stylesheet" href="/assets/css/basic_preview.css">
 
 <div class="PageContent">
     <div class="container-fluid">
@@ -14,7 +14,7 @@
                         <span style="height: 100%;" class="input-group-text">Bio</span>
                       </div>
                       <span class="form-control" aria-label="Bio" id="text-bio">{{user.bio}}</span>
-                      <textarea class="form-control" aria-label="Bio" id="text-area-bio"></textarea>
+                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio"></textarea>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         </div>
                     {{else}}
                         <div class="card-body">
-                            <h5 class="card-title">Go join some activities!</h5>
+                            <h5 class="card-title">No activities joined!</h5>
                             <a href="/activities" class="btn btn-primary">Activities</a>
                         </div>
                 {{/each}}
@@ -130,7 +130,7 @@
                         </div>
                     </a>
                     {{else}}
-                        Go make some friends!
+                        No friends!
                     {{/each}}
                 </div>
             </div>
@@ -140,3 +140,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/scripts/profile.js"></script>
+{{#if self}}
+<script src="/scripts/profile-edit.js"></script>
+{{/if}}

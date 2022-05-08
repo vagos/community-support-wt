@@ -38,7 +38,7 @@ body {
     line-height: 1.4em; 
 }
 
-.visible {
+.invisible {
     display: none;
     visibility: hidden;
 }

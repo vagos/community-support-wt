@@ -13,6 +13,8 @@ router.patch('/change-bio', (req, res) => {
     controller.changeUserBio(req.session.passport.user.id, req.body.bio);
     res.sendStatus(200);
 
+    console.log("hey");
+
 });
 
 router.get('/', async (req, res) => {
@@ -22,15 +24,9 @@ router.get('/', async (req, res) => {
         return
     }
 
-    user = {
-        name: req.session.passport.user.username
-    };
+    user = await controller.getUserObject(req.session.passport.user.id);
 
-    console.log(req.session.passport)
-
-    other = await controller.getUserObject('Anna Triangle', 1);
-
-    res.render('profile', { title:'profile', 'user': user});
+    res.render('profile', { title:'profile', 'user': user, 'self': true }); // self means that the user's SELF is accessing their profile.
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const db = require('./db');
 
-exports.getUserObject = async (username, id) => {
+exports.getUserObject = async (id) => {
    
     const activities = await db.query(`SELECT * FROM participation JOIN activity
     ON participation.activity = activity.id
@@ -10,10 +10,10 @@ exports.getUserObject = async (username, id) => {
     user ON user_second = user.id
     WHERE user_first = ?`, [id, id]);
 
-    const info = await db.queryOne(`SELECT join_date, bio FROM user WHERE id = ?`, id);
+    const info = await db.queryOne(`SELECT name, join_date, bio FROM user WHERE id = ?`, id);
 
     user = {
-        'name': username,
+        'name': info.name,
         'id': id,
         'bio': info.bio,
         'activities': activities,
