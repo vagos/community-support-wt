@@ -2,32 +2,33 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL DEFAULT ''
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    bio TEXT NOT NULL DEFAULT '',
+    join_date DATE,
+    hashed_password BINARY(32),
+    salt BINARY(16)
 ) ENGINE=INNODB;
 
-
-INSERT INTO user(name) VALUES('Ioanna Cramberry');
-INSERT INTO user(name) VALUES('Vagos Triangle');  
-INSERT INTO user(name) VALUES('Konstantina Pokahontas');
-INSERT INTO user(name) VALUES('Orestis Kolombia');
-INSERT INTO user(name) VALUES('Panagiotis Looper');
-INSERT INTO user(name) VALUES('Panagiotis Kolombia');
-INSERT INTO user(name) VALUES('Orestis Goomba');
-INSERT INTO user(name) VALUES('Apostolis Troopa');
-INSERT INTO user(name) VALUES('Apostolis Kolombia');
-INSERT INTO user(name) VALUES('Ioanna Cramberry');
-INSERT INTO user(name) VALUES('Orestis Kolombia');
-INSERT INTO user(name) VALUES('John Zuza');
-INSERT INTO user(name) VALUES('Maria Pokahontas');
-INSERT INTO user(name) VALUES('Orestis Zelda');
-INSERT INTO user(name) VALUES('Vagos Zelda');
-INSERT INTO user(name) VALUES('Vagos Kolombia');
-INSERT INTO user(name) VALUES('Orestis Triangle');
-INSERT INTO user(name) VALUES('Orestis Johnas');
-INSERT INTO user(name) VALUES('Kostas Looper');
-INSERT INTO user(name) VALUES('Kostas Zelda');
-
-
+INSERT INTO user(name) VALUES('Mario Zuza');
+INSERT INTO user(name) VALUES('Artemis Zelda');
+INSERT INTO user(name) VALUES('Maria Sigma');
+INSERT INTO user(name) VALUES('Vagos Goomba');
+INSERT INTO user(name) VALUES('Dabber Triangle');
+INSERT INTO user(name) VALUES('Dabber Koopa');
+INSERT INTO user(name) VALUES('Anna Zelda');
+INSERT INTO user(name) VALUES('John Troopa');
+INSERT INTO user(name) VALUES('Anna Goomba');
+INSERT INTO user(name) VALUES('Ioanna Pokahontas');
+INSERT INTO user(name) VALUES('Dabber Zelda');
+INSERT INTO user(name) VALUES('Vagos Pokahontas');
+INSERT INTO user(name) VALUES('Panagiotis Troopa');
+INSERT INTO user(name) VALUES('Maria Goomba');
+INSERT INTO user(name) VALUES('Vagos Johnas');
+INSERT INTO user(name) VALUES('Maria Kolombia');
+INSERT INTO user(name) VALUES('Maria Triangle');
+INSERT INTO user(name) VALUES('Panagiotis Koopa');
+INSERT INTO user(name) VALUES('John Goomba');
+INSERT INTO user(name) VALUES('John Johnas');
 DROP TABLE IF EXISTS activity;
 
 CREATE TABLE IF NOT EXISTS activity (
@@ -36,28 +37,26 @@ CREATE TABLE IF NOT EXISTS activity (
     description VARCHAR(255) DEFAULT ''
 ) ENGINE=INNODB;
 
-
-INSERT INTO activity(name, description) VALUES('Collect Running', 'xedSqMsiNDlUSRkYYUeOuOAlunHBsF');
-INSERT INTO activity(name, description) VALUES('Select Swimming', 'qxSQgRCmiZFxIGYnNPkyLNzRzTBU L');
-INSERT INTO activity(name, description) VALUES('Cooking Climbing', 'MKjiljsHvViMcittbEuLOTCEjmybPg');
-INSERT INTO activity(name, description) VALUES('Fish Food', 'zRjmvrOuTNjkBMCkMCF PQSHINpIWZ');
-INSERT INTO activity(name, description) VALUES('Cooking Swimming', 'WNcjvQhQtIyLG baZzDvMMRNCrovVX');
-INSERT INTO activity(name, description) VALUES('Mountain Posters', 's SLimRlcLRvkq  sbzJGzvgXJKplX');
-INSERT INTO activity(name, description) VALUES('Prepare Eating', ' UDExCxjpCmWdFncOkZuCZOMw BEKZ');
-INSERT INTO activity(name, description) VALUES('Mountain Eating', 'VbcPICFINCZTsuidiQbCwjsXMirkAz');
-INSERT INTO activity(name, description) VALUES('Cooking Posters', 'zRozzJxGrQVfqeDFPv jDengHCqRuY');
-INSERT INTO activity(name, description) VALUES('Prepare Running', 'kXEhHEyZCYgaepPopeadbqHgxqClgk');
-INSERT INTO activity(name, description) VALUES('Prepare Food', 'zLMPKetBNcYsHRMbvaVhZ TINWvZJK');
-INSERT INTO activity(name, description) VALUES('Pickup Swimming', 'KudcBMyXBifgMGtYCSaGFvnRlCzEYq');
-INSERT INTO activity(name, description) VALUES('Mountain Swimming', 'R bLsqfAHsgNCJUvspvGJwCTrYmvEW');
-INSERT INTO activity(name, description) VALUES('Collect Eating', 'wBrQuxTNtVuynAXHTYHxKJxVXsCzmP');
-INSERT INTO activity(name, description) VALUES('Cooking Food', 'qJQBpLfYkqSMBWPaubqDySclmjNTiV');
-INSERT INTO activity(name, description) VALUES('Fish Running', 'eNFqZXAUiSaZY YdouwUT WShgBRDp');
-INSERT INTO activity(name, description) VALUES('Prepare Shops', 'NDtIzmgTWaAeOh CNNVOhlMbtQezzq');
-INSERT INTO activity(name, description) VALUES('Cooking Running', 'CRrlGvOPqNpipzhTgdfSRbwTBmWCOC');
-INSERT INTO activity(name, description) VALUES('Fish Food', 'sWJEowftTfm wZzbmTcrAYTBtrlcET');
-INSERT INTO activity(name, description) VALUES('Fish Running', 'RAeLxyJfmBZXeQPzE HAHUuhgqJdst');
-
+INSERT INTO activity(name, description) VALUES('Remove Paintings', 'uKXkXwShYPcfXKmzGEBJshUhowkgHo');
+INSERT INTO activity(name, description) VALUES('Fish Paintings', 'mYbgkYPW ICMYRPEKZqAtVDhvHqyEh');
+INSERT INTO activity(name, description) VALUES('Cooking Paintings', 'pMDIqQrrsrABhEFHEXzNIptMZEhWOD');
+INSERT INTO activity(name, description) VALUES('Collect Eating', 'opAQVKQZXlTmtRIyCdaOxmSUgEpbEU');
+INSERT INTO activity(name, description) VALUES('Find Eating', 'piqBFtjyUovxHAzOMlCogFXWZqCgvY');
+INSERT INTO activity(name, description) VALUES('Prepare Swimming', 'CNVmfqIoWhZhWlCSznciecugpY BZD');
+INSERT INTO activity(name, description) VALUES('Remove Shops', 'SBlRjQXsztRrypbpCijoGUaVAYVTFo');
+INSERT INTO activity(name, description) VALUES('Select Shops', 'VzufdDqxgcUVjeCmaDLcSknSnQsOKm');
+INSERT INTO activity(name, description) VALUES('Collect Eating', 'lj tGCdIVTDXbzkzyoUnoPJbPPsveN');
+INSERT INTO activity(name, description) VALUES('Organise Running', 'DPfbuKk lNHStgrMCstPHKQKrXENxf');
+INSERT INTO activity(name, description) VALUES('Cooking Climbing', 'EYdWsnZTimRp JHHWkDBSuhlRiAPdg');
+INSERT INTO activity(name, description) VALUES('Fish Swimming', 'fYtKjE KKJmiCPsGNAoGtSeJEYdXuc');
+INSERT INTO activity(name, description) VALUES('Organise Food', 'qzOQdewZZHwsvXiNGqAIFHTyeamFYo');
+INSERT INTO activity(name, description) VALUES('Find Climbing', 'ZHXVjgwIJbVQbDFfaAAeS XfzPhhKg');
+INSERT INTO activity(name, description) VALUES('Draw Running', 'uIsVkooYYUGAdwsrZIHiJdvzfLzXHE');
+INSERT INTO activity(name, description) VALUES('Find Drinking', 'AjPxpajLFSkqrAFPGkNCecqHMsHdKL');
+INSERT INTO activity(name, description) VALUES('Find Swimming', 'pZzUzcjqYKvEqZuOSKqUrjnPfAFnkr');
+INSERT INTO activity(name, description) VALUES('Fish Swimming', 'h VhcKwtcFmNgNWgGhIzQGwMQwjAYS');
+INSERT INTO activity(name, description) VALUES('Find Eating', 'gaFjIvlIoLKyjvoAMuOXEG XQcrNnZ');
+INSERT INTO activity(name, description) VALUES('Collect Swimming', 'FRswzumEpCLQ TafYFpSkyUrsM uYM');
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE IF NOT EXISTS post (
@@ -77,28 +76,26 @@ CREATE TABLE IF NOT EXISTS post (
             ON DELETE CASCADE
 ) ENGINE=INNODB;
 
-
-INSERT INTO post(activity, creator, creation_time, body) VALUES(2, 20, '2022-10-02', 'NRyKEjJqbacBHIPRDKsKUhECYueCAg');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(11, 16, '2022-03-30', 'jOxoJSIkCAVFVYCwbSHNsHSVedZYrQ');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(12, 9, '2022-05-11', 'skkZFdDDtdVHLCwhVOABxaPTcKQauB');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(3, 13, '2020-04-01', 'yRsOWAxOjOCJGkSc zOKhWsaJEijYR');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(12, 13, '2021-10-14', 'CglmSCLZzEpOSAgZLgUJXYtUabemfH');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(13, 4, '2022-05-04', 'xpsCJaJohJZnbeOFUmFxbFftOmZPYr');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(7, 6, '2021-02-16', 'ypWoJnqUEXiIIvROWeDHlsosxsU mg');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(3, 4, '2020-02-14', 'egPtJtEY LixkZFqFTbZbPOmrxHRPv');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 6, '2022-04-28', 'sKgOfSfrXHLtTVPQdVyBrOsDzfSaKv');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(9, 17, '2021-07-30', 'LIBdEYgztrdgkyvaHeadnFPueQShiv');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(3, 15, '2021-05-28', 'pMZnTCrxzJgWZaVjksoIIFjLHYbifB');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(15, 17, '2020-10-08', 'TBacPbhahGRpDXNyWCKfJryUNXVqnL');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 5, '2021-05-13', 'NPyPDtKjVIDmmDPWIEhwonakKMgOcp');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(20, 16, '2022-01-17', 'XckIzXwtVhKohivsnEgqnYoAyTNppb');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(5, 15, '2022-01-11', 'zvxIqoItJlZeno WGzxQHIwbid aeJ');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(18, 3, '2021-10-17', 'LvXublYgEsKYEFKFTtzHKBRlpNLawz');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 8, '2021-03-04', 'aMPtThpjwYvqBqNYfJ issUoRtWDcL');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 6, '2021-06-01', 'UKCkqcOaXwZDXuQHuDqdTleCVDYsSL');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(3, 7, '2020-07-09', 'CGewKaGahyWRDnrsPKVOfDWUyzXCcl');
-INSERT INTO post(activity, creator, creation_time, body) VALUES(15, 3, '2022-03-21', 'GrmIuOMjymWufhWHqAEeeWTYvQhWUl');
-
+INSERT INTO post(activity, creator, creation_time, body) VALUES(20, 19, '2020-01-11', 'lkaFXCKWsQYTrRCwGNIcIKP PNuTGO');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(20, 9, '2021-11-18', 'aVHMIAxgUoUTVZCTLgjGD YMBkVjli');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(19, 16, '2022-09-05', 'DgUfzWoPdJfRNglSVplUEKjEWGuZvI');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(12, 6, '2021-07-11', 'nkKsOXYGutwTTlpSnb AvLWgazJJPE');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(15, 13, '2020-05-19', 'UtmSZlOgITUdRgVguHvxjOnEzBmUaf');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(20, 6, '2022-09-02', 'vSLTPcYMxBcsAhtfgxZzMYEojaNymg');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(9, 12, '2020-04-24', 'rYIyVy tqaoFzhobzVIVbQlCyaemTC');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(5, 14, '2021-10-22', 'cIwnoTWsCVvTwBGcxDgMTXOtRWRwSa');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(5, 4, '2021-05-27', 'cvaOFUzewBcZuUjtFiPpmfUjhVdPNH');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(11, 2, '2022-05-13', 'ViGhKLlNeRqeaISFrsrpsoNPFTrxfr');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(6, 6, '2022-08-20', 'tHjJlbDZZyHqAKONDYWtCOkdwSzIsu');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(6, 18, '2020-08-15', 'TPQHrqZCQDcgUEdDfSVtxujeoTT Tm');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(11, 17, '2021-12-21', 'jnFZFuOZEuEkbjbrvZWSLtjPTNngLV');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(16, 14, '2022-07-23', 'UneTaAWzjZtRBnDYKKPSWnyzlHBVuN');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(15, 15, '2020-12-07', 'TfFxsTyQGWvxzKSxdSkhGCuswOwawJ');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(1, 14, '2020-12-29', 'R HyCbUSMnzEnODUDdfnxwrcGgeELx');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(6, 14, '2020-05-25', 'xkQuPUWtUvJrSKvUtxUHIgVkqanioR');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(18, 15, '2020-08-22', 'VCxvzCOpOjJdzsnburCSzhRQRmbtAR');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(16, 16, '2022-07-11', 'gHBKHRxdWtRlAXWUliPKBmiMKNdPmd');
+INSERT INTO post(activity, creator, creation_time, body) VALUES(7, 18, '2020-04-02', 'gIghtVJrmylayvaNvgRkusCK LXBYc');
 DROP TABLE IF EXISTS friendship;
 
 CREATE TABLE IF NOT EXISTS friendship (
@@ -115,13 +112,33 @@ CREATE TABLE IF NOT EXISTS friendship (
             ON DELETE CASCADE
 ) ENGINE=INNODB;
 
--- name 'create_friendship' is not defined
+INSERT INTO friendship(user_first, user_second) VALUES(4, 3);
+INSERT INTO friendship(user_first, user_second) VALUES(19, 12);
+INSERT INTO friendship(user_first, user_second) VALUES(16, 8);
+INSERT INTO friendship(user_first, user_second) VALUES(12, 6);
+INSERT INTO friendship(user_first, user_second) VALUES(15, 9);
+INSERT INTO friendship(user_first, user_second) VALUES(8, 18);
+INSERT INTO friendship(user_first, user_second) VALUES(11, 11);
+INSERT INTO friendship(user_first, user_second) VALUES(10, 2);
+INSERT INTO friendship(user_first, user_second) VALUES(18, 11);
+INSERT INTO friendship(user_first, user_second) VALUES(6, 14);
+INSERT INTO friendship(user_first, user_second) VALUES(3, 19);
+INSERT INTO friendship(user_first, user_second) VALUES(15, 5);
+INSERT INTO friendship(user_first, user_second) VALUES(17, 15);
+INSERT INTO friendship(user_first, user_second) VALUES(3, 7);
+INSERT INTO friendship(user_first, user_second) VALUES(2, 3);
+INSERT INTO friendship(user_first, user_second) VALUES(9, 16);
+INSERT INTO friendship(user_first, user_second) VALUES(1, 10);
+INSERT INTO friendship(user_first, user_second) VALUES(13, 5);
+INSERT INTO friendship(user_first, user_second) VALUES(3, 13);
+INSERT INTO friendship(user_first, user_second) VALUES(2, 20);
 DROP TABLE IF EXISTS participation;
 
 CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
     activity INT,
+    join_date DATE,
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE
@@ -133,28 +150,26 @@ CREATE TABLE IF NOT EXISTS participation (
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 
-
-INSERT INTO participation(user, activity) VALUES(7, 13);
-INSERT INTO participation(user, activity) VALUES(15, 12);
-INSERT INTO participation(user, activity) VALUES(10, 5);
-INSERT INTO participation(user, activity) VALUES(11, 9);
-INSERT INTO participation(user, activity) VALUES(9, 5);
-INSERT INTO participation(user, activity) VALUES(19, 12);
-INSERT INTO participation(user, activity) VALUES(8, 8);
-INSERT INTO participation(user, activity) VALUES(6, 9);
-INSERT INTO participation(user, activity) VALUES(17, 2);
-INSERT INTO participation(user, activity) VALUES(6, 17);
-INSERT INTO participation(user, activity) VALUES(9, 17);
-INSERT INTO participation(user, activity) VALUES(17, 18);
-INSERT INTO participation(user, activity) VALUES(3, 11);
-INSERT INTO participation(user, activity) VALUES(3, 17);
-INSERT INTO participation(user, activity) VALUES(17, 14);
-INSERT INTO participation(user, activity) VALUES(17, 11);
-INSERT INTO participation(user, activity) VALUES(2, 15);
+INSERT INTO participation(user, activity) VALUES(3, 20);
+INSERT INTO participation(user, activity) VALUES(6, 15);
+INSERT INTO participation(user, activity) VALUES(17, 9);
 INSERT INTO participation(user, activity) VALUES(18, 11);
-INSERT INTO participation(user, activity) VALUES(2, 14);
-INSERT INTO participation(user, activity) VALUES(16, 4);
-
+INSERT INTO participation(user, activity) VALUES(17, 12);
+INSERT INTO participation(user, activity) VALUES(18, 17);
+INSERT INTO participation(user, activity) VALUES(15, 6);
+INSERT INTO participation(user, activity) VALUES(3, 13);
+INSERT INTO participation(user, activity) VALUES(12, 2);
+INSERT INTO participation(user, activity) VALUES(18, 15);
+INSERT INTO participation(user, activity) VALUES(12, 8);
+INSERT INTO participation(user, activity) VALUES(12, 10);
+INSERT INTO participation(user, activity) VALUES(15, 14);
+INSERT INTO participation(user, activity) VALUES(18, 14);
+INSERT INTO participation(user, activity) VALUES(2, 12);
+INSERT INTO participation(user, activity) VALUES(10, 14);
+INSERT INTO participation(user, activity) VALUES(12, 19);
+INSERT INTO participation(user, activity) VALUES(1, 3);
+INSERT INTO participation(user, activity) VALUES(1, 18);
+INSERT INTO participation(user, activity) VALUES(12, 20);
 DROP TABLE IF EXISTS comment;
 
 CREATE TABLE IF NOT EXISTS comment (
@@ -173,23 +188,23 @@ CREATE TABLE IF NOT EXISTS comment (
             ON DELETE CASCADE
 ) ENGINE=INNODB;
 
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-02-21', 10, 11, 'kPYMFLUTqhpyqBLzvomHOFNHgRnpyz');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-08-03', 12, 6, 'KoDvOeoQAzxjijdHUsVnlfIVvycksk');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-05-20', 19, 19, 'awzGTpEdgkaRsEmFvBygsXIRogqIay');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-06-29', 16, 6, 'MBxxsJRjwlphVAsxQZfWVMqmYRpmQp');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-10-07', 10, 11, 'JUOelzceanXmYTWUSjFCRxApenxLdu');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-03-11', 20, 19, 'VzEaiieNRsnMdoxpQGcmCUZnZulpKX');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-09-12', 13, 20, 'SVZiwAlgvattkRuqcVzFjKMgLvDc z');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-09-18', 17, 10, 'qymvnFNnvStamHPgPbxLQmTNTblsqT');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-05-04', 18, 20, 'ZPzFIGDSXKIQPRRUQtdzArIMuXcZbG');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-12-06', 4, 7, 'ZRjrcDibzRAiIZmHTRBRHIyqLevLEi');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-06-30', 7, 14, 'vgkugfsHJvZIt SOxnx atcRewPTwK');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-05-26', 2, 13, 'pUUY tYx nlFCHocQNVyQCdJPKCaKU');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-11-09', 5, 17, 'HgaTwVCaxZzkTduGCjWaKsMRLZcQdX');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-02-23', 12, 3, 'FYyOxvzjgrKTNlXTUpwTFHoYXWSnOB');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-03-18', 1, 5, 'XeJbASOULpbAzNgtWYGwCJEiLLmeFE');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-03-27', 18, 18, 'ZUCGhEkAKCSrHFC DsRNkufLwtYvXw');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-05-28', 11, 4, 'StjELnnexzmRmFCjWATMrqcpTuuUbL');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-09-06', 8, 7, 'OohnWPhxLANKempluqGjDgxre bzAm');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-02-03', 12, 15, 'pLOGhWUBcGRmJTVavhjzP OfhhnBbW');
-INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-03-19', 2, 9, 'hdsAWJD ONKCHbFYcocNeLqFDqEJgf');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-09-08', 13, 18, 'jJSYII pvUPryFDAFykfVrUQbcRisd');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-07-21', 17, 2, 'tIPnwWxzwCWOsQMmDYUGmYrRopQAEI');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-07-28', 13, 4, 'UwewNXqHtVCgufDqZPemnUVRCaAygd');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-12-20', 16, 1, 'MmqmECc ZeGPcexMkDeECVZGWosJGJ');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-10-21', 9, 11, 'oEsPacBsNGKimsxUeSgoooMEACCDVy');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-12-09', 10, 13, 'GxHImWJXbxXQDUJGShZcmWWhbdfGvY');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-08-17', 4, 9, 'YXUTZATFDcYmOsKSrYbxYbaIZyOvRo');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-04-29', 6, 4, 'NijBadVNeYSQtcLvlLDgQVMNTFpoLo');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-07-24', 2, 18, 'wB vJZQlSJfgzXuBMkKhKdw AEAZji');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-06-07', 4, 19, 'cqTLFGOsDXKWMBhSueIHDPmvvBLJpD');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-08-21', 7, 13, 'jHVcJyaoTtKHsqPuxouBVTxGZ WTJZ');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-10-19', 13, 13, 'zgBngzgk hIFemXHzaEAPTKxRyAYeh');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-12-24', 8, 20, 'wDztuuqTpUkXEhtGJ ktRuBaVWAdJA');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-07-19', 20, 19, 'TlADGAduJaeIoPLcujfBGoBYfLZMGb');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-08-09', 5, 8, 'cBrGJVMGzXQIGBbuSZSuWZWOwkHMgO');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-06-29', 18, 13, 'yfEKVmPOzNhwwZBZugOHFOAKwfEsgk');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-03-03', 19, 17, 'GQEVwWtjZRpThVdUAkYLzErLGVQKHT');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-02-17', 12, 9, 'nDsvxlKSBBBm jtbzYsHWNQNoUNOmv');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2022-11-26', 10, 19, 'PSRXpkxjbqWAqRFikTUQTjFjGbOovu');
+INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-10-10', 10, 16, 'CTpt sBTvATrxYygppByllclTPRYyq');

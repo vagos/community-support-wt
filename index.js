@@ -31,7 +31,7 @@ app.use(session({
     secret: 'mysecret',
     resave: false,
     saveUninitialized: false,
-    store: new SQLiteStore({ db: 'sessions.db', dir: './dev/db' })
+    store: new SQLiteStore({ db: 'sessions.db', dir: './db/sqlite' })
 }));
 app.use(flash());
 
