@@ -1,18 +1,40 @@
-{{post.title}}
 
-<p>{{post.body}}</p>
-
-
-<div class="container mt-4 mb-4">
-  <div class="row justify-content-md-center">
-    <div class="col-md-12 col-lg-8">
-      <label>Comment</label>
-      <div class="form-group">
-         <textarea id="editor"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+<div class="PostContent mt-4">
+  <div class="card card-lg">
+    <div class="card-header"> 
+      <h1 class="text-start">test title{{post.title}}</h1>
+      {{!-- make this ligther end on the side --}}
+      <p>Posted by admin test</p> 
+    </div>
+    <div class="card-body"> <p class="text-center">test body {{post.body}}</p></div>
+  
+    <div class="userComment card-footer">
+      <label for="userComment"> Comment:</label>
+      <textarea class="form-control" id="userComment"></textarea>
+      <button type="submit" class="btn btn-primary">submit</button>
     </div>
   </div>
 </div>
+
+
+<div class="CommentContent card mt-4">
+
+  <div class="comment d-flex flex-nowrap align-items-center collapse show m-2">
+    <div class="prof-image align-self-start p-2 bg-secondary">profile img</div>
+    {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
+    <div class="comment-body flex-grow-1 p-2 bg-primary">random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh</div>
+    <div class="comment-buttons d-inline-flex align-items-stretch">
+      <button>Reply</button>
+      <button>Hide/show</button>
+    </div>
+  </div>
+  {{!-- maybe another way to do it? --}}
+  <div class="reply container mt-2">
+    <label for="userReply"> Reply:</label>
+    <textarea class="form-control" id="userReply"></textarea>
+    <button type="submit" class="btn btn-primary">submit</button>
+  </div>
+</div>
+
 
 
