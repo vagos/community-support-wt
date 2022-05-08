@@ -1,21 +1,23 @@
 version: '3.8'
 services:
   mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
+    image: mariadb
+    container_name: mariadb
     env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_DATABASE=test
+      - MARIADB_AUTO_UPGRADE=true
     ports:
-      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
-#    volumes:
-#      - db:/var/lib/mysql
+      - 3306:3306
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+      - ./dev:/data
   app:
     depends_on:
       - mysqldb
+        # restart: unless-stopped
     build: .
-    restart: unless-stopped
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
@@ -24,9 +26,4 @@ services:
       - DB_USER=$MYSQL_USER
       - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
       - DB_NAME=$MYSQL_DATABASE
-      - DB_PORT=$MYSQL_DOCKER_PORT
-    stdin_open: true
-    tty: true
-volumes: 
-  db:
-      
+      - DB_PORT=3306

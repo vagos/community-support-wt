@@ -1,5 +1,3 @@
-python dbcreate.py > schema.sql
-
 mysql -u admin -p << EOF
 DROP DATABASE test;
 CREATE DATABASE test;

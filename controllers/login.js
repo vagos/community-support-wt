@@ -35,7 +35,7 @@ passport.deserializeUser((user, cb) => {
     });
 });
 
-module.exports.signupUser =  (name, password) => {
+module.exports.signupUser =  (name, password, cb) => {
     var salt = crypto.randomBytes(16);
 
     crypto.pbkdf2(password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
@@ -44,12 +44,15 @@ module.exports.signupUser =  (name, password) => {
             name,
             hashedPassword,
             salt
-        ], function(err) {
+        ], function(err, result) {
             if (err) { throw err; }
+
             var user = {
-                id: this.lastID,
+                id: result.insertId,
                 username: name
             };
+
+            cb(user);
         });
     });
 }

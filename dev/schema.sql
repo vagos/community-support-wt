@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE IF NOT EXISTS user (
+  
     id INT AUTO_INCREMENT PRIMARY KEY,    
     name VARCHAR(255) NOT NULL DEFAULT '',
     bio TEXT ,
@@ -8,6 +9,7 @@ CREATE TABLE IF NOT EXISTS user (
     hashed_password BINARY(32),
     salt BINARY(16)
 ) ENGINE=INNODB;
+
 
 INSERT INTO user(name) VALUES('Apostolis Sigma');
 INSERT INTO user(name) VALUES('Apostolis Sigma');
@@ -36,6 +38,7 @@ CREATE TABLE IF NOT EXISTS activity (
     name VARCHAR(255) UNIQUE,
     description VARCHAR(255) DEFAULT ''
 ) ENGINE=INNODB;
+
 
 INSERT INTO activity(name, description) VALUES('Select Paintings', 'kxZJFuOBqT zbMneBnZvcQaWyBDGPF');
 INSERT INTO activity(name, description) VALUES('Select Food', 'ozXZdReIzkaxIHqa iYNDDsgtzhllJ');
@@ -76,6 +79,7 @@ CREATE TABLE IF NOT EXISTS post (
             ON DELETE CASCADE
 ) ENGINE=INNODB;
 
+
 INSERT INTO post(activity, creator, creation_time, body) VALUES(7, 17, '2021-06-10', 'GdCpzIFIMGzffMzqoPCRdPBNkNPwXn');
 INSERT INTO post(activity, creator, creation_time, body) VALUES(18, 4, '2020-12-26', 'VUHpDXPsSCUoORNBlHcdQnOfVPVveb');
 INSERT INTO post(activity, creator, creation_time, body) VALUES(18, 6, '2021-05-18', 'AHzCLzVqoJcdzjutNWHrptiiejXrVG');
@@ -111,6 +115,7 @@ CREATE TABLE IF NOT EXISTS friendship (
             ON UPDATE CASCADE
             ON DELETE CASCADE
 ) ENGINE=INNODB;
+
 
 INSERT INTO friendship(user_first, user_second) VALUES(16, 11);
 INSERT INTO friendship(user_first, user_second) VALUES(18, 8);
@@ -150,6 +155,7 @@ CREATE TABLE IF NOT EXISTS participation (
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 
+
 INSERT INTO participation(user, activity) VALUES(12, 20);
 INSERT INTO participation(user, activity) VALUES(3, 2);
 INSERT INTO participation(user, activity) VALUES(9, 1);
@@ -188,6 +194,7 @@ CREATE TABLE IF NOT EXISTS comment (
             ON DELETE CASCADE
 ) ENGINE=INNODB;
 
+
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-07-05', 11, 14, 'SvASAxWxmdEyuyJvJvrOdsIcMCdFDs');
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-09-04', 4, 1, 'vIvDdcwUQYitDpiaDnFFtiaQiAxGub');
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-12-30', 20, 3, 'CyqCtTtjjvAYAmhzMytrafqUKlaVuO');
@@ -208,3 +215,4 @@ INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-01-17', 8, 
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2020-05-14', 2, 4, 'NBybkDL XppsZcLMtZuyISHVkIWpJv');
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-01-11', 3, 15, ' ToKOiHokQhHpqdkEluZhZOtfyuGdJ');
 INSERT INTO comment(creation_time, creator, post, body) VALUES('2021-02-24', 10, 6, 'SULJOwO UBwgVk fNLAHXNwYUXfLIl');
+
