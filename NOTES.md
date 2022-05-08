@@ -70,6 +70,10 @@ After that we referance it using /assets/css/myfile.css
 
 - intellisense for css extension reades all files os its slow. Use only when making css
 
+### windows mysql poweruser problems
+
+https://stackoverflow.com/questions/17158367/enable-binary-mode-while-restoring-a-database-from-an-sql-dump
+
 ### Docker Links
 
 https://stackoverflow.com/questions/17666249/how-do-i-import-an-sql-file-using-the-command-line-in-mysql
