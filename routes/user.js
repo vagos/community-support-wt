@@ -14,4 +14,11 @@ router.get('/:userId', async (req, res) => {
     res.render('profile', { title: 'other_profile' , 'user' : user, 'self': false });
 });
 
+
+router.get('/stats/:userId', async (req, res) => {
+    id = req.params.userId;
+    stats = await profileController.getUserStats(id);
+    res.json(stats);
+});
+
 module.exports = router;

@@ -29,3 +29,16 @@ exports.changeUserBio = async (id, bio) => {
     WHERE user.id = ?`, [bio, id]);
 };
 
+exports.getUserStats = async (id) => {
+
+    comments_per_month = await db.query(`SELECT COUNT(*) as cnt, 
+    DATE_FORMAT(comment.creation_time, '%m') as month
+    FROM comment WHERE comment.creator = ? 
+            GROUP BY month
+            ORDER BY month
+        `, [id]);
+
+    return {
+        comments: comments_per_month,
+    };
+};

@@ -17,11 +17,18 @@ router.patch('/change-bio', (req, res) => {
 
 });
 
+router.get('/user-stats/:userId', (req, res) => {
+    id = req.params.userId;
+    stats = controller.getUserStats(id);
+
+    res.json(stats);
+});
+
 router.get('/', async (req, res) => {
 
-    if (!req.session) {
-        res.render('profile');
-        return
+    if (req.isUnauthenticated()) {
+        res.redirect('/');
+        return;
     }
 
     user = await controller.getUserObject(req.session.passport.user.id);
