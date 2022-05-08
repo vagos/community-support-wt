@@ -15,9 +15,13 @@ router.get('/signup', (req, res, next) => {
 
 router.post('/signup', function(req, res, next) { 
     
-    controller.signupUser(req.body.username, req.body.password);
-    res.redirect('/login');
-    
+    controller.signupUser(req.body.username, req.body.password, (user) => {
+        console.log(user);
+        req.login(user, (err) => {
+            if (err) { throw (err); }
+            res.redirect('/profile');
+        });
+    });
 });
 
 router.post('/password', passport.authenticate('local', {

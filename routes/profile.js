@@ -12,9 +12,6 @@ router.patch('/change-bio', (req, res) => {
    
     controller.changeUserBio(req.session.passport.user.id, req.body.bio);
     res.sendStatus(200);
-
-    console.log("hey");
-
 });
 
 router.get('/user-stats/:userId', (req, res) => {
