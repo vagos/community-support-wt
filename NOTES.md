@@ -62,9 +62,17 @@ After that we referance it using /assets/css/myfile.css
 
 - nice lists in bootstrap (https://getbootstrap.com/docs/4.0/components/list-group/#custom-content)
 
+- pl and pr dont work anymore (https://stackoverflow.com/questions/35148828/bootstrap-spacing-classes-not-working)
+
+- bootstrap 5 typography (https://getbootstrap.com/docs/5.0/utilities/text/)
+
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css
+
+### windows mysql poweruser problems
+
+https://stackoverflow.com/questions/17158367/enable-binary-mode-while-restoring-a-database-from-an-sql-dump
 
 ### Docker Links
 
