@@ -12,7 +12,7 @@ router.get('/:postId', (req, res) => {
 
     controller.getPost(req.params.postId, (post) => {
         res.render('post', { post:post });
-
+        console.log(post);
     });
 
 });

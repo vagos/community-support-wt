@@ -37,3 +37,8 @@ body {
     max-width: 1280px;
     line-height: 1.4em; 
 }
+
+.invisible {
+    display: none;
+    visibility: hidden;
+}

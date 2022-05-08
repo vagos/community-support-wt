@@ -21,11 +21,10 @@ router.get('/', (req, res) => {
         res.render('activities',{title:"activities" ,activities: activities});
     });
 
-
 });
 
 router.get('/:activityId', (req, res) => {
-    
+
     activityName = req.params.activityId;
     
     controller.getPosts(activityName, (posts) => {

@@ -58,7 +58,7 @@ def create_activity_name():
     return target + ' ' + verb
 
 def create_string(l=20):
-    return ''.join((random.choice(string.ascii_letters + ' ') for i in range(l)))
+    return ''.join((random.choice(string.ascii_letters + ' ') for _ in range(l)))
 
 def create_username():
 
@@ -81,7 +81,11 @@ def create_date(previous_date = "2020-1-1"):
 user_table = """
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL DEFAULT ''
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    bio TEXT NOT NULL DEFAULT '',
+    join_date DATE,
+    hashed_password BINARY(32),
+    salt BINARY(16)
 ) ENGINE=INNODB;
 """
 
@@ -151,6 +155,7 @@ CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
     activity INT,
+    join_date DATE,
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE
@@ -166,7 +171,7 @@ CREATE TABLE IF NOT EXISTS participation (
 N = 20
 
 def fill_table(table_name, n=10):
-    for i in range(n):
+    for _ in range(n):
         print(eval(f"create_{table_name}()"))
 
 
@@ -195,6 +200,11 @@ def create_participation():
 def create_comment():
     comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string(30))
     sql = "INSERT INTO comment(creation_time, creator, post, body) VALUES('%s', %s, %s, '%s');" % comment
+    return sql
+
+def create_friendship():
+    row = (create_fk("user", "id"), create_fk("user", "id"))
+    sql = "INSERT INTO friendship(user_first, user_second) VALUES(%s, %s);" % row
     return sql
 
 
