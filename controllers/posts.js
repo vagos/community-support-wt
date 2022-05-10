@@ -2,7 +2,7 @@ const db = require('./db');
 
 // returns post for given id
 exports.getPost = (postId, cb) => {
-    db.connection.query(`SELECT * FROM post WHERE 
+    db.connection.query(`SELECT post.*, user.name as creatorName from post join (select id,name from user) as user on user.id=post.creator WHERE 
     post.id = ?`, postId,
     (err, rows) => { if (err) throw err; cb(rows[0]); });
 };

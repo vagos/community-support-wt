@@ -1,22 +1,27 @@
 {{!-- testing info --}}
-post id:
+{{!-- post id:
 {{post.id}}
 <br>
 comments:
 {{#each comments}}
   {{this}}
   <br>
-{{/each}}
+{{/each}} --}}
 
 
 <div class="PostContent mt-4">
   <div class="card card-lg">
 
     <div class="card-header"> 
-      <h1 class="text-start">test title{{post.name}} <small class="fs-5 fw-light"> Posted by: admin test</small> </h1>
+      {{#if post.name}}
+        <h1 class="text-start">{{post.name}}<small class="fs-5 fw-light"> Posted by: {{post.creatorName}}</small> </h1>
+      {{/if}}
+      {{#unless post.name}}
+        <h1 class="text-start">NOTITLE!!!!<small class="fs-5 fw-light"> Posted by: {{post.creatorName}}</small> </h1>
+      {{/unless}}
     </div>
 
-    <div class="card-body"> <p class="text-center">test body {{post.body}}</p></div>
+    <div class="card-body"> <p class="text-center">{{post.body}}</p></div>
   
     {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
@@ -33,50 +38,55 @@ comments:
 
   {{!-- Other User comments --}}
 
-  {{#each comments}}
-    <div class="comment d-flex flex-column m-2">
+  {{#if comments}}
+    {{#each comments}}
+      <div class="comment d-flex flex-column m-2">
 
-      {{!-- noncollapsible part --}}
-      <div class="imageAndName d-inline-flex ">
-        {{!-- profile image and name --}}
-        {{!-- REMINDER CHANGE CANVAS SIZE --}}
-        <div class=" align-self-start me-1" style="width:8%; height:10%;">
-          <a href="/user/{{this.creator}}">
-            <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
-          </a>
-        </div>
-        <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+        {{!-- noncollapsible part --}}
+        <div class="imageAndName d-inline-flex ">
+          {{!-- profile image and name --}}
+          {{!-- REMINDER CHANGE CANVAS SIZE --}}
+          <div class=" align-self-start me-1" style="width:8%; height:10%;">
+            <a href="/user/{{this.creator}}">
+              <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
+            </a>
+          </div>
+          <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
 
-        {{!-- Collapse button --}}
-        {{!--ms-auto pushes the rest items into the left  --}}
-        {{!-- Pay attention at id --}}
-        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
-      </div>
-      {{!-- Collapsible part --}}
-      {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
-      <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
-        <div class="bodyAndButtons d-flex flex-column ps-4">
-          <div class="comment-body flex-grow-1 p-2 ">
-            {{this.body}}
-            {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
+          {{!-- Collapse button --}}
+          {{!--ms-auto pushes the rest items into the left  --}}
+          {{!-- Pay attention at id --}}
+          <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
+        </div>
+        {{!-- Collapsible part --}}
+        {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
+        <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
+          <div class="bodyAndButtons d-flex flex-column ps-4">
+            <div class="comment-body flex-grow-1 p-2 ">
+              {{this.body}}
+              {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
+            </div>
+            <div class="comment-buttons d-inline-flex align-items-stretch">
+              <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
+            </div>
           </div>
-          <div class="comment-buttons d-inline-flex align-items-stretch">
-            <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
+          {{!-- Reply Section --}}
+          {{!-- maybe another way to do it? --}}
+          <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
+            <label for="userReply"> Reply:</label>
+            <textarea class="form-control" id="userReply"></textarea>
+            <button type="submit" class="btn btn-primary">submit</button>
           </div>
         </div>
-        {{!-- Reply Section --}}
-        {{!-- maybe another way to do it? --}}
-        <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
-          <label for="userReply"> Reply:</label>
-          <textarea class="form-control" id="userReply"></textarea>
-          <button type="submit" class="btn btn-primary">submit</button>
-        </div>
+      
       </div>
-    
-    </div>
 
     {{/each}}
+  {{/if}}
 
+  {{#unless comments}}
+    <span class="text-center">No comments yet!</span>
+  {{/unless}}
 </div>
 
 <script src="/scripts/post-profile-pics.js"></script>

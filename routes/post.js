@@ -13,12 +13,12 @@ router.get('/:postId', (req, res) => {
     controller.getPost(req.params.postId, (post) => {
         
         // retrieve comments
-        console.log(`getting comments for post ${post.id}`);
+        // console.log(`getting comments for post ${post.id}`);
 
         controller.getExtendedComments(post.id,(comments) => {
-            for (comment of comments){
-                console.log(comment);
-            }
+            // for (comment of comments){
+            //     console.log(comment);
+            // }
 
             postInfo = {post:post , comments:comments} ;
             res.render('post', postInfo);

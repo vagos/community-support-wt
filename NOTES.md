@@ -23,6 +23,8 @@ After that we referance it using /assets/css/myfile.css
 
 - Multiple Css styles with handlebars (https://www.youtube.com/watch?v=o4njTeKjGWQ)
 
+- Describe command in mysql
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)
@@ -66,6 +68,7 @@ After that we referance it using /assets/css/myfile.css
 
 - bootstrap 5 typography (https://getbootstrap.com/docs/5.0/utilities/text/)
 
+- bootstrap icons extension (https://icons.getbootstrap.com/)
 
 ### Express Handlebars notes
 
@@ -87,7 +90,7 @@ https://developer.ibm.com/tutorials/docker-dev-db/
 
 ### Code hurdles
 
--[ ] How to pass usernames and profile pictures for post comments?
+-[X] How to pass usernames and profile pictures for post comments?
     - with another function that returns all usernames ?
     - with a SQL querry to extend comments to include usernames. (THIS) 
         "select comment.*, user.name as creatorName from comment join (select id,name from user) as user on user.id=comment.creator WHERE comment.post= {postID};"   
