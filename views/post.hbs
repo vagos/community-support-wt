@@ -3,7 +3,10 @@ post id:
 {{post.id}}
 <br>
 comments:
-{{comments}}
+{{#each comments}}
+  {{this}}
+  <br>
+{{/each}}
 
 
 <div class="PostContent mt-4">
@@ -31,13 +34,14 @@ comments:
   {{!-- Other User comments --}}
 
   {{#each comments}}
+    {{this}}
     <div class="comment d-flex flex-column m-2">
 
       {{!-- noncollapsible part --}}
       <div class="imageAndName d-inline-flex ">
         {{!-- profile image and name --}}
-        <div class="prof-image align-self-start p-2 bg-secondary">{{this.prof-img}}image</div>
-        <small class="user-name p-2" >{{this.username}}username</small>  
+        <div class="prof-image align-self-start p-2 bg-secondary">{{this.creator}}image</div>
+        <small class="user-name p-2" >{{this.creator}}username</small>  
 
         {{!-- Collapse button --}}
         {{!--ms-auto pushes the rest items into the left  --}}
@@ -49,7 +53,8 @@ comments:
       <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
         <div class="bodyAndButtons d-flex flex-column ps-4">
           <div class="comment-body flex-grow-1 p-2 ">
-            random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh
+            {{this.body}}
+            {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
           </div>
           <div class="comment-buttons d-inline-flex align-items-stretch">
             <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
