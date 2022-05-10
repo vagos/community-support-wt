@@ -9,8 +9,17 @@ exports.getPost = (postId, cb) => {
 
 // Returns all comments on given post
 exports.getComments = (postId, cb) => {
-    // Why is the "?" there?
+    // Why is the "?" there? its for safety
     db.connection.query(`SELECT * FROM comment WHERE 
+    comment.post = ?`, postId,
+    (err, rows) => {if (err) throw err; cb(rows); });
+}
+
+
+// // Returns all comments with usernames on given post
+exports.getExtendedComments = (postId, cb) => {
+    // Why is the "?" there? its for safety
+    db.connection.query(`SELECT comment.*, user.name as creatorName from comment join (select id,name from user) as user on user.id=comment.creator WHERE 
     comment.post = ?`, postId,
     (err, rows) => {if (err) throw err; cb(rows); });
 }

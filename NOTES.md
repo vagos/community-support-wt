@@ -83,3 +83,13 @@ https://stackoverflow.com/questions/17158367/enable-binary-mode-while-restoring-
 
 https://stackoverflow.com/questions/17666249/how-do-i-import-an-sql-file-using-the-command-line-in-mysql
 https://developer.ibm.com/tutorials/docker-dev-db/
+
+
+### Code hurdles
+
+-[ ] How to pass usernames and profile pictures for post comments?
+    - with another function that returns all usernames ?
+    - with a SQL querry to extend comments to include usernames. (THIS) 
+        "select comment.*, user.name as creatorName from comment join (select id,name from user) as user on user.id=comment.creator WHERE comment.post= {postID};"   
+    <br>
+    cool trick with comment.* will return only all the comment colums(https://stackoverflow.com/questions/26203799/using-an-inner-join-without-returning-any-columns-from-the-joined-table)

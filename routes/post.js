@@ -15,7 +15,7 @@ router.get('/:postId', (req, res) => {
         // retrieve comments
         console.log(`getting comments for post ${post.id}`);
 
-        controller.getComments(post.id,(comments) => {
+        controller.getExtendedComments(post.id,(comments) => {
             for (comment of comments){
                 console.log(comment);
             }

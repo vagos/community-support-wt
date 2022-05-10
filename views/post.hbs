@@ -34,14 +34,18 @@ comments:
   {{!-- Other User comments --}}
 
   {{#each comments}}
-    {{this}}
     <div class="comment d-flex flex-column m-2">
 
       {{!-- noncollapsible part --}}
       <div class="imageAndName d-inline-flex ">
         {{!-- profile image and name --}}
-        <div class="prof-image align-self-start p-2 bg-secondary">{{this.creator}}image</div>
-        <small class="user-name p-2" >{{this.creator}}username</small>  
+        {{!-- REMINDER CHANGE CANVAS SIZE --}}
+        <div class=" align-self-start me-1" style="width:8%; height:10%;">
+          <a href="/user/{{this.creator}}">
+            <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
+          </a>
+        </div>
+        <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
 
         {{!-- Collapse button --}}
         {{!--ms-auto pushes the rest items into the left  --}}
@@ -75,5 +79,6 @@ comments:
 
 </div>
 
+<script src="/scripts/post-profile-pics.js"></script>
 
 
