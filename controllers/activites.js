@@ -15,3 +15,14 @@ exports.getPosts = (activityName, cb) => {
         JOIN activity ON activity.id = post.activity WHERE activity.name = ?`, activityName,
     (err, rows) => { if (err) throw err; cb(rows) });
 };
+
+
+// Returns extended posts (post + total users + total posts)
+exports.getExtendedPosts = (activityName, cb) => {
+
+    console.log("getting extended post info")
+
+    // db.connection.query(` querry here`, activityName,
+    // (err, rows) => { if (err) throw err; cb(rows) });
+
+};

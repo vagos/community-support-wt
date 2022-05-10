@@ -13,7 +13,7 @@ exports.getComments = (postId, cb) => {
     db.connection.query(`SELECT * FROM comment WHERE 
     comment.post = ?`, postId,
     (err, rows) => {if (err) throw err; cb(rows); });
-}
+};
 
 
 // // Returns all comments with usernames on given post
@@ -22,4 +22,4 @@ exports.getExtendedComments = (postId, cb) => {
     db.connection.query(`SELECT comment.*, user.name as creatorName from comment join (select id,name from user) as user on user.id=comment.creator WHERE 
     comment.post = ?`, postId,
     (err, rows) => {if (err) throw err; cb(rows); });
-}
+};
