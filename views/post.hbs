@@ -14,10 +14,10 @@ comments:
 
     <div class="card-header"> 
       {{#if post.name}}
-        <h1 class="text-start">{{post.name}}<small class="fs-5 fw-light"> Posted by: {{post.creatorName}}</small> </h1>
+        <h1 class="text-start">{{post.name}}<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
       {{/if}}
       {{#unless post.name}}
-        <h1 class="text-start">NOTITLE!!!!<small class="fs-5 fw-light"> Posted by: {{post.creatorName}}</small> </h1>
+        <h1 class="text-start">NOTITLE!!!!<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
       {{/unless}}
     </div>
 
