@@ -66,6 +66,11 @@ After that we referance it using /assets/css/myfile.css
 
 - bootstrap 5 typography (https://getbootstrap.com/docs/5.0/utilities/text/)
 
+
+### Express Handlebars notes
+
+- Helper functions (https://handlebarsjs.com/guide/builtin-helpers.html#lookup)
+
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css
