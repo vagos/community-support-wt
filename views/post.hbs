@@ -8,6 +8,7 @@
 
     <div class="card-body"> <p class="text-center">test body {{post.body}}</p></div>
   
+    {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
       <label for="userComment"> Comment:</label>
       <textarea class="form-control" id="userComment"></textarea>
@@ -22,22 +23,25 @@
 
   <div class="comment d-flex flex-column m-2">
 
+    {{!-- noncollapsible part --}}
     <div class="imageAndName d-inline-flex ">
-      <div class="prof-image align-self-start p-2 bg-secondary">profile img</div>
+      <div class="prof-image align-self-start p-2 bg-secondary">img</div>
       <small class="user-name p-2" >random username</small>  
        {{!--ms-auto pushes the rest items into the left  --}}
       <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-body"  >Hide/show</button> 
     </div>
+    {{!-- Collapsible part --}}
     {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
     <div class="comment-collapsible collapse show" id="comment-body">
       <div class="bodyAndButtons d-flex flex-column ps-4">
-        <div class="comment-body flex-grow-1 p-2 bg-primary">
+        <div class="comment-body flex-grow-1 p-2 ">
           random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh
         </div>
         <div class="comment-buttons d-inline-flex align-items-stretch">
           <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply">Reply</button> 
         </div>
       </div>
+      {{!-- Reply Section --}}
       {{!-- maybe another way to do it? --}}
       <div class="reply container mt-2 collapse" id="reply">
         <label for="userReply"> Reply:</label>
