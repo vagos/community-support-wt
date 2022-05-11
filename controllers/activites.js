@@ -17,12 +17,14 @@ exports.getPosts = (activityName, cb) => {
 };
 
 
-// Returns extended posts (post + total users + total posts)
-exports.getExtendedPosts = (activityName, cb) => {
+// Returns extended activities (activity + total users + total posts) for all activities
+exports.getExtendedAll = ( cb ) => {
 
     console.log("getting extended post info")
 
-    // db.connection.query(` querry here`, activityName,
-    // (err, rows) => { if (err) throw err; cb(rows) });
+    db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
+    FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(activity.id) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
+        ON activity.id = info.id`,
+    (err, rows) => { if (err) throw err; cb(rows); });
 
 };

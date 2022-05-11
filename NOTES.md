@@ -25,6 +25,8 @@ After that we referance it using /assets/css/myfile.css
 
 - Describe command in mysql
 
+- Left join (https://www.w3schools.com/mysql/mysql_join_left.asp)
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)
@@ -77,6 +79,8 @@ After that we referance it using /assets/css/myfile.css
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css
+
+- Selecting multiple vars in vscode  (ctrl+f2 or ctrl+shift+L) (https://stackoverflow.com/questions/46539714/select-all-occurrences-of-selected-word-in-vscode)
 
 ### windows mysql poweruser problems
 
