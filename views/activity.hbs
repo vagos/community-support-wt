@@ -4,7 +4,13 @@
   {{#each posts}}
       <div class="card">
         <div class="card-header">
-          <h5 class="post-title">TEST TITLE{{this.name}}</h5>
+          {{#if this.name}}
+            <h5 class="post-title">{{this.name}}</h5>
+          {{/if}}
+          {{!-- This shouldn't be allowed --}}
+          {{#unless this.name}}
+            <h5 class="post-title">NO POST TITLE!</h5>
+          {{/unless}}
         </div>
         <div class="card-body">
             <p class="post-text">{{this.body}}</p>
