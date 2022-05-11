@@ -8,10 +8,10 @@
         </div>
         <div class="card-body">
             <p class="post-text">{{this.body}}</p>
-            
+
             {{!-- maybe put this in card footer? --}}
             <div class="enter-post d-flex justify-content-between">
-              <span class="p-2">Comments:1234</span>
+              <span class="p-2">Comments:{{this.commentCount}}</span>
               <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
             </div>
         </div>

@@ -56,3 +56,10 @@ select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COU
 -- God have mercy on this querry
 
 SELECT activity.* ,info.userCount, info.postCount FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(activity.id) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info ON activity.id = info.id;
+
+-- get extended post (post + comment count)
+
+SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id;
+
+-- get extended post for given activity id
+SELECT post.id, post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id =  post.activity WHERE activity.name = ?

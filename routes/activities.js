@@ -27,14 +27,22 @@ router.get('/', (req, res) => {
 router.get('/:activityId', (req, res) => {
 
     activityName = req.params.activityId;
-    
-    controller.getPosts(activityName, (posts) => {
+
+    controller.getExtendedPosts(activityName, (posts) => {
         
         res.render('activity', { name : activityName, 
             posts: posts
 
         });
     });
+    
+    // controller.getPosts(activityName, (posts) => {
+        
+    //     res.render('activity', { name : activityName, 
+    //         posts: posts
+
+    //     });
+    // });
 });
 
 module.exports = router;

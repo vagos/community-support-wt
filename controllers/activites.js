@@ -28,3 +28,10 @@ exports.getExtendedAll = ( cb ) => {
     (err, rows) => { if (err) throw err; cb(rows); });
 
 };
+
+exports.getExtendedPosts = (activityName, cb) => {
+
+    db.connection.query(`SELECT post.id, post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id = 
+    post.activity WHERE activity.name = ?`, activityName,
+    (err, rows) => { if (err) throw err; cb(rows) });
+};
