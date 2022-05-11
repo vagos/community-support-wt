@@ -19,7 +19,13 @@
                     </div>
                 </div>
             </div>
-            <p class="small text-muted">Joined on {{user.join_date}}</p>
+            {{#if user.join_date}}
+                <p class="small text-muted">Joined on {{user.join_date}}</p>
+            {{/if}}
+            {{!-- This shouldnt be allowed --}}
+            {{#unless user.join_date}}
+                <p class="small text-muted">NO JOIN DATE!</p>
+            {{/unless}}
         </div>
     </div>
 

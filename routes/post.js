@@ -22,7 +22,7 @@ router.get('/:postId', (req, res) => {
 
             postInfo = {post:post , comments:comments} ;
             res.render('post', postInfo);
-            console.log(postInfo);
+            // console.log(postInfo);
         });
     });
 
