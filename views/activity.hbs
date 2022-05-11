@@ -1,11 +1,26 @@
 <h1>{{name}}</h1>
 
-{{#each posts}}
-    <div class="card">
-      <div class="card-body">
-          <h5 class="card-title">{{this.name}}</h5>
-          <p class="card-text">{{this.body}}</p>
-          <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
+{{#if posts}}
+  {{#each posts}}
+      <div class="card">
+        <div class="card-header">
+          <h5 class="post-title">TEST TITLE{{this.name}}</h5>
+        </div>
+        <div class="card-body">
+            <p class="post-text">{{this.body}}</p>
+            
+            {{!-- maybe put this in card footer? --}}
+            <div class="enter-post d-flex justify-content-between">
+              <span class="p-2">Comments:1234</span>
+              <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
+            </div>
+        </div>
       </div>
-    </div>
-{{/each}}
+  {{/each}}
+{{/if}}
+
+{{#unless posts}}
+  <div>
+    <p class="text-center">No posts yet!</p>
+  </div>
+{{/unless}}
