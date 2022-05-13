@@ -27,6 +27,10 @@ After that we referance it using /assets/css/myfile.css
 
 - Left join (https://www.w3schools.com/mysql/mysql_join_left.asp)
 
+- Alter table (https://www.w3schools.com/sql/sql_alter.asp)
+
+- altering existing table to add constraint (https://pencilprogrammer.com/self-referencing-foreign-key-in-mysql/)
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)

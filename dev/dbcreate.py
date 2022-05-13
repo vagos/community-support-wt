@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS comment (
     creation_time DATE,
     creator INT,
     post INT,
-    replies_to INT DEFAULT NULL
+    replies_to INT DEFAULT NULL,
     body TEXT,
     FOREIGN KEY (creator)
         REFERENCES user(id)
