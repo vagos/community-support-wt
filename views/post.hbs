@@ -40,46 +40,62 @@ comments:
 
   {{#if comments}}
     {{#each comments}}
-      <div class="comment d-flex flex-column m-2">
 
-        {{!-- noncollapsible part --}}
-        <div class="imageAndName d-inline-flex ">
-          {{!-- profile image and name --}}
-          {{!-- REMINDER CHANGE CANVAS SIZE --}}
-          <div class=" align-self-start me-1" style="width:8%; height:10%;">
-            <a href="/user/{{this.creator}}">
-              <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
-            </a>
-          </div>
-          <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+      {{!-- if comment doesnt reply to anything --}}
+      {{#unless this.replies_to}}
+        <div class="comment d-flex flex-column m-2" id="comment-{{this.id}}">
+      {{/unless}}
 
-          {{!-- Collapse button --}}
-          {{!--ms-auto pushes the rest items into the left  --}}
-          {{!-- Pay attention at id --}}
-          <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
-        </div>
-        {{!-- Collapsible part --}}
-        {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
-        <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
-          <div class="bodyAndButtons d-flex flex-column ps-4">
-            <div class="comment-body flex-grow-1 p-2 ">
-              {{this.body}}
-              {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
+      {{!-- if comment is a reply to another --}}
+      {{#if this.replies_to}}
+        <div class="reply comment d-flex flex-column m-2" id="comment-{{this.id}}">
+          {{!-- this is normally hidden and used to order comments correctly --}}
+          <span class="replies_to d-none" id="reply-to-{{this.replies_to}}">REPLIES TO COMMENT:{{this.replies_to}}</span>
+      {{/if}}
+
+          {{!-- noncollapsible part --}}
+          <div class="imageAndName d-inline-flex ">
+            {{!-- profile image and name --}}
+            {{!-- REMINDER CHANGE CANVAS SIZE --}}
+            <div class=" align-self-start me-1" style="width:8%; height:10%;">
+              <a href="/user/{{this.creator}}">
+                <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
+              </a>
             </div>
-            <div class="comment-buttons d-inline-flex align-items-stretch">
-              <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
+            <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+
+            {{!-- Collapse button --}}
+            {{!--ms-auto pushes the rest items into the left  --}}
+            {{!-- Pay attention at id --}}
+            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
+          </div>
+          {{!-- Collapsible part --}}
+          {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
+          <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
+            <div class="bodyAndButtons d-flex flex-column ps-4">
+              <div class="comment-body flex-grow-1 p-2 ">
+                {{this.body}}
+                {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
+              </div>
+              <div class="comment-buttons d-inline-flex align-items-stretch">
+                <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
+              </div>
             </div>
+            {{!-- Reply Section --}}
+            {{!-- maybe another way to do it? --}}
+            <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
+              <label for="userReply"> Reply:</label>
+              <textarea class="form-control" id="userReply"></textarea>
+              <button type="submit" class="btn btn-primary">submit</button>
+            </div>
+
+            <div class="reply-comments ms-4 mt-1 " id="reply-comments-{{this.id}}">
+              {{!-- <span class="bg-secondary">HERE PUT COMMENTS THAT REPLY TO THIS ONE</span> --}}
+            </div>
+
           </div>
-          {{!-- Reply Section --}}
-          {{!-- maybe another way to do it? --}}
-          <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
-            <label for="userReply"> Reply:</label>
-            <textarea class="form-control" id="userReply"></textarea>
-            <button type="submit" class="btn btn-primary">submit</button>
-          </div>
+        
         </div>
-      
-      </div>
 
     {{/each}}
   {{/if}}
@@ -89,6 +105,9 @@ comments:
   {{/unless}}
 </div>
 
+{{!-- script for drawing profile pictures --}}
 <script src="/scripts/post-profile-pics.js"></script>
 
+{{!-- script for putting replies under their respective comment --}}
+<script src="/scripts/post-comments-order.js"></script>
 

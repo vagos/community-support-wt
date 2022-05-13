@@ -31,6 +31,7 @@ After that we referance it using /assets/css/myfile.css
 
 - altering existing table to add constraint (https://pencilprogrammer.com/self-referencing-foreign-key-in-mysql/)
 
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)
@@ -76,6 +77,9 @@ After that we referance it using /assets/css/myfile.css
 
 - bootstrap icons extension (https://icons.getbootstrap.com/)
 
+- hiding elements in bootstrap (https://getbootstrap.com/docs/5.0/utilities/display/)
+
+
 ### Express Handlebars notes
 
 - Helper functions (https://handlebarsjs.com/guide/builtin-helpers.html#lookup)
@@ -98,9 +102,13 @@ https://developer.ibm.com/tutorials/docker-dev-db/
 
 ### Code hurdles
 
--[X] How to pass usernames and profile pictures for post comments?
+- [X] How to pass usernames and profile pictures for post comments?
     - with another function that returns all usernames ?
     - with a SQL querry to extend comments to include usernames. (THIS) 
         "select comment.*, user.name as creatorName from comment join (select id,name from user) as user on user.id=comment.creator WHERE comment.post= {postID};"   
     <br>
     cool trick with comment.* will return only all the comment colums(https://stackoverflow.com/questions/26203799/using-an-inner-join-without-returning-any-columns-from-the-joined-table)
+
+- [ ] How to show and retrive replies to a comment?
+    - for now I will just load them as comments and put them in the correct place through a script
+    - Later I think it is better to do a querry for comments that are replies to a comment in this post , after loading the page

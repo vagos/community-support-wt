@@ -11,7 +11,7 @@ exports.getAll = ( cb ) => {
 
 exports.getPosts = (activityName, cb) => {
 
-    db.connection.query(`SELECT post.id, post.body FROM post 
+    db.connection.query(`SELECT post.id, post.name, post.body FROM post 
         JOIN activity ON activity.id = post.activity WHERE activity.name = ?`, activityName,
     (err, rows) => { if (err) throw err; cb(rows) });
 };
@@ -31,7 +31,8 @@ exports.getExtendedAll = ( cb ) => {
 
 exports.getExtendedPosts = (activityName, cb) => {
 
-    db.connection.query(`SELECT post.id, post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id = 
+    // maybe later return creatorname and say time of posting?
+    db.connection.query(`SELECT post.id, post.name , post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id = 
     post.activity WHERE activity.name = ?`, activityName,
     (err, rows) => { if (err) throw err; cb(rows) });
 };
