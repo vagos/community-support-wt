@@ -24,7 +24,9 @@ function rnd(n) {
 function drawProfilePicture() {
     ctx = pictureProfile.getContext('2d');
 
+    // console.log("profile username:",document.getElementById("userName").innerHTML);
     seed = numberifyString(document.getElementById("userName").innerHTML);
+    // console.log("profile seed:",seed);
 
     N = Math.min( ( rnd(seed) % 10 ) +  (rnd(seed + 1) % 10) + 1, 10) ;
 

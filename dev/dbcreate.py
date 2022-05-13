@@ -82,7 +82,7 @@ user_table = """
 CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL DEFAULT '',
-    bio TEXT NOT NULL DEFAULT '',
+    bio TEXT ,
     join_date DATE,
     hashed_password BINARY(32),
     salt BINARY(16)
@@ -138,6 +138,7 @@ CREATE TABLE IF NOT EXISTS comment (
     creation_time DATE,
     creator INT,
     post INT,
+    replies_to INT DEFAULT NULL,
     body TEXT,
     FOREIGN KEY (creator)
         REFERENCES user(id)
@@ -146,7 +147,11 @@ CREATE TABLE IF NOT EXISTS comment (
     FOREIGN KEY (post)
         REFERENCES post(id)
             ON UPDATE CASCADE
-            ON DELETE CASCADE
+            ON DELETE CASCADE,
+    CONSTRAINT fk_replies_to
+        FOREIGN KEY (replies_to)
+            REFERENCES comment(id)
+                ON UPDATE CASCADE
 ) ENGINE=INNODB;
 """
 

@@ -11,8 +11,19 @@ const controller = require('../controllers/posts');
 router.get('/:postId', (req, res) => {
 
     controller.getPost(req.params.postId, (post) => {
-        res.render('post', { post:post });
-        console.log(post);
+        
+        // retrieve comments
+        // console.log(`getting comments for post ${post.id}`);
+
+        controller.getExtendedComments(post.id,(comments) => {
+            // for (comment of comments){
+            //     console.log(comment);
+            // }
+
+            postInfo = {post:post , comments:comments} ;
+            res.render('post', postInfo);
+            // console.log(postInfo);
+        });
     });
 
 });
