@@ -1,5 +1,21 @@
-// get all user comment image and name
-const userComments = document.querySelectorAll(".imageAndName");
+function rnd(n) {
+    
+    for (let i = 0; i < 10; i++) {
+        n = n ^ ( n * 19 );
+    }
+
+    return Math.abs(n);
+}
+
+function numberifyString(s) {
+    let r = 0;
+
+    for (let i = 0; i < s.length; i++) {
+       r += s.codePointAt(i); 
+    }
+
+    return r;
+}
 
 // will draw the user picture for the given comment node
 function drawProfilePicture(node, username) {
@@ -20,13 +36,3 @@ function drawProfilePicture(node, username) {
     }
 }
 
-
-for (user of userComments){
-
-    pictureProfile = user.querySelector(".prof-image");
-
-    username = user.querySelector(".user-name").innerHTML;
-
-    drawProfilePicture(pictureProfile, username)
-
-}
