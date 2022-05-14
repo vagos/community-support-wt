@@ -24,7 +24,7 @@ router.use('/user', userRouter);
 
 //define the home page route
 router.get('/', (req, res) => {
-    res.render('home', {title:'home'});
+    res.render('home', {title:'home', authenticated: req.isAuthenticated()});
 });
 
 module.exports = router;

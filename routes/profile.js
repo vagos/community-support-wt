@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 
     user = await controller.getUserObject(req.session.passport.user.id);
 
-    res.render('profile', { title:'profile', 'user': user, 'self': true }); // self means that the user's SELF is accessing their profile.
+    res.render('profile', { title:'profile', authenticated: req.isAuthenticated(), 'user': user, 'self': true }); // self means that the user's SELF is accessing their profile.
 });
 
 module.exports = router;

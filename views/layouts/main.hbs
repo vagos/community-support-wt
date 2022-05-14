@@ -34,10 +34,15 @@
             <li class="nav-item">
                 <a class="nav-link {{#ifeq title 'activities'}}active{{/ifeq}} " href="/activities">activities</a>
             </li>
+            {{#if authenticated}}
             <li class="nav-item">
                 <a class="nav-link {{#ifeq title 'profile'}}active{{/ifeq}} " href="/profile">profile</a>
             </li>
-                <a class="nav-link" href="/login">login</a>
+            {{else}}
+            <li class="nav-item">
+                <a class="nav-link {{#ifeq title 'login'}}active{{/ifeq}} " href="/login">login</a>
+            </li>
+            {{/if}}
           </ul>
         </div>
 
@@ -46,7 +51,7 @@
 
     <main class="grid">
         <aside class="pageNavigation">
-            <p>Here we will put page specific Navigation</p>
+            <p></p>
         </aside>
 
         <div  class="pageContentContainer">

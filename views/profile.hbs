@@ -20,6 +20,9 @@
                 </div>
             </div>
             <p class="small text-muted">Joined on {{user.join_date}}</p>
+            {{#if self}}
+                <a class ="btn btn-danger" href="/login/logout">Logout</a>
+            {{/if}}
         </div>
     </div>
 
