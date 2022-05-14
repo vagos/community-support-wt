@@ -36,3 +36,11 @@ function drawProfilePicture(node, username) {
     }
 }
 
+function getRandomColorRGB(s) {
+    
+    seed = numberifyString(s);
+
+    return `rgb(${rnd(seed) % (255)}, ${rnd(seed + 1) % (255)},
+        ${rnd(seed + 2) % (255)})`;
+
+}
