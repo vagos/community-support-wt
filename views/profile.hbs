@@ -26,6 +26,9 @@
             {{#unless user.join_date}}
                 <p class="small text-muted">NO JOIN DATE!</p>
             {{/unless}}
+            {{#if self}}
+                <a class ="btn btn-danger" href="/login/logout">Logout</a>
+            {{/if}}
         </div>
     </div>
 

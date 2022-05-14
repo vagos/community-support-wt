@@ -18,8 +18,7 @@ router.get('/', (req, res) => {
             v.color = `rgb( ${Math.random() * (255)}, ${Math.random() * (255)}, ${Math.random() * (255)})`;
         });
 
-        res.render('activities', {title:"activities", activities: extendedActivities});
-
+        res.render('activities',{title:'activities', authenticated: req.isAuthenticated(), activities: activities});
     });
 
 });
