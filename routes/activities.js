@@ -42,9 +42,16 @@ router.get('/:activityId', (req, res) => {
 router.put('/createActivity', (req, res) => {
 
     // create activity with values given in request
-    controller.createActivity(req.body.name, req.body.description);
-    // respond OK
-    res.sendStatus(200);
+
+    // This is weird because it is a async function (https://www.valentinog.com/blog/throw-async/)
+    controller.createActivity(req.body.name, req.body.description)
+        .then(cb => {
+        // console.log("ok");
+        res.sendStatus(200);})
+        .catch((err) => {
+        console.error(err);
+        res.sendStatus(403);});
+
 
 });
 

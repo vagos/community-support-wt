@@ -43,27 +43,33 @@ exports.createActivity = async (activityName, description, cb) => {
 
     // console.log(activityName, description);
 
-    // MAYBE CHECK HERE ALSO FOR constraints
+    // Checking Here
     let uniqueName = false;
-     db.connection.query(`SELECT * FROM activity WHERE activity.name = ?`, activityName,
-    (err, rows) => { if (err) throw err; {
-        // check if there are any activities with same name
-        if (rows.length==0){
-            uniqueName = true;
-        }
-        else{
-            uniqueName = false;
-        } 
-        // console.log("check is ",uniqueName);
+    const result =  await db.query(`SELECT * FROM activity WHERE activity.name = ?`, activityName);
 
-        // Try to insert data if it passes constraint
-        if (uniqueName){
-            db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-        }
-        else{
-            console.log("NAME NOT UNIQUE");
-        }
-    }});
+    // console.log("result",result);
+
+
+    // check if there are any activities with same name
+    if (result.length==0){
+        uniqueName = true;
+    }
+    else{
+        uniqueName = false;
+    } 
+    // console.log("check is ",uniqueName);
+
+    // Try to insert data if it passes constraint
+    if (uniqueName){
+        let temp = await db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+        // console.log(temp);
+    }
+    else{
+        // console.log("NAME NOT UNIQUE");
+        throw Error("I AM DISAPPOINTED IN YOU MY CHILD");
+    }
+
+
 
     
     // console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);

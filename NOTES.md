@@ -37,6 +37,7 @@ After that we referance it using /assets/css/myfile.css
 
 - nice custom form api (https://simonplend.com/how-to-use-fetch-to-post-form-data-as-json-to-your-api/)
 
+- throwing vs Rejection (https://www.valentinog.com/blog/throw-async/) (https://stackoverflow.com/questions/33445415/javascript-promises-reject-vs-throw) 
 
 ### Styling notes
 
