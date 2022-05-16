@@ -22,6 +22,8 @@ exports.getExtendedAll = ( cb ) => {
 
     // console.log("getting extended post info")
 
+    // MAYBE CHECK HERE ALSO FOR constraints
+
     db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
     FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(activity.id) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
         ON activity.id = info.id`,
@@ -40,6 +42,10 @@ exports.getExtendedPosts = (activityName, cb) => {
 // do we need async?
 exports.createActivity = async (activityName, description, cb) => {
 
-    console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+    console.log(activityName, description);
+
+    // console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+
+    db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
 
 };

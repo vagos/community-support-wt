@@ -3,37 +3,95 @@ const newActivity = document.querySelector(".activity-creator");
 const activityForm = newActivity.querySelector("form.make-activity");
 
 
+// This function returns a list with all activity titles
+function getAllActivityTitles(){
+
+    const all_activities = document.querySelectorAll(".activity-title");
+
+    const all_activity_titles = new Array();
+
+    for (activity of all_activities){
+        all_activity_titles.push(activity.innerHTML);
+    }
+    
+    return all_activity_titles;
+
+}
+
+// this will print all entries of a given formdata
+function printFormData(FormData){
+
+    console.log("Form data entries:");
+
+    for (entry of FormData.entries()){
+        console.log(entry);
+    }
+}
+
+async function postFormDataAsJson({ url, formData }) {
+
+	const plainFormData = Object.fromEntries(formData.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+
+    // console.log(plainFormData);
+    // console.log(formDataJsonString);
+
+	fetch(url,{
+        method : 'PUT',
+        body: formDataJsonString,
+		headers: {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+	});
+
+}
+
 function makeActivity(event) {
 
     // prevents browser from using default behaviour , so we can use our own
     event.preventDefault();
 
+    // get the form that called this
     const form = event.currentTarget;
+
+    // get all activities
+    var all_activities = getAllActivityTitles();
+
+    // console.log(all_activities);
 
     try {
 
-        const title = newActivity.querySelector("#activity-title").value ;
+        // console.log(form);
 
-        console.log(form);
-
-        console.log("title",title);
-
+        // make new form data based on form 
         const formData = new FormData(form);
 
+        // printFormData(formData);
 
-        // form dat appears empty in console https://stackoverflow.com/questions/25040479/formdata-created-from-an-existing-form-seems-empty-when-i-log-it
+        // get activity title entered
+        let title = formData.get("name");
 
-        console.log("formdata:",formData.values());
+        // console.log("title",title);
 
-        for (data of formData.values()){
-            console.log(data);
+        if (all_activities.includes(title)){
+            // if activity already exists
+            console.log("it exists");
+            alert("This activity already exists.\nPlease type another title.");
         }
+        else if ((all_activities.includes(title))== false){
+            // if activity doesn't exist
+            console.log("it doesn't exist");
 
-        // formData.forEach(file => console.log("File: ", file));
+            console.log("inserting data");
+            // insert data
 
-        // for (var [key, value] of formData.entries()) {
-        //     console.log(key, value);
-        // }
+            postFormDataAsJson({url:'/activities/createActivity',formData:formData});
+
+        }
+        else{
+            console.log("this should happen!");
+        }
 
     }
     catch (error) {
@@ -42,5 +100,28 @@ function makeActivity(event) {
 
 
 }
+
+// buttonEditBio.addEventListener("click", (e) => {
+
+//     if ( textAreaBio.value != textBio.innerHTML ) { // user edited their bio.
+    
+//         const data = { bio: textAreaBio.value };
+
+//         fetch('/profile/change-bio', { 
+//             method : 'PATCH',
+//             body: JSON.stringify(data),
+//             headers: {
+//                 'Accept': 'application/json, text/plain, */*',
+//                 'Content-Type': 'application/json'
+//               },
+//             });
+
+//     }
+// });
+
+
+var all_activities = getAllActivityTitles();
+
+// console.log(all_activities);
 
 activityForm.addEventListener("submit",makeActivity);

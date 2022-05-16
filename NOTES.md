@@ -31,6 +31,12 @@ After that we referance it using /assets/css/myfile.css
 
 - altering existing table to add constraint (https://pencilprogrammer.com/self-referencing-foreign-key-in-mysql/)
 
+- name attribute is important for forms(https://stackoverflow.com/questions/1397592/difference-between-id-and-name-attributes-in-html)
+
+- Puting data with form data and fetch (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+- nice custom form api (https://simonplend.com/how-to-use-fetch-to-post-form-data-as-json-to-your-api/)
+
 
 ### Styling notes
 
