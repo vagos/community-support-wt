@@ -22,7 +22,6 @@ exports.getExtendedAll = ( cb ) => {
 
     // console.log("getting extended post info")
 
-    // MAYBE CHECK HERE ALSO FOR constraints
 
     db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
     FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(activity.id) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
@@ -42,10 +41,33 @@ exports.getExtendedPosts = (activityName, cb) => {
 // do we need async?
 exports.createActivity = async (activityName, description, cb) => {
 
-    console.log(activityName, description);
+    // console.log(activityName, description);
 
+    // MAYBE CHECK HERE ALSO FOR constraints
+    let uniqueName = false;
+     db.connection.query(`SELECT * FROM activity WHERE activity.name = ?`, activityName,
+    (err, rows) => { if (err) throw err; {
+        // check if there are any activities with same name
+        if (rows.length==0){
+            uniqueName = true;
+        }
+        else{
+            uniqueName = false;
+        } 
+        // console.log("check is ",uniqueName);
+
+        // Try to insert data if it passes constraint
+        if (uniqueName){
+            db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+        }
+        else{
+            console.log("NAME NOT UNIQUE");
+        }
+    }});
+
+    
     // console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
 
-    db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+    // db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
 
 };
