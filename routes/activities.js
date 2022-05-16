@@ -1,3 +1,4 @@
+const { Router } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -36,13 +37,15 @@ router.get('/:activityId', (req, res) => {
         });
     });
     
-    // controller.getPosts(activityName, (posts) => {
-        
-    //     res.render('activity', { name : activityName, 
-    //         posts: posts
+});
 
-    //     });
-    // });
+router.put('/createActivity', (req, res) => {
+
+    // create activity with values given in request
+    controller.createActivity(req.body.name, req.body.description);
+    // respond OK
+    res.sendStatus(200);
+
 });
 
 module.exports = router;

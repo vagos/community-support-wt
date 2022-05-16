@@ -1,4 +1,33 @@
 <div class="PageContent">
+
+  <div class="activity-creator card">
+
+    <form class="make-activity">
+      <legend>Make activity section</legend>
+
+      <div class="form-group">
+        <label for="activity-title">Title:</label>
+        <input class="form-control" type="text" id="activity-title" placeholder="TEST ACTIVITY">
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-text" id="description">Description:</span>
+        <input class="form-control" type="text" id="activity-description" placeholder="TEST DESCRIPTION" >
+      </div>
+
+      <input type="submit">
+
+    </form>
+    
+    
+    {{!-- <span>Make activity section</span>
+    <span class="activity-title">title:test activity</span>
+    <span class="activity-description">description:test description</span>
+    <button class="btn btn-primary button-make-activity">MAKE TEST ACTIVITY</button> --}}
+ 
+  </div>
+
+    {{!-- Maybe change clas names in cards later? --}}
     <div class="accordion" id="accordionActivity">
         {{#each activities}}
             <div class="card mb-2" style="width: 80%;">
@@ -17,3 +46,5 @@
     </div>
 
 </div>
+
+<script src="/scripts/activities-put-activity.js"></script>

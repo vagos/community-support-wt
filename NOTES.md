@@ -79,6 +79,8 @@ After that we referance it using /assets/css/myfile.css
 
 - hiding elements in bootstrap (https://getbootstrap.com/docs/5.0/utilities/display/)
 
+- Bootstrap 5 forms (https://getbootstrap.com/docs/5.0/forms/overview/)
+
 
 ### Express Handlebars notes
 

@@ -36,3 +36,10 @@ exports.getExtendedPosts = (activityName, cb) => {
     post.activity WHERE activity.name = ?`, activityName,
     (err, rows) => { if (err) throw err; cb(rows) });
 };
+
+// do we need async?
+exports.createActivity = async (activityName, description, cb) => {
+
+    console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
+
+};
