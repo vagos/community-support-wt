@@ -25,5 +25,15 @@ export async function postFormDataAsJson({ url, formData }) {
 
 }
 
+// this will print all entries of a given formdata
+export function printFormData(FormData){
+
+    console.log("Form data entries:");
+
+    for (let entry of FormData.entries()){
+        console.log(entry);
+    }
+}
+
 // this wont work on browser (https://isotropic.co/how-to-fix-referenceerror-require-is-not-defined-in-javascript/)
 // module.exports.postFormDataAsJson = postFormDataAsJson;

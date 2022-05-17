@@ -25,13 +25,16 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/:activityId', (req, res) => {
+// renamed from activityID to activityName to be more accurate
+router.get('/:activityName', (req, res) => {
 
-    activityName = req.params.activityId;
+    // console.log(req);
+    let activityName = req.params.activityName;
 
     controller.getExtendedPosts(activityName, (posts) => {
         
-        res.render('activity', { name : activityName, 
+        // activityID is for testing
+        res.render('activity', { name : activityName,
             posts: posts
 
         });

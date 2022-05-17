@@ -41,7 +41,7 @@ After that we referance it using /assets/css/myfile.css
 
 - Reseting Auto-increamenting sql (https://www.techonthenet.com/mysql/auto_increment_reset.php)
 
-- Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/)
+- Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/) (https://www.w3schools.com/bootstrap5/bootstrap_form_validation.php)
 
 - More info on importing in browsers (https://javascript.info/modules-intro)
 
@@ -106,6 +106,8 @@ After that we referance it using /assets/css/myfile.css
 - intellisense for css extension reades all files os its slow. Use only when making css
 
 - Selecting multiple vars in vscode  (ctrl+f2 or ctrl+shift+L) (https://stackoverflow.com/questions/46539714/select-all-occurrences-of-selected-word-in-vscode)
+
+- Maybe look into php? (https://www.w3schools.com/php/)
 
 ### windows mysql poweruser problems
 
