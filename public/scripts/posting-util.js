@@ -18,8 +18,8 @@ export async function convertFormDataToJsonString(formData) {
 	const plainFormData = Object.fromEntries(formData.entries());
 	const formDataJsonString = JSON.stringify(plainFormData);
 
-    console.log(plainFormData);
-    console.log(formDataJsonString);
+    // console.log(plainFormData);
+    // console.log(formDataJsonString);
 
     return formDataJsonString;
 
@@ -47,9 +47,12 @@ export async function convertJsonToString(json) {
 // A simple function that post a Json to given url
 export async function postJson({ url, jsonData }) {
 
+    // must convert json to string
+    let jsonStringData = await convertJsonToString(jsonData);
+
 	let response = await fetch(url,{
         method : 'PUT',
-        body: jsonData,
+        body: jsonStringData,
 		headers: {
 			"Content-Type": "application/json",
 			"Accept": "application/json"
