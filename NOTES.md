@@ -43,6 +43,8 @@ After that we referance it using /assets/css/myfile.css
 
 - Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/)
 
+- More info on importing in browsers (https://javascript.info/modules-intro)
+
 
 ### Styling notes
 
