@@ -1,6 +1,3 @@
-// not necessary anymore
-const activityForm = document.querySelector("form.make-activity");
-
 
 // This function returns a list with all activity titles
 function getAllActivityTitles(){
@@ -27,6 +24,7 @@ function printFormData(FormData){
     }
 }
 
+// this will try to post formData given to url given, it will return the server response
 async function postFormDataAsJson({ url, formData }) {
 
 	const plainFormData = Object.fromEntries(formData.entries());
@@ -35,7 +33,7 @@ async function postFormDataAsJson({ url, formData }) {
     // console.log(plainFormData);
     // console.log(formDataJsonString);
 
-	fetch(url,{
+	let response = await fetch(url,{
         method : 'PUT',
         body: formDataJsonString,
 		headers: {
@@ -44,9 +42,36 @@ async function postFormDataAsJson({ url, formData }) {
 		},
 	});
 
+    // return server response
+    console.log("post response",response);
+    return response;
+
 }
 
-function makeActivity(event) {
+// takes known activityTitles and the formData, and if the formData passes the constraint it will return true.
+function ActivityConstraint(all_activities,formData){
+
+    const title = formData.get("name");
+
+    if (all_activities.includes(title)){
+        // if activity already exists
+        // console.log("it exists");
+        return false;
+    }
+    else if ((all_activities.includes(title))== false){
+        // if activity doesn't exist
+        // console.log("it doesn't exist");
+
+        return true;
+
+    }
+    else{
+        console.log("this should happen!");
+        return false;
+    }
+}
+
+async function makeActivity(event) {
 
     // prevents browser from using default behaviour , so we can use our own
     event.preventDefault();
@@ -59,39 +84,32 @@ function makeActivity(event) {
 
     // console.log(all_activities);
 
+    // make new form data based on form 
+    const formData = new FormData(form);
+
+    // printFormData(formData);
     try {
+        // check if formData passes constraint
+        let is_unique = ActivityConstraint(all_activities, formData);
 
-        // console.log(form);
+        // if it passes constraint insert data
+        if (is_unique){
 
-        // make new form data based on form 
-        const formData = new FormData(form);
+            // console.log("inserting data");
+            // insert data, this will return response 
+            // NOTE THIS MUST WAIT FOR RESPONSE
+            let response = await postFormDataAsJson({url:'/activities/createActivity',formData:formData});
 
-        // printFormData(formData);
-
-        // get activity title entered
-        let title = formData.get("name");
-
-        // console.log("title",title);
-
-        if (all_activities.includes(title)){
-            // if activity already exists
-            console.log("it exists");
-            alert("This activity already exists.\nPlease type another title.");
-        }
-        else if ((all_activities.includes(title))== false){
-            // if activity doesn't exist
-            console.log("it doesn't exist");
-
-            console.log("inserting data");
-            // insert data
-
-            postFormDataAsJson({url:'/activities/createActivity',formData:formData});
-
+            // if response isnt an ok
+            console.log("make activity response",response);
+            if (response.status!=200){
+                console.log("response wasnt ok, it was",response.status);
+            }
         }
         else{
-            console.log("this should happen!");
+            // alert user this activity isnt unique
+            alert("This activity already exists.\nPlease type another title."); 
         }
-
     }
     catch (error) {
         console.error(error);
@@ -100,27 +118,8 @@ function makeActivity(event) {
 
 }
 
-// buttonEditBio.addEventListener("click", (e) => {
-
-//     if ( textAreaBio.value != textBio.innerHTML ) { // user edited their bio.
-    
-//         const data = { bio: textAreaBio.value };
-
-//         fetch('/profile/change-bio', { 
-//             method : 'PATCH',
-//             body: JSON.stringify(data),
-//             headers: {
-//                 'Accept': 'application/json, text/plain, */*',
-//                 'Content-Type': 'application/json'
-//               },
-//             });
-
-//     }
-// });
-
 
 var all_activities = getAllActivityTitles();
 
-// console.log(all_activities);
-
+activityForm = document.querySelector("form.make-activity");
 activityForm.addEventListener("submit",makeActivity);
