@@ -1,6 +1,5 @@
-const newActivity = document.querySelector(".activity-creator");
-
-const activityForm = newActivity.querySelector("form.make-activity");
+// not necessary anymore
+const activityForm = document.querySelector("form.make-activity");
 
 
 // This function returns a list with all activity titles

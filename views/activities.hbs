@@ -1,33 +1,34 @@
 <div class="PageContent">
 
-  <div class="activity-creator card">
+  
 
-    <form class="make-activity">
-      {{!-- REMINDER use name for correct formdata creation --}}
-      {{!-- id is not used for the dataform --}}
-      <legend>Make activity section</legend>
+  <form class="make-activity container border rounded px-3 my-2">
+    {{!-- REMINDER use name for correct formdata creation --}}
+    {{!-- id is not used for the dataform --}}
+    <div class="row">
+      <p class="mt-2 fs-3">Make activity section</p>
+      <hr>
 
-      <div class="form-group">
-        <label for="activity-title">Title:</label>
-        <input class="form-control" type="text" id="activity-title" name="name" placeholder="TEST ACTIVITY">
+      <div class="col input-group">
+        <span class="input-group-text" id="title">Title:</span>
+        <input class="form-control" type="text" id="activity-title" name="name" placeholder="TEST ACTIVITY" required>
       </div>
 
-      <div class="input-group">
+      <div class="col input-group">
         <span class="input-group-text" id="description">Description:</span>
         <input class="form-control" type="text" id="activity-description" name="description" placeholder="TEST DESCRIPTION" >
       </div>
+    </div>
+    
+    <div class="buttons row p-3">
+      {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
+      <input class="btn btn-primary col-3 ms-auto" type="submit">
+    </div>
+    
 
-      <input type="submit">
-
-    </form>
+  </form>
     
     
-    {{!-- <span>Make activity section</span>
-    <span class="activity-title">title:test activity</span>
-    <span class="activity-description">description:test description</span>
-    <button class="btn btn-primary button-make-activity">MAKE TEST ACTIVITY</button> --}}
- 
-  </div>
 
     {{!-- Maybe change clas names in cards later? --}}
     <div class="accordion" id="accordionActivity">

@@ -39,6 +39,11 @@ After that we referance it using /assets/css/myfile.css
 
 - throwing vs Rejection (https://www.valentinog.com/blog/throw-async/) (https://stackoverflow.com/questions/33445415/javascript-promises-reject-vs-throw) 
 
+- Reseting Auto-increamenting sql (https://www.techonthenet.com/mysql/auto_increment_reset.php)
+
+- Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/)
+
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)
@@ -88,6 +93,7 @@ After that we referance it using /assets/css/myfile.css
 
 - Bootstrap 5 forms (https://getbootstrap.com/docs/5.0/forms/overview/)
 
+- Vertical ruler for comments (https://getbootstrap.com/docs/5.1/helpers/vertical-rule/)
 
 ### Express Handlebars notes
 
