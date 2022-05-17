@@ -1,7 +1,7 @@
 // this wont work on the browser (https://stackoverflow.com/questions/19059580/client-on-node-js-uncaught-referenceerror-require-is-not-defined)
 // const posting = require("posting-util");
 // now be carful because everything needs to be strict. Meaning always must use let or var
-import { postFormDataAsJson, printFormData } from "./posting-util.js";
+import { convertFormDataToJson, postJson, printFormData, } from "./posting-util.js";
 
 // This function returns a list with all activity titles
 function getAllPostTitles(){
@@ -43,6 +43,32 @@ function PostConstraint(all_posts,formData){
     }
 }
 
+// this will take the form data (in json form), and add the creator,post,creation_time
+function addData(data){
+
+    let all_data = data;
+
+    // add creator data
+    // this is 21 for testing, later use the logged in user to do it
+    all_data["creator"]=21;
+
+    // add activity data
+    // this is 1 for testing, later use the activityID
+    all_data["activity"]=1;
+
+    // add time data
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth()+1; //this return 0-11
+    let year = date.getFullYear();
+
+    let dateString = `${year}-${month}-${day}`;
+    // console.log(dateString);
+    all_data["creation_time"] = dateString;
+
+    return all_data;
+}
+
 // this will try to make an post from an post form
 async function makePost(event) {
 
@@ -61,7 +87,7 @@ async function makePost(event) {
     // make new form data based on form 
     const formData = new FormData(form);
 
-    printFormData(formData);
+    // printFormData(formData);
     try {
         // check if formData passes constraint
         let is_unique = PostConstraint(all_posts, formData);
@@ -70,10 +96,20 @@ async function makePost(event) {
         if (is_unique){
 
             // console.log("inserting data");
-            // insert data, this will return response 
-            // NOTE THIS MUST WAIT FOR RESPONSE
+            // Gather data
+            let data = await convertFormDataToJson(formData);
+
+            console.log("form json",data);
+            
+            // add the rest of the post info
+            data = addData(data);
+
+            console.log("final data json",data);
+
+            // temporary
+            return;
             // NOTE MUST MAKE ROUTER FIRST
-            let response = await postFormDataAsJson({url:'',formData:formData});
+            let response = await postJson({url:'',jsonData:data});
 
             // console.log("make activity response",response);
             // if response isnt an ok
