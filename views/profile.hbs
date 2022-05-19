@@ -12,10 +12,10 @@
                     <h2 class="col-sm" id="userName" >{{user.name}}</h2>
                     <div class="input-group">
                       <div class="input-group-prepend" id="button-edit-bio">
-                        <span style="height: 100%;" class="input-group-text">Bio</span>
+                        <p style="height: 100%;" class="col-sm btn btn-secondary">Bio</p>
                       </div>
                       <span class="form-control" aria-label="Bio" id="text-bio">{{user.bio}}</span>
-                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio"></textarea>
+                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio">{{user.bio}}</textarea>
                     </div>
                 </div>
             </div>
@@ -152,6 +152,7 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="/scripts/util.js"></script>
