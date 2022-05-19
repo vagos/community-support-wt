@@ -9,6 +9,8 @@ const postRouter       = require('./post.js');
 const loginRouter      = require('./login.js');
 const userRouter       = require('./user.js');
 
+const activityController = require('../controllers/activites');
+// const userController = require('../controllers/user');
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
@@ -23,8 +25,13 @@ router.use('/login', loginRouter);
 router.use('/user', userRouter);
 
 //define the home page route
-router.get('/', (req, res) => {
-    res.render('home', {title:'home', authenticated: req.isAuthenticated()});
+router.get('/', async (req, res) => {
+    const activities = await activityController.getPopularActivities();
+
+    res.render('home', {title:'home', 
+        activities: activities,
+
+        authenticated: req.isAuthenticated()});
 });
 
 module.exports = router;

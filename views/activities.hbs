@@ -2,7 +2,9 @@
     <div class="accordion" id="accordionActivity">
         {{#each activities}}
             <div class="card mb-2" style="width: 80%;">
-                <p class="card-header d-flex justify-content-between align-content-end" style="background-color: {{this.color}};">
+                <p class="card-header d-flex justify-content-between
+                    align-content-end" style="background-color:
+                    {{randomColor this.name}};">
                   {{!-- REMEMBER TO QUERRY AS INPUT --}}
                   <span>Users:{{this.userCount}}</span> 
                   <span>Total Posts:{{this.postCount}}</span>
