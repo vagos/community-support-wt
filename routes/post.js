@@ -20,8 +20,7 @@ router.get('/:postId', (req, res) => {
             //     console.log(comment);
             // }
 
-            postInfo = {post:post , comments:comments} ;
-            res.render('post', postInfo);
+            res.render('post', {authenticated: req.isAuthenticated(), post:post , comments:comments});
             // console.log(postInfo);
         });
     });

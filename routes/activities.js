@@ -56,8 +56,8 @@ router.get('/:activityId', (req, res) => {
     controller.getExtendedPosts(activityName, (posts) => {
         
         res.render('activity', { name : activityName, 
-            posts: posts
-
+            posts: posts,
+            authenticated: req.isAuthenticated(),
         });
     });
 });
