@@ -10,6 +10,7 @@ const loginRouter      = require('./login.js');
 const userRouter       = require('./user.js');
 
 const activityController = require('../controllers/activites');
+const userController = require('../controllers/users');
 // const userController = require('../controllers/user');
 
 //middleware that is specific to this router
@@ -27,10 +28,11 @@ router.use('/user', userRouter);
 //define the home page route
 router.get('/', async (req, res) => {
     const activities = await activityController.getPopularActivities();
+    const users = await userController.getTopUsers();
 
     res.render('home', {title:'home', 
         activities: activities,
-
+        users, users,
         authenticated: req.isAuthenticated()});
 });
 

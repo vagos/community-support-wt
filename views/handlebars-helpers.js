@@ -1,5 +1,5 @@
 const handlebars = require('handlebars');
-const util = require("../public/scripts/util");
+const util = require("../controllers/util");
 
 exports.ifeq = (a, b, options) => {
     if (a === b) { return options.fn(this); }

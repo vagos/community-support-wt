@@ -44,7 +44,3 @@ function getRandomColorRGB(s) {
         ${rnd(seed + 2) % (255)})`;
 
 }
-
-module.exports = {
-    getRandomColorRGB: getRandomColorRGB
-};

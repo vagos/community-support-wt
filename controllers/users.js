@@ -6,5 +6,8 @@ exports.getAll = async () => {
 };
 
 exports.getTopUsers = async () => {
-
+    return db.query(`
+    SELECT name, id FROM user 
+    LIMIT 4
+    `);
 };
