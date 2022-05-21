@@ -9,7 +9,7 @@ const options = {
   port     : process.env.DB_PORT,
 }
 
-console.log(options);
+// console.log(options);
 
 const connection = mysql.createConnection(options)
 

@@ -53,8 +53,7 @@ app.listen(port, () => {
 
     db.connection.connect((err) => {
         if (err) throw err;
-        console.log('Connected to db!');
     });
 });
 
-
+module.exports = app;
