@@ -48,7 +48,7 @@ app.set('views', './views')
 
 app.use('/', index_router);
 
-app.listen(port, () => {
+server = app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 
     db.connection.connect((err) => {
@@ -56,4 +56,7 @@ app.listen(port, () => {
     });
 });
 
-module.exports = app;
+module.exports = { 
+    app: app,
+    server: server,
+}

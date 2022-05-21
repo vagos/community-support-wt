@@ -23,5 +23,5 @@ async function queryOne(sql, args) {
 module.exports = {
     connection : connection,
     query: query,
-    queryOne: queryOne
+    queryOne: queryOne,
 }
