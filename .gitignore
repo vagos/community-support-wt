@@ -5,3 +5,6 @@ codeExamples
 
 db/mysql
 db/sqlite
+
+# jest coverage report
+coverage
