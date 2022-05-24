@@ -1,7 +1,7 @@
 """
 db creation script
 
-usage: python dbcreate.py > schema.sql
+usage: python createDB.py > schema.sql
 
 $ mysql -p 
 > source ./schema.sql
@@ -24,7 +24,11 @@ $ mysql -u admin -p
 
 
 import random
-import string
+import re
+
+from essential_generators import DocumentGenerator
+
+gen = DocumentGenerator()
 
 # random.seed(999)
 
@@ -57,15 +61,22 @@ def create_activity_name():
 
     return target + ' ' + verb
 
-def create_string(l=20):
-    return ''.join((random.choice(string.ascii_letters + ' ') for _ in range(l)))
+def create_string(_type):
+    s = ""
+    if _type == 'sentence': s = gen.sentence()
+    if _type == 'paragraph': s = gen.paragraph()
+
+    if s: return re.sub(r'[\'"\n]', ' ', s)
+
+    return ""
 
 def create_username():
 
     name = random.choice(NAMES)
     surname = random.choice(SURNAMES)
 
-    return name + ' ' + surname
+    # return name + ' ' + surname
+    return gen.name()
 
 def create_date(previous_date = "2020-1-1"):
     """ Create a random date that happens AFTER previous_date."""
@@ -173,7 +184,7 @@ CREATE TABLE IF NOT EXISTS participation (
 ) ENGINE=INNODB;
 """
 
-N = 20
+N = 1000
 
 def fill_table(table_name, n=10):
     for _ in range(n):
@@ -188,13 +199,13 @@ def create_user():
     return sql
 
 def create_activity():
-    activity = ( create_activity_name(), create_string(30) )
+    activity = ( create_activity_name(), create_string('sentence') )
     sql = "INSERT INTO activity(name, description) VALUES('%s', '%s');" % activity
     return sql
 
 def create_post():
-    post = (create_fk("activity", "id"), create_fk("user", "id"), create_date(), create_string(30))
-    sql = "INSERT INTO post(activity, creator, creation_time, body) VALUES(%s, %s, '%s', '%s');" % post
+    post = (create_string('sentence'), create_fk("activity", "id"), create_fk("user", "id"), create_date(), create_string('paragraph'))
+    sql = "INSERT INTO post(name, activity, creator, creation_time, body) VALUES('%s', %s, %s, '%s', '%s');" % post
     return sql
 
 def create_participation():
@@ -203,7 +214,7 @@ def create_participation():
     return sql
 
 def create_comment():
-    comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string(30))
+    comment = ( create_date(), create_fk("user", "id"), create_fk("post", "id"), create_string('paragraph'))
     sql = "INSERT INTO comment(creation_time, creator, post, body) VALUES('%s', %s, %s, '%s');" % comment
     return sql
 
@@ -897,6 +908,7 @@ def main():
     tables = ["user", "activity", "post", "friendship", "participation", "comment"]
 
     for t in tables:
+        print(t)
         try:
             print(f"DROP TABLE IF EXISTS {t};")
             print(eval(t + "_table"))
