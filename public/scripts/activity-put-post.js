@@ -43,31 +43,6 @@ function PostConstraint(all_posts,formData){
     }
 }
 
-// this will take the form data (in json form), and add the creator,post,creation_time
-function addData(data){
-
-    let all_data = data;
-
-    // add creator data
-    // this is 21 for testing, later use the logged in user to do it
-    all_data["creator"]=21;
-
-    // add activity data
-    // this is 1 for testing, later use the activityID
-    all_data["activity"]=1;
-
-    // add time data
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth()+1; //this return 0-11
-    let year = date.getFullYear();
-
-    let dateString = `${year}-${month}-${day}`;
-    // console.log(dateString);
-    all_data["creation_time"] = dateString;
-
-    return all_data;
-}
 
 // this will try to make an post from an post form
 async function makePost(event) {
@@ -98,13 +73,6 @@ async function makePost(event) {
             // console.log("inserting data");
             // Gather data
             let data = await convertFormDataToJson(formData);
-
-            console.log("form json",data);
-            
-            // add the rest of the post info
-            data = addData(data);
-
-            console.log("final data json",data);
 
           
             // note the url is "currentActivity/createPost"
