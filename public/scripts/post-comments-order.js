@@ -8,11 +8,11 @@ function putReplyUnderComment(reply) {
 
     const replies_to = reply.querySelector(".replies_to").id;
 
-    console.log(replies_to);
+    // console.log(replies_to);
 
     // splices to get replies-to id
     const replies_to_id = replies_to.slice(9);
-    console.log(replies_to_id);
+    // console.log(replies_to_id);
 
     // move reply into correct comment
 

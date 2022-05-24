@@ -23,3 +23,26 @@ exports.getExtendedComments = (postId, cb) => {
     comment.post = ?`, postId,
     (err, rows) => {if (err) throw err; cb(rows); });
 };
+
+exports.createComment = async (commentCreator, commentPost, commentBody, commentReply, commentCreationTime, cb) => {
+
+
+    //convert "NULL" to NULL
+    let replies_to;
+    if(commentReply=="NULL") replies_to=null;
+    else replies_to=commentReply;
+
+    // dont forget the .id because it is a row data packet
+    // console.log("will insert:",commentCreator, commentPost, commentBody ,replies_to, commentCreationTime);
+
+    // check if it passed constraints
+
+    // WHAT ARE THE CONSTRAINTS FOR COMMENT?
+    // IF user is in activity?
+
+
+    // try to insert data if it passes constraint
+
+    let temp = await db.query(`INSERT INTO comment(creator,post,body,replies_to,creation_time) VALUES(?, ?, ?, ?, ?)`, [commentCreator, commentPost, commentBody, replies_to, commentCreationTime]);
+
+};

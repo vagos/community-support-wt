@@ -1,32 +1,75 @@
-<h1>{{name}}</h1>
+<div class="PageContent">
 
-{{#if posts}}
-  {{#each posts}}
-      <div class="card">
-        <div class="card-header">
-          {{#if this.name}}
-            <h5 class="post-title">{{this.name}}</h5>
-          {{/if}}
-          {{!-- This shouldn't be allowed --}}
-          {{#unless this.name}}
-            <h5 class="post-title">NO POST TITLE!</h5>
-          {{/unless}}
-        </div>
-        <div class="card-body">
-            <p class="post-text">{{this.body}}</p>
+  <h1 class="activity-title">{{name}}</h1>
 
-            {{!-- maybe put this in card footer? --}}
-            <div class="enter-post d-flex justify-content-between">
-              <span class="p-2">Comments:{{this.commentCount}}</span>
-              <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
-            </div>
-        </div>
+  <form class="make-post container border rounded px-3 my-2">
+    {{!-- REMINDER use name for correct formdata creation --}}
+    {{!-- id is not used for the dataform --}}
+    <div class="row">
+      <p class="mt-2 fs-3">Make post section</p>
+      <hr>
+
+      <div class="col input-group">
+        <span class="input-group-text" id="title">Title:</span>
+        <input class="form-control" type="text" id="post-title" name="name" placeholder="TEST POST TITLE" required>
       </div>
-  {{/each}}
-{{/if}}
 
-{{#unless posts}}
+      <div class="col input-group">
+        <span class="input-group-text" id="body">Body:</span>
+        <input class="form-control" type="text" id="post-body" name="body" placeholder="TEST BODY" >
+      </div>
+    </div>
+
+    {{!-- this is temporary for now --}}
+    {{!-- <div class="row d-hidden hidden-info">
+        <input class="form-control" type="text" id="post-creator" name="creator" value="21" required>
+        <input class="form-control" type="text" id="post-activity" name="activity" value="{{name}}" required>
+      </div> --}}
+    
+    <div class="buttons row p-3">
+      {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
+      <input class="btn btn-primary col-3 ms-auto" type="submit">
+    </div>
+    
+
+  </form>
+    
+
   <div>
-    <p class="text-center">No posts yet!</p>
+    {{#if posts}}
+      {{#each posts}}
+          <div class="card">
+            <div class="card-header">
+              {{#if this.name}}
+                <h5 class="post-title">{{this.name}}</h5>
+              {{/if}}
+              {{!-- This shouldn't be allowed --}}
+              {{#unless this.name}}
+                <h5 class="post-title">NO POST TITLE!</h5>
+              {{/unless}}
+            </div>
+            <div class="card-body">
+                <p class="post-text">{{this.body}}</p>
+
+                {{!-- maybe put this in card footer? --}}
+                <div class="enter-post d-flex justify-content-between">
+                  <span class="p-2">Comments:{{this.commentCount}}</span>
+                  <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
+                </div>
+            </div>
+          </div>
+      {{/each}}
+    {{/if}}
   </div>
-{{/unless}}
+
+  {{#unless posts}}
+    <div>
+      <p class="text-center">No posts yet!</p>
+    </div>
+  {{/unless}}
+
+</div>
+
+{{!-- Scripts section --}}
+
+<script type="module" src="/scripts/activity-put-post.js"></script>

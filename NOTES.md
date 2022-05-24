@@ -31,6 +31,20 @@ After that we referance it using /assets/css/myfile.css
 
 - altering existing table to add constraint (https://pencilprogrammer.com/self-referencing-foreign-key-in-mysql/)
 
+- name attribute is important for forms(https://stackoverflow.com/questions/1397592/difference-between-id-and-name-attributes-in-html)
+
+- Puting data with form data and fetch (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+- nice custom form api (https://simonplend.com/how-to-use-fetch-to-post-form-data-as-json-to-your-api/)
+
+- throwing vs Rejection (https://www.valentinog.com/blog/throw-async/) (https://stackoverflow.com/questions/33445415/javascript-promises-reject-vs-throw) 
+
+- Reseting Auto-increamenting sql (https://www.techonthenet.com/mysql/auto_increment_reset.php)
+
+- Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/) (https://www.w3schools.com/bootstrap5/bootstrap_form_validation.php)
+
+- More info on importing in browsers (https://javascript.info/modules-intro)
+
 
 ### Styling notes
 
@@ -79,6 +93,9 @@ After that we referance it using /assets/css/myfile.css
 
 - hiding elements in bootstrap (https://getbootstrap.com/docs/5.0/utilities/display/)
 
+- Bootstrap 5 forms (https://getbootstrap.com/docs/5.0/forms/overview/)
+
+- Vertical ruler for comments (https://getbootstrap.com/docs/5.1/helpers/vertical-rule/)
 
 ### Express Handlebars notes
 
@@ -89,6 +106,8 @@ After that we referance it using /assets/css/myfile.css
 - intellisense for css extension reades all files os its slow. Use only when making css
 
 - Selecting multiple vars in vscode  (ctrl+f2 or ctrl+shift+L) (https://stackoverflow.com/questions/46539714/select-all-occurrences-of-selected-word-in-vscode)
+
+- Maybe look into php? (https://www.w3schools.com/php/)
 
 ### windows mysql poweruser problems
 
