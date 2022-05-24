@@ -25,9 +25,12 @@ comments:
   
     {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
-      <label for="userComment"> Comment:</label>
-      <textarea class="form-control" id="userComment"></textarea>
-      <button type="submit" class="btn btn-primary">submit</button>
+      <form class="make-comment">
+        <label for="userComment"> Comment:</label>
+        <textarea class="form-control" name="body" id="userComment"></textarea>
+        <button type="submit" class="btn btn-primary">submit</button>
+        <input type="hidden" id="replies_to" name="replies_to" value="NULL">
+      </form>
     </div>
 
   </div>
@@ -84,9 +87,12 @@ comments:
             {{!-- Reply Section --}}
             {{!-- maybe another way to do it? --}}
             <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
-              <label for="userReply"> Reply:</label>
-              <textarea class="form-control" id="userReply"></textarea>
-              <button type="submit" class="btn btn-primary">submit</button>
+              <form class="make-reply">
+                <label for="userReply"> Reply:</label>
+                <textarea class="form-control" name="body" id="userReply"></textarea>
+                <input type="hidden" id="replies_to" name="replies_to" value="{{this.id}}">
+                <button type="submit" class="btn btn-primary">submit</button>
+              </form>
             </div>
 
             <div class="reply-comments ms-4 mt-1 " id="reply-comments-{{this.id}}">
@@ -111,3 +117,5 @@ comments:
 {{!-- script for putting replies under their respective comment --}}
 <script src="/scripts/post-comments-order.js"></script>
 
+{{!-- script for making comments--}}
+<script type="module" src="/scripts/post-put-comment.js"></script>

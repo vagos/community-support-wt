@@ -81,13 +81,13 @@ exports.createActivity = async (activityName, description, cb) => {
 
 exports.createPost = async (postName, postBody, postActivity, postCreator, postCreationTime, cb) => {
 
-    // get id's for creator and activity
+    // get id for activity
 
     const Activity = await db.queryOne(`SELECT activity.id from activity where activity.name = ?`, postActivity);
 
 
     // dont forget the .id because it is a row data packet
-    console.log("will insert:",postName, postBody, Activity.id,postCreator, postCreationTime);
+    // console.log("will insert:",postName, postBody, Activity.id,postCreator, postCreationTime);
 
     // check if it passed constraints
 

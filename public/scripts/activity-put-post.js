@@ -77,10 +77,10 @@ async function makePost(event) {
           
             // note the url is "currentActivity/createPost"
             const currentUrl = window.location.href;
-            console.log(`currently at: ${currentUrl}`);
+            // console.log(`currently at: ${currentUrl}`);
             let response = await postJson({url:currentUrl+'/createPost',jsonData:data});
 
-            // console.log("make activity response",response);
+            // console.log("make post response",response);
             // if response isnt an ok
             if (response.status!=200){
                 // console.log("response wasnt ok, it was",response.status);
@@ -89,7 +89,7 @@ async function makePost(event) {
             }
         }
         else{
-            // alert user this activity isnt unique
+            // alert user this post isnt unique
             alert("This Post already exists.\nPlease type another title."); 
         }
     }

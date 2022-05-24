@@ -67,7 +67,7 @@ router.put('/:activityName/createPost', (req, res) => {
 
 
     // IF USER ISNT LOGGED IN
-    console.log("req:",req);
+    // console.log("req:",req);
     if (req.isUnauthenticated()) {
         //Send a response status as well?
         res.redirect(`/${req.params.activityName}`);
@@ -89,11 +89,13 @@ router.put('/:activityName/createPost', (req, res) => {
     let time = util.timeString();
 
     
-    console.log(`NOW PUTTING POST ${postName} :${postBody} \n created by:${postCreator} for activity:${postActivity} on:${time}\n`);
+    // console.log(`NOW PUTTING POST ${postName} :${postBody} \n created by:${postCreator} for activity:${postActivity} on:${time}\n`);
 
     controller.createPost(postName, postBody, postActivity, postCreator, time).
     then(cb => {
-        res.sendStatus(200);})
+        res.sendStatus(200);
+        // Maybe refresh aswell?
+    })
     .catch((err) => {
         console.error(err);
         res.sendStatus(403);});
