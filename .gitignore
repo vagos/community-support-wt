@@ -8,3 +8,5 @@ db/sqlite
 
 # jest coverage report
 coverage
+
+docs/report/build
