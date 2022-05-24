@@ -85,20 +85,18 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
 
     const Activity = await db.queryOne(`SELECT activity.id from activity where activity.name = ?`, postActivity);
 
-    // Temporary
-    const Creator = await db.queryOne(`SELECT user.id from user where user.name = ? LIMIT 1`, postCreator);
-
 
     // dont forget the .id because it is a row data packet
-    console.log("will insert:",postName, postBody, Activity.id, Creator.id, postCreationTime);
+    console.log("will insert:",postName, postBody, Activity.id,postCreator, postCreationTime);
 
     // check if it passed constraints
 
     // WHAT ARE THE CONSTRAINTS FOR POST?
+    // IF user is in activity?
 
 
     // try to insert data if it passes constraint
 
-    let temp = await db.query(`INSERT INTO post(name, body, activity, creator, creation_time) VALUES(?, ?, ?, ?, ?)`, [postName, postBody, Activity.id, Creator.id, postCreationTime]);
+    let temp = await db.query(`INSERT INTO post(name, body, activity, creator, creation_time) VALUES(?, ?, ?, ?, ?)`, [postName, postBody, Activity.id, postCreator, postCreationTime]);
 
 };

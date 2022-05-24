@@ -66,22 +66,26 @@ router.put('/createActivity', (req, res) => {
 router.put('/:activityName/createPost', (req, res) => {
 
 
+    // IF USER ISNT LOGGED IN
+    console.log("req:",req);
+    if (req.isUnauthenticated()) {
+        //Send a response status as well?
+        res.redirect(`/${req.params.activityName}`);
+        return;
+    }
+
+
     // Gather data to insert
+
+    // getting user
+    let postCreator = req.session.passport.user.id;
 
     let postName = req.body.name;
     let postBody = req.body.body;
 
     // get activity id
     let postActivity = req.params.activityName;
-
-    // HOW TO GET CREATOR? (creator must be in activity)!
-    // test user is in every activity for now
-    let postCreator = "test";
-
-    // run this to enroll them everywhere
-    // delete all existing participations they have (delete from participation where user=41;)
-    // enroll them in every activity insert into participation(activity,user) (select activities.id as activitiesId,admin.id as adminId from (select id from activity) as activities cross join (select id from user where user.name="test" limit 1) as admin order by activities.id);
-
+    
     let time = util.timeString();
 
     
