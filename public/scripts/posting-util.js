@@ -4,15 +4,15 @@
 // this will try to post formData given to url given, it will return the server response
 export async function postFormDataAsJson({ url, formData }) {
 
-	let formDataJsonString = await convertFormDataToJsonString(formData);
+	let formDataJson = await convertFormDataToJson(formData);
 
-	let response = await postJson({url:url, jsonData:formDataJsonString})
+	let response = await postJson({url:url, jsonData:formDataJson})
 
     return response;
 
 }
 
-// A simple function that converts form data to json string
+// A simple function that converts form data to json string  (NOT NEEDED ANYMORE)
 export async function convertFormDataToJsonString(formData) {
 
 	const plainFormData = Object.fromEntries(formData.entries());
