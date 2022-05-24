@@ -2,6 +2,8 @@ const buttonEditBio = document.getElementById("button-edit-bio");
 const textAreaBio = document.getElementById("text-area-bio");
 const textBio = document.getElementById("text-bio");
 
+textBio.innerHTML = marked.parse(textAreaBio.value)
+
 buttonEditBio.addEventListener("click", (e) => {
 
     if ( textAreaBio.value != textBio.innerHTML ) { // user edited their bio.
@@ -17,10 +19,8 @@ buttonEditBio.addEventListener("click", (e) => {
               },
             });
 
-        textBio.innerHTML = textAreaBio.value
+        textBio.innerHTML = marked.parse(textAreaBio.value)
     }
-
-    textAreaBio.value = textBio.innerHTML;
 
     textAreaBio.classList.toggle("invisible");
     textBio.classList.toggle("invisible");

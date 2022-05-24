@@ -2,3 +2,9 @@ node_modules
 .vscode
 workspace.code-workspace
 codeExamples
+
+db/mysql
+db/sqlite
+
+# jest coverage report
+coverage

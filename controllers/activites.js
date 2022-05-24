@@ -1,7 +1,3 @@
-/* 
- * TODO: look into adding the model part of MVP
- *
- */
 const db = require('./db');
 
 exports.getAll = ( cb ) => {
@@ -100,3 +96,15 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
     let temp = await db.query(`INSERT INTO post(name, body, activity, creator, creation_time) VALUES(?, ?, ?, ?, ?)`, [postName, postBody, Activity.id, postCreator, postCreationTime]);
 
 };
+exports.getPopularActivities = async () => {
+
+    return db.query(`
+SELECT activity.id, activity.name, COUNT(activity.id) as postCount
+FROM activity 
+JOIN post ON post.activity = activity.id
+-- WHERE post.creation_time >= DATE(NOW() - INTERVAL 1 MONTH)
+GROUP BY activity.id
+ORDER BY postCount DESC
+LIMIT 3
+    `);
+}

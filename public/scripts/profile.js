@@ -1,47 +1,9 @@
 userId = document.getElementById("profileLink").innerHTML;
 pictureProfile = document.getElementById("profilePictureCanvas");
 
+const username = document.getElementById("userName").innerHTML
 
-function numberifyString(s) {
-    let r = 0;
-
-    for (let i = 0; i < s.length; i++) {
-       r += s.codePointAt(i); 
-    }
-
-    return r;
-}
-
-function rnd(n) {
-    
-    for (let i = 0; i < 10; i++) {
-        n = n ^ ( n * 19 );
-    }
-
-    return Math.abs(n);
-}
-
-function drawProfilePicture() {
-    ctx = pictureProfile.getContext('2d');
-
-    // console.log("profile username:",document.getElementById("userName").innerHTML);
-    seed = numberifyString(document.getElementById("userName").innerHTML);
-    // console.log("profile seed:",seed);
-
-    N = Math.min( ( rnd(seed) % 10 ) +  (rnd(seed + 1) % 10) + 1, 10) ;
-
-    for (let i = 0; i < N; i++) {
-        ctx.fillStyle = `rgb(${rnd(seed) % 255}, ${rnd(seed + 1) % 255}, ${rnd(seed + 2) % 255})`;
-        ctx.fillRect(rnd(seed + 1) % 100 + 50,
-            rnd(seed + 4) % 100 + 10, 
-            rnd(seed + 2) % 100 + 50, 
-            rnd(seed + 2) % 100 + 50) 
-
-        seed += 1;
-    }
-}
-
-drawProfilePicture();
+drawProfilePicture(pictureProfile, username);
 
 // Charts
 
@@ -50,16 +12,35 @@ async function drawGraphs(id) {
     const stats = await data.json();
 
     commentBars = Array(12).fill(0);
-
     stats.comments.forEach((v) => {
         monthIndex = parseInt(v.month) - 1;
         commentBars[monthIndex] = v.cnt;
     });
+    
+    postBars = Array(12).fill(0);
+    stats.posts.forEach((v) => {
+        monthIndex = parseInt(v.month) - 1;
+        postBars[monthIndex] = v.cnt;
+    });
 
-    drawCommentGraph(commentBars);
+    drawMonthGraph(commentBars, postBars);
+
+    activityData = {
+        labels: [],
+        numbers: [],
+        colors : [],
+    }
+    stats.participation.forEach( (v) => {
+        activityData.labels.push(v.name);
+        activityData.numbers.push(v.points);
+        activityData.colors.push(getRandomColorRGB(v.name));
+    });
+    console.log(activityData);
+
+    drawActivityPieChart(activityData);
 }
 
-function drawCommentGraph(commentBarData) {
+function drawMonthGraph(commentBarData, postBarData) {
 
     const labels = [
         'January',
@@ -78,12 +59,20 @@ function drawCommentGraph(commentBarData) {
 
     const data = {
         labels: labels,
-        datasets: [{
+        datasets: [
+        {
             label: 'Comments/Month',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: commentBarData,
-        }]
+        },
+        {
+            label: 'Posts/Month',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(132, 99, 255)',
+            data: postBarData
+        }
+        ]
     };
 
     const config = {
@@ -92,11 +81,47 @@ function drawCommentGraph(commentBarData) {
         options: {}
     };
 
-    const commentChart = new Chart(
-        document.getElementById('commentChart'),
+    const barChart = new Chart(
+        document.getElementById('barChart'),
         config
     );
 }
 
-drawGraphs(userId);
+function drawActivityPieChart(activityData) {
 
+    const data = {
+      labels: activityData.labels,
+      datasets: [
+        {
+          label: 'Dataset 1',
+          data: activityData.numbers,
+          backgroundColor: activityData.colors
+        }
+      ]
+    };
+
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Activity Proportion'
+          }
+        }
+      },
+    };
+
+    const pieChart = new Chart(
+        document.getElementById('pieChart'),
+        config
+    );
+
+}
+
+drawGraphs(userId);

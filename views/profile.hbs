@@ -5,17 +5,21 @@
 <div class="PageContent">
     <div class="container-fluid">
         <div class="card card-lg">
+            <p class="card-header d-flex justify-content-between
+                align-content-end" style="background-color:
+                {{randomColor user.name}};">
+            </p>
             <div class="row">
                 <!--                <img src="/assets/img/logo.png" class="rounded col-sm-3"> -->
                 <canvas class="col-sm-4 profile-picture" id="profilePictureCanvas"></canvas>
                 <div class="col-sm-8">
-                    <h2 class="row" id="userName" >{{user.name}}</h2>
+                    <h2 class="col-sm" id="userName" >{{user.name}}</h2>
                     <div class="input-group">
                       <div class="input-group-prepend" id="button-edit-bio">
-                        <span style="height: 100%;" class="input-group-text">Bio</span>
+                        <p style="height: 100%;" class="col-sm btn btn-secondary">Bio</p>
                       </div>
                       <span class="form-control" aria-label="Bio" id="text-bio">{{user.bio}}</span>
-                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio"></textarea>
+                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio">{{user.bio}}</textarea>
                     </div>
                 </div>
             </div>
@@ -26,6 +30,9 @@
             {{#unless user.join_date}}
                 <p class="small text-muted">NO JOIN DATE!</p>
             {{/unless}}
+            {{#if self}}
+                <a class ="btn btn-danger" href="/login/logout">Logout</a>
+            {{/if}}
         </div>
     </div>
 
@@ -114,8 +121,12 @@
         </div>
     </div>
 
-    <div>
-      <canvas id="commentChart"></canvas>
+    <div class="row-sm-8">
+      <canvas id="barChart"></canvas>
+    </div>
+    
+    <div class="row-sm-8">
+      <canvas id="pieChart"></canvas>
     </div>
 
     <hr> 
@@ -145,8 +156,12 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="/scripts/util.js"></script>
 <script src="/scripts/profile.js"></script>
+
 {{#if self}}
-<script src="/scripts/profile-edit.js"></script>
+    <script src="/scripts/profile-edit.js"></script>
 {{/if}}

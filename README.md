@@ -22,7 +22,7 @@
     - [X] Create Tables
     - [X] Figure out how to do basic queries
 
-3. [ ] User login
+3. [X] User login
 
 
 ### Misc 
