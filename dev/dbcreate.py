@@ -900,9 +900,11 @@ def main():
         try:
             print(f"DROP TABLE IF EXISTS {t};")
             print(eval(t + "_table"))
-            fill_table(t, N)
         except Exception as e:
             comment(e)
+
+    for t in tables:
+        fill_table(t, N)
 
 
 if __name__ == "__main__":
