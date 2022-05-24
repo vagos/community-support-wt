@@ -1,6 +1,9 @@
 const { Router } = require('express');
 const express = require('express');
 const router = express.Router();
+const util = require('../controllers/util.js');
+
+// why cant use this instead? (import { timeString } from '../controllers/util.js')
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
@@ -42,6 +45,8 @@ router.get('/:activityName', (req, res) => {
     
 });
 
+// Putting requests
+
 router.put('/createActivity', (req, res) => {
 
     // create activity with values given in request
@@ -50,11 +55,44 @@ router.put('/createActivity', (req, res) => {
     controller.createActivity(req.body.name, req.body.description)
         .then(cb => {
         // console.log("ok");
-        res.sendStatus(200);})
+            res.sendStatus(200);})
         .catch((err) => {
+            console.error(err);
+            res.sendStatus(403);});
+
+
+});
+
+router.put('/:activityName/createPost', (req, res) => {
+
+
+    // Gather data to insert
+
+    let postName = req.body.name;
+    let postBody = req.body.body;
+
+    // get activity id
+    let postActivity = req.params.activityName;
+
+    // HOW TO GET CREATOR? (creator must be in activity)!
+    // test user is in every activity for now
+    let postCreator = "test";
+
+    // run this to enroll them everywhere
+    // delete all existing participations they have (delete from participation where user=41;)
+    // enroll them in every activity insert into participation(activity,user) (select activities.id as activitiesId,admin.id as adminId from (select id from activity) as activities cross join (select id from user where user.name="test" limit 1) as admin order by activities.id);
+
+    let time = util.timeString();
+
+    
+    console.log(`NOW PUTTING POST ${postName} :${postBody} \n created by:${postCreator} for activity:${postActivity} on:${time}\n`);
+
+    controller.createPost(postName, postBody, postActivity, postCreator, time).
+    then(cb => {
+        res.sendStatus(200);})
+    .catch((err) => {
         console.error(err);
         res.sendStatus(403);});
-
 
 });
 

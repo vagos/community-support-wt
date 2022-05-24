@@ -106,10 +106,11 @@ async function makePost(event) {
 
             console.log("final data json",data);
 
-            // temporary
-            return;
-            // NOTE MUST MAKE ROUTER FIRST
-            let response = await postJson({url:'',jsonData:data});
+          
+            // note the url is "currentActivity/createPost"
+            const currentUrl = window.location.href;
+            console.log(`currently at: ${currentUrl}`);
+            let response = await postJson({url:currentUrl+'/createPost',jsonData:data});
 
             // console.log("make activity response",response);
             // if response isnt an ok
