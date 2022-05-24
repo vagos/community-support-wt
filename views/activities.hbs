@@ -12,7 +12,7 @@
               <div class="card-body">
                   <h5 class="card-title">{{this.name}}</h5>
                 <p class="card-text">{{this.description}}</p>
-                <a href="/activities/{{this.name}}" class="btn btn-primary">view posts</a>
+                <a href="/activities/{{this.name}}" class="btn btn-primary" style="background-color: {{randomColor this.name}}">view posts</a>
               </div>
             </div>
         {{/each}}
