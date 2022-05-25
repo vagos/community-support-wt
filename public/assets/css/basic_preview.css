@@ -24,3 +24,8 @@
   height: 96px;
 
 }
+
+.profileGraph {
+    max-height: 300px;
+} 
+
