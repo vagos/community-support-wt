@@ -32,7 +32,7 @@ async function fill() {
     
     for ( let query of queries ) {
         connection.query(query, (err, results) => {
-            // if (err) { console.error(err); }
+            if (err) { }
         });
     }
 }
