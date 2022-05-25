@@ -1,6 +1,6 @@
 
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
-exports.timeString =  function timeString() {
+function timeString() {
 
 
     const currentDate = new Date();
@@ -16,7 +16,7 @@ exports.timeString =  function timeString() {
     return timeString;
 
 
-}
+};
 function rnd(n) {
     
     for (let i = 0; i < 10; i++) {
@@ -65,5 +65,6 @@ function getRandomColorRGB(s) {
 }
 
 module.exports = {
-    getRandomColorRGB: getRandomColorRGB
+    getRandomColorRGB: getRandomColorRGB,
+    timeString: timeString
 };
