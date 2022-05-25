@@ -20,18 +20,22 @@ exports.getExtendedAll = ( cb ) => {
 
 
     db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
-    FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
+    FROM activity JOIN (SELECT users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
         ON activity.id = info.id`,
     (err, rows) => { if (err) throw err; cb(rows); });
 
 };
 
+// Returns extended info on posts + activityId
 exports.getExtendedPosts = (activityName, cb) => {
 
-    // maybe later return creatorname and say time of posting?
-    db.connection.query(`SELECT post.id, post.name , post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id = 
-    post.activity WHERE activity.name = ?`, activityName,
-    (err, rows) => { if (err) throw err; cb(rows) });
+    db.connection.query(`SELECT post.id, post.name , post.body, post.creation_time, post.commentCount, post.creator, post.creator_name
+        FROM (SELECT post.*, count(comment.post) AS commentCount 
+            FROM (SELECT post.*,user.name AS creator_name FROM post JOIN user ON post.creator=user.id) AS post 
+            LEFT JOIN comment ON post.id= comment.post group by post.id) AS post
+        JOIN activity ON activity.id = post.activity
+        WHERE activity.name = ? `, activityName,
+        (err, rows) => { if (err) throw err; cb(rows) });
 };
 
 // do we need async?
@@ -79,7 +83,7 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
 
     // get id for activity
 
-    const Activity = await db.queryOne(`SELECT activity.id from activity where activity.name = ?`, postActivity);
+    const Activity = await db.queryOne(`SELECT activity.id FROM activity where activity.name = ?`, postActivity);
 
 
     // dont forget the .id because it is a row data packet
@@ -99,7 +103,7 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
 exports.getPopularActivities = async () => {
 
     return db.query(`
-SELECT activity.id, activity.name, COUNT(activity.id) as postCount
+SELECT activity.id, activity.name, COUNT(activity.id) AS postCount
 FROM activity 
 JOIN post ON post.activity = activity.id
 -- WHERE post.creation_time >= DATE(NOW() - INTERVAL 1 MONTH)
@@ -108,3 +112,20 @@ ORDER BY postCount DESC
 LIMIT 3
     `);
 }
+
+// returns true if user is in activity
+exports.isParticipant = async function (userId ,activityName) {
+
+    let result = await db.query(`SELECT * FROM participation
+        JOIN activity ON participation.activity = activity.id
+        JOIN user ON participation.user = user.id
+        WHERE user.id = ?
+        AND activity.name = ?`,[userId ,activityName]);
+
+    console.log("result:",result);
+
+    // if user is participant in that activity
+    if (result.length !=0) return true;
+    else return false;
+
+};

@@ -58,13 +58,21 @@ router.get('/:activityName', (req, res) => {
 
     // console.log(req);
     let activityName = req.params.activityName;
+    // let activityId ; Maybe we should store activityID on the html to reduce db queries?
 
-    controller.getExtendedPosts(activityName, (posts) => {
+
+    // watch out for the async
+    controller.getExtendedPosts(activityName, async (posts) => {
         
         // activityID is for testing
-        res.render('activity', { name : activityName, 
+
+        // check if user can create posts
+        console.log(posts);
+        let authenticated = req.isAuthenticated() && await controller.isParticipant(req.session.passport.user.id,activityName);
+
+        res.render('activity', { ActivityName : activityName,
             posts: posts,
-            authenticated: req.isAuthenticated(),
+            authenticated: authenticated,
         });
     });
     

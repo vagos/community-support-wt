@@ -1,6 +1,13 @@
 <div class="PageContent">
 
-  <h1 class="activity-title">{{name}}</h1>
+  {{!-- Printing if user is authenticated to post stuff --}}
+  <span>AUTH {{authenticated}}</span>
+
+  <h1 class="activity-title">{{ActivityName}}</h1>
+
+  {{!-- Maybe we should store activityID on the html to reduce db queries? --}}
+  {{!-- <small class="activity-id d-hidden">{{ActivityId}}</small> --}}
+  
 
   <form class="make-post container border rounded px-3 my-2">
     {{!-- REMINDER use name for correct formdata creation --}}
@@ -19,12 +26,6 @@
         <input class="form-control" type="text" id="post-body" name="body" placeholder="TEST BODY" >
       </div>
     </div>
-
-    {{!-- this is temporary for now --}}
-    {{!-- <div class="row d-hidden hidden-info">
-        <input class="form-control" type="text" id="post-creator" name="creator" value="21" required>
-        <input class="form-control" type="text" id="post-activity" name="activity" value="{{name}}" required>
-      </div> --}}
     
     <div class="buttons row p-3">
       {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
@@ -41,7 +42,7 @@
           <div class="card">
             <div class="card-header">
               {{#if this.name}}
-                <h5 class="post-title">{{this.name}}</h5>
+                <h5 class="post-title">{{this.name}}  <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by:{{this.creator_name}}</a></small></h5>
               {{/if}}
               {{!-- This shouldn't be allowed --}}
               {{#unless this.name}}
