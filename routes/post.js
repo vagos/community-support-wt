@@ -57,8 +57,7 @@ router.put('/:postId/createComment', (req, res) => {
 
     controller.createComment(commentCreator, commentPost, commentBody, commentReply, time).
     then(cb => {
-        res.sendStatus(200);
-        // Maybe refresh aswell?
+        res.sendStatus(205);
     })
     .catch((err) => {
         console.error(err);

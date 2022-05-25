@@ -45,6 +45,11 @@ After that we referance it using /assets/css/myfile.css
 
 - More info on importing in browsers (https://javascript.info/modules-intro)
 
+- AutoRefreshing page for client (https://www.quackit.com/javascript/javascript_refresh_page.cfm)
+
+- HTTP CODE: 205 Reset Content
+    The server successfully processed the request, asks that the requester reset its document view, and is not returning any content.[14]
+
 
 ### Styling notes
 
