@@ -908,7 +908,6 @@ def main():
     tables = ["user", "activity", "post", "friendship", "participation", "comment"]
 
     for t in tables:
-        print(t)
         try:
             print(f"DROP TABLE IF EXISTS {t};")
             print(eval(t + "_table"))
