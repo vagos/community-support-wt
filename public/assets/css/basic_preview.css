@@ -29,3 +29,13 @@
     max-height: 300px;
 } 
 
+.alert {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+    
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
