@@ -5,6 +5,12 @@ const username = document.getElementById("userName").innerHTML
 
 drawProfilePicture(pictureProfile, username);
 
+const barChart = document.getElementById('barChart');
+const pieChart = document.getElementById('pieChart');
+
+const barChartDiv = document.getElementById('barChartDiv');
+const pieChartDiv = document.getElementById('pieChartDiv');
+
 // Charts
 
 async function drawGraphs(id) {
@@ -23,7 +29,10 @@ async function drawGraphs(id) {
         postBars[monthIndex] = v.cnt;
     });
 
-    drawMonthGraph(commentBars, postBars);
+    if (stats.comments.length || stats.posts.length) {
+        drawMonthGraph(commentBars, postBars);
+    }
+
 
     activityData = {
         labels: [],
@@ -35,9 +44,10 @@ async function drawGraphs(id) {
         activityData.numbers.push(v.points);
         activityData.colors.push(getRandomColorRGB(v.name));
     });
-    console.log(activityData);
 
-    drawActivityPieChart(activityData);
+    if (stats.participation.length) {
+        drawActivityPieChart(activityData);
+    }
 }
 
 function drawMonthGraph(commentBarData, postBarData) {
@@ -81,8 +91,10 @@ function drawMonthGraph(commentBarData, postBarData) {
         options: {}
     };
 
-    const barChart = new Chart(
-        document.getElementById('barChart'),
+    barChartDiv.classList.remove('invisible');
+
+    const barChartGraph = new Chart(
+        barChart,
         config
     );
 }
@@ -93,7 +105,7 @@ function drawActivityPieChart(activityData) {
       labels: activityData.labels,
       datasets: [
         {
-          label: 'Dataset 1',
+          label: '',
           data: activityData.numbers,
           backgroundColor: activityData.colors
         }
@@ -117,11 +129,14 @@ function drawActivityPieChart(activityData) {
       },
     };
 
-    const pieChart = new Chart(
-        document.getElementById('pieChart'),
+    pieChartDiv.classList.remove('invisible');
+
+    const pieChartGraph = new Chart(
+        pieChart,
         config
     );
 
 }
 
 drawGraphs(userId);
+
