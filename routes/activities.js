@@ -78,6 +78,13 @@ router.get('/:activityName', (req, res) => {
         // only check if user is logged in
         if (authenticated) participant = await controller.isParticipant(req.session.passport.user.id,activityName);
 
+        // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
+        for(let post of posts){
+            let date = new Date(post.creation_time);
+            post.creation_time = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+            //This is for later since posts dont store hours + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        }
+
         res.render('activity', { ActivityName : activityName,
             posts: posts,
             authenticated: authenticated,

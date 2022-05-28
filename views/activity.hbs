@@ -84,7 +84,7 @@
           <div class="card">
             <div class="card-header">
               {{#if this.name}}
-                <h5 class="post-title">{{this.name}}  <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by:{{this.creator_name}}</a></small></h5>
+                <h5 class="post-title">{{this.name}}  <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by:{{this.creator_name}}</a></small> <small class="post-time"> {{this.creation_time}} ago</small></h5>
               {{/if}}
               {{!-- This shouldn't be allowed --}}
               {{#unless this.name}}
@@ -117,3 +117,11 @@
 {{#if participant}}
   <script type="module" src="/scripts/activity-put-post.js"></script>
 {{/if}}
+
+<script type="module">
+  const postTimes = document.querySelectorAll(".post-time");
+  console.log(postTimes);
+  for (let postTime of postTimes){
+    console.log(postTime);
+  }
+</script>
