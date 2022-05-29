@@ -2,6 +2,7 @@ node_modules
 .vscode
 workspace.code-workspace
 codeExamples
+testing
 
 db/mysql
 db/sqlite

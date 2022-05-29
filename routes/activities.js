@@ -80,9 +80,8 @@ router.get('/:activityName', (req, res) => {
 
         // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
         for(let post of posts){
-            let date = new Date(post.creation_time);
-            post.creation_time = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-            //This is for later since posts dont store hours + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            // console.log(util.dateToTimeString(post.creation_time));
+            post.creation_time = util.dateToTimeString(post.creation_time);
         }
 
         res.render('activity', { ActivityName : activityName,
