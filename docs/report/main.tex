@@ -1,7 +1,15 @@
 \documentclass[acmtog, nonacm, language=english, language=greek]{acmart}
 
+\usepackage{alphabeta}
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Use 8-bit encoding
+
+
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{dirtytalk}
+\usetikzlibrary{shapes.geometric, arrows, timeline}
+
+
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
@@ -90,8 +98,6 @@
 
 \subsection{Λειτουργικές Απαιτήσεις}
 
-
-
 \subsection{Βάση Δεδομένων}
 \subsection{Διάγραμμα Ροής Χρήστη}
 
@@ -100,7 +106,7 @@
     \node (start) [startstop] {Αρχική Σελίδα};
 
     \node (loggedin)        [decision, below of=start]         {\footnotesize Συνδεδεμένος?};
-    \node (activitiespage)  [process, left of=loggedin]        {Δραστηριοτήτες};
+    \node (activitiespage)  [process, left of=loggedin]        {Δραστηριότητες};
     \node (postspage)       [process, below of=activitiespage] {Αναρτήσεις};
     \node (postpage)        [process, below of=postspage]      {Ανάρτηση};
     \node (profile)         [process, below of=postpage]       {Προφίλ Χρήστη};
@@ -210,7 +216,97 @@ lists)}.
 
 \subsection{Λειτουργικότητα Εφαρμογής}
 
+\paragraph{Αρχική Σελίδα}
 
+Η εμπειρία χρήσης ξεκινάει με την αρχική σελίδα. 
+Εδώ παρουσιάζονται ορισμένες πληροφορίες σχετικά με
+δημοφιλείς δραστηριότητες και κορυφαίους χρήστες. 
+Ο υπολογισμός αυτών γίνεται με βάση τον αριθμό των πρόσφατων δημοσιποιήσεων.
+
+Ο χρήστης εφόσων δεν είναι συνδεδεμένος ακόμα μπορεί να: 
+
+\begin{itemize}
+    \item Βλέπει προφίλ άλλων χρηστών.
+    \item Βλέπει δημοσιεύσεις των υπάρχοντων δραστηριοτήτων.
+\end{itemize}
+
+\paragraph{Σύνδεση}
+
+Ο χρήστης μπορεί να συνδεθεί στη σελίδα \say{\en{Login}}. Σε περίπτωση που δεν
+υπάρχει το όνομα στη βάση ή ο κώδικός είναι λανθασμένος ο χρήστης ενημερώνεται
+με \en{pop-up}. Υπεύθυνη για την προσπάθεια σύνδεσης και την παραγωγή μυνημάτων
+σφάλματος είναι η βιβλιοθήκη \src{passport.js}. 
+
+\paragraph{Εγγραφή}
+
+Αν δεν υπάρχει το όνομα του χρήστη ακόμα στη βάση μπορεί να φτιάξει λογαριασμό
+στη σελίδα \say{\en{Register}}. Η εγγραφή του χρήστη στη βάση γίνεται επίσης
+μέσω της βιβλιοθήκης \src{passport.js} \cite{Passport}.
+
+Αφού συνδεθεί ο χρήστης, του αντιστοιχείται πλέον ένα \en{session-token}. Έτσι,
+μπορούμε να αποθηκεύουμε πληροφορίες σχετικά με τη συνεδρία του. Στην εφαρμογή,
+οι μόνες πληροφορίες που αξιοποιούμε για την παρουσίαση των σελίδων είναι το αν
+ο χρήστης είναι συνδεδεμένος και το \en{id} που του αντιστοιχεί στη βάση
+δεδομένων.
+
+\paragraph{Προφίλ Χρήστη}
+
+Μόλις συνδεθεί ο χρήστης, γίνεται ανακατεύθυνση του 
+στη σελίδα με το προσωπικό του προφίλ. Εδώ του 
+παρουσιάζονται πληροφορίες σχετικά με τις δραστηριότητες 
+στις οποίες έχει συμμετάσχει. 
+Δίνονται επίσης μερικές γραφικές παραστάσεις. Ο τρόπος με τον οποίο 
+παράγονται είναι από την πλευρά του \en{client}, όπου γίνεται 
+\en{request} στο \en{api} της ιστοσελίδας το οποίο επιστρέφει 
+ένα \src{json} αντικείμενο με τα στατιστικά του χρήστη. 
+Τελικά, η βιβλιοθήκη \src{chart.js} \cite{ChartJS}
+αναλαμβάνει την εμφάνιση των γραφημάτων.
+
+\paragraph{Σελίδες Δραστηριοτήτων/Δημοσιεύσεων}
+
+Στη σελίδα \say{\en{Activities}}, γίνεται στην ουσία παρουσίαση του
+περιεχομένου της βάσης, με τον χρήστη να μπορεί να δει τις δημοσιεύσεις και τα
+σχόλια σε αυτές για κάθε διαφορετική δραστηριότητα. Ακόμα, ο χρήστης μπορεί να
+δημιουργήσει νέες δημοσιεύσεις και σχόλια εφόσων έχει το δικαίωμα.
+
+\section{Χρονοδιάγραμμα}
+
+% Timeline
+% Author: Stefan Kottwitz
+% https://www.packtpub.com/hardware-and-creative/latex-cookbook
+\begin{center}
+\begin{tikzpicture}[timespan=Ebdom`ada, timeline width=15, end week=10]
+    
+  \timeline{7}
+
+  \begin{phases}
+    \phase{between week=1 and 2 in 0.4,
+      involvement degree=2.5cm,phase color=red!40!black}
+    \phase{between week=3 and 5 in 0.5,
+      involvement degree=3.5cm,phase color=red!90!black}
+    \phase{between week=5 and 6 in 0.3,
+      involvement degree=4cm,phase color=red!40!yellow}
+    \phase{between week=6 and 7 in 0.3,
+      involvement degree=5cm,phase color=red!40!blue}
+  \end{phases}
+
+  \addmilestone{at=phase-1.120,direction=90:1cm, text={Επιλογή Θέματος}, text options={above}}
+  \addmilestone{at=phase-1.270,direction=270:1cm, text={Αναζήτηση Παρόμοιων Εφαρμογών}, text options={below}}
+
+  \addmilestone{at=phase-2.70, direction=90:1cm, text={Επιλογή Τεχνολογιών}, text options={above}}
+  \addmilestone{at=phase-2.150, direction=90:1.0cm, text={Σχεδιασμός \en{Front-End}}, text options={above}}
+  \addmilestone{at=phase-2.250, direction=270:2cm, text={Σχεδιασμός Βάσης}, text options={below}}
+
+  \addmilestone{at=phase-3.90,direction=90:1.2cm, text={Δημιουργία Πρώτων Σελίδων}, text options=above}
+  \addmilestone{at=phase-3.250,direction=270:0.8cm, text options=below, text={\en{Node App}}}
+  \addmilestone{at=phase-3.270,direction=270:2cm, text={Εισαγωγή Βάσης}}
+
+  \addmilestone{at=phase-4.50,direction=90:1.2cm, text={\en{Login,Sessions}}, text options=above}
+  \addmilestone{at=phase-4.250,direction=270:3cm, text options=below, text={Βελτίωση της διεπαφής}}
+  \addmilestone{at=phase-4.300,direction=270:5cm, text={Διεπαφή Βάσης, Τελικές Λειτουργίες}}
+
+\end{tikzpicture}
+\end{center}
 
 \bibliography{acmart}
 
