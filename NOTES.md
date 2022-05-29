@@ -50,6 +50,7 @@ After that we referance it using /assets/css/myfile.css
 - HTTP CODE: 205 Reset Content
     The server successfully processed the request, asks that the requester reset its document view, and is not returning any content.[14]
 
+- Reloading and resting forms (https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button)
 
 ### Styling notes
 
@@ -105,6 +106,8 @@ After that we referance it using /assets/css/myfile.css
 ### Express Handlebars notes
 
 - Helper functions (https://handlebarsjs.com/guide/builtin-helpers.html#lookup)
+
+- accesing value external of #each (https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop)
 
 ### Workspace Notes
 

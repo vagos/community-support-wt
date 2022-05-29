@@ -1,12 +1,13 @@
 {{!-- testing info --}}
 {{!-- post id:
 {{post.id}}
-<br>
-comments:
-{{#each comments}}
-  {{this}}
-  <br>
-{{/each}} --}}
+<br> 
+{{activityName}}
+--}}
+
+{{!-- Printing if user is authenticated and a participant --}}
+  <span>AUTH: {{authenticated}}</span>
+  <span>participant: {{participant}}</span>
 
 
 <div class="PostContent mt-4">
@@ -25,12 +26,22 @@ comments:
   
     {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
-      <form class="make-comment">
-        <label for="userComment"> Comment:</label>
-        <textarea class="form-control" name="body" id="userComment"></textarea>
-        <button type="submit" class="btn btn-primary">submit</button>
-        <input type="hidden" id="replies_to" name="replies_to" value="NULL">
-      </form>
+      {{#if participant}}
+        <form class="make-comment">
+          <label for="userComment"> Comment:</label>
+          <textarea class="form-control" name="body" id="userComment"></textarea>
+          <button type="submit" class="btn btn-primary">submit</button>
+          <input type="hidden" id="replies_to" name="replies_to" value="NULL">
+        </form>
+      {{/if}}
+      {{#unless participant}}
+        {{#if authenticated}}
+          <span>You must join activity to comment <a href="/activities/{{activityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">JOIN Activity</a></span>
+        {{/if}}
+        {{#unless authenticated}}
+          <span>You must sign in to comment <a href="/login" class="sign-in-button btn btn-success w-100 m-2">Sign in here</a></span>
+        {{/unless}}
+      {{/unless}}
     </div>
 
   </div>
@@ -87,12 +98,22 @@ comments:
             {{!-- Reply Section --}}
             {{!-- maybe another way to do it? --}}
             <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
-              <form class="make-reply">
-                <label for="userReply"> Reply:</label>
-                <textarea class="form-control" name="body" id="userReply"></textarea>
-                <input type="hidden" id="replies_to" name="replies_to" value="{{this.id}}">
-                <button type="submit" class="btn btn-primary">submit</button>
-              </form>
+              {{#if ../participant}}
+                <form class="make-reply">
+                  <label for="userReply"> Reply:</label>
+                  <textarea class="form-control" name="body" id="userReply"></textarea>
+                  <input type="hidden" id="replies_to" name="replies_to" value="{{this.id}}">
+                  <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+              {{/if}}
+              {{#unless ../participant}}
+                {{#if ../authenticated}}
+                  <span class="text-center">You must join activity to reply <a href="/activities/{{../activityName}}/join" class="join-activity-btn btn btn-success w-auto m-2">JOIN Activity</a></span>
+                {{/if}}
+                {{#unless ../authenticated}}
+                  <span>You must sign in to reply <a href="/login" class="sign-in-button btn btn-success w-auto m-2">Sign in here</a></span>
+                {{/unless}}
+              {{/unless}}
             </div>
 
             <div class="reply-comments ms-4 mt-1 " id="reply-comments-{{this.id}}">
@@ -120,4 +141,16 @@ comments:
 <script src="/scripts/post-comments-order.js"></script>
 
 {{!-- script for making comments--}}
-<script type="module" src="/scripts/post-put-comment.js"></script>
+{{#if participant}}
+  <script type="module" src="/scripts/post-put-comment.js"></script>
+{{/if}}
+
+{{#unless participant}}
+  {{#if authenticated}}
+    {{!-- Adding function to join activity buttons --}}
+    <script type="module" src="/scripts/join-activity-btn.js"></script>
+  {{/if}}
+  {{#unless authenticated}}
+    {{!-- Adding function to sign in buttons --}}
+  {{/unless}}
+{{/unless}}

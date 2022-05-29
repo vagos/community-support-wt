@@ -1,8 +1,8 @@
 <div class="PageContent">
 
   {{!-- Printing if user is authenticated and a participant --}}
-  {{!-- <span>AUTH: {{authenticated}}</span>
-  <span>participant: {{participant}}</span> --}}
+  <span>AUTH: {{authenticated}}</span>
+  <span>participant: {{participant}}</span>
 
   <h1 class="activity-title">{{ActivityName}}</h1>
 
@@ -43,38 +43,10 @@
   {{#unless participant}}
     {{!-- but the user is logged in --}}
     {{#if authenticated}}
-      <a href="/activities/{{ActivityName}}/join" class="join-button btn btn-success w-100 m-2">JOIN Activity</a>
+      <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">JOIN Activity</a>
 
       {{!-- Adding function to button --}}
-      <script type="module">
-        import { postJson } from "/scripts/posting-util.js";
-        const joinBtn = document.querySelector("a.join-button");
-        console.log(joinBtn);
-        joinBtn.addEventListener('click', async (event) => {
-          event.preventDefault();
-
-          //gather data
-          const data = { activity: "test" };
-
-          // get the url from the button that called this
-          const url = event.currentTarget.pathname;
-          console.log(url);
-
-          let response = await postJson({url:url, jsonData:data});
-
-            // if response isnt an 205 (Request ok, refresh page)
-            if (response.status!=205){
-                // console.log("response wasnt ok, it was",response.status);
-                // let user know what happend
-                //if(response.status==403) alert("PARTICIPATION is already in DB.\nPlease Refresh your page or try another Title.");
-            }
-            else{
-              // Else reload current page
-              document.location.reload();
-            }
-
-        });
-      </script>
+      <script type="module" src="/scripts/join-activity-btn.js"></script>
     {{/if}}
   {{/unless}}
 

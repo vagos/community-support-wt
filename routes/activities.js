@@ -11,6 +11,7 @@ router.use((req , res, next) => {
 });
 
 const controller = require('../controllers/activites');
+const participationController = require('../controllers/participation');
 
 function getRandomColorRGB(s) { // TODO move this
 
@@ -76,7 +77,7 @@ router.get('/:activityName', (req, res) => {
         let authenticated = req.isAuthenticated();
         let participant = false;
         // only check if user is logged in
-        if (authenticated) participant = await controller.isParticipant(req.session.passport.user.id,activityName);
+        if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
 
         // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
         for(let post of posts){
@@ -174,7 +175,7 @@ router.put('/:activityName/join', (req, res) => {
     
     // console.log(`NOW PUTTING participant ${participationUser} for activity:${participationActivity} on:${time}\n`);
 
-    controller.makeParticipant(participationUser, participationActivity, time).
+    participationController.makeParticipant(participationUser, participationActivity, time).
     then(cb => {
         // STATUS 205 signals OK, Now refresh page
         res.sendStatus(205);
