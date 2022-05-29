@@ -6,7 +6,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.render('login', { title: 'login' });
+    res.render('login', { title: 'login', errors: req.session.flash.error });
+    req.session.flash.error = []
 });
 
 router.get('/signup', (req, res) => {
