@@ -28,14 +28,19 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
+  --backgroundColor: var(--white);
+  --navbarColor: var(background-color);
+  /* --navbarColor: rgb(33, 37, 41); */
+
 }
+
 
 body {
     margin: 0 auto; 
     width: 90%; 
     max-width: 1280px;
     line-height: 1.4em; 
-    background-color: var(--light);
+    background-color: var(--backgroundColor);
 }
 
 .invisible {
@@ -48,7 +53,7 @@ body {
 }
 
 .bg-light {
-    background-color: var(--light) !important;
+    background-color: var(--navbarColor) !important;
 } 
 
 #text-bio:hover {
