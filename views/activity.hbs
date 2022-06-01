@@ -64,7 +64,7 @@
               {{/unless}}
             </div>
             <div class="card-body">
-                <p class="post-text">{{this.body}}</p>
+                <p class="post-text post-body">{{this.body}}</p>
 
                 {{!-- maybe put this in card footer? --}}
                 <div class="enter-post d-flex justify-content-between">
@@ -86,6 +86,12 @@
 </div>
 
 {{!-- Scripts section --}}
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+{{!-- script for enabling markdown syntax for posts/comments --}}
+<script src="/scripts/post-markdown.js"></script>
+
 {{#if participant}}
   <script type="module" src="/scripts/activity-put-post.js"></script>
 {{/if}}

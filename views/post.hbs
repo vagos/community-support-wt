@@ -22,7 +22,7 @@
       {{/unless}}
     </div>
 
-    <div class="card-body"> <p class="text-center">{{post.body}}</p></div>
+    <div class="card-body"><p class="post-body">{{post.body}}</p></div>
   
     {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
@@ -87,10 +87,7 @@
           {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
           <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
             <div class="bodyAndButtons d-flex flex-column ps-4">
-              <div class="comment-body flex-grow-1 p-2 ">
-                {{this.body}}
-                {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
-              </div>
+              <div class="comment-body flex-grow-1 p-2">{{this.body}}</div>
               <div class="comment-buttons d-inline-flex align-items-stretch">
                 <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
               </div>
@@ -132,6 +129,8 @@
   {{/unless}}
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script src="/scripts/util.js"></script>
 
 {{!-- script for drawing profile pictures --}}
@@ -139,6 +138,10 @@
 
 {{!-- script for putting replies under their respective comment --}}
 <script src="/scripts/post-comments-order.js"></script>
+
+{{!-- script for enabling markdown syntax for posts/comments --}}
+<script src="/scripts/post-markdown.js"></script>
+
 
 {{!-- script for making comments--}}
 {{#if participant}}
