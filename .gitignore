@@ -10,3 +10,4 @@ db/sqlite
 coverage
 
 docs/report/build
+docs/presentation/build
