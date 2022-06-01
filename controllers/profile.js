@@ -12,12 +12,20 @@ exports.getUserObject = async (id) => {
 
     const info = await db.queryOne(`SELECT name, join_date, bio FROM user WHERE id = ?`, id);
 
+    const comments = await db.query(`SELECT comment.creation_time, post.id as postId, post.name as postName FROM comment JOIN post ON comment.post = post.id 
+        WHERE comment.creator = ? ORDER BY comment.creation_time ASC LIMIT 5`, id);
+
+    const posts = await db.query(`SELECT post.id, post.name FROM post 
+        WHERE post.creator = ? ORDER BY post.creation_time ASC LIMIT 5`, id);
+    
     user = {
         'name': info.name,
         'id': id,
         'bio': info.bio,
         'activities': activities,
-        'friends' : friends
+        'friends' : friends,
+        'comments' : comments,
+        'posts' : posts,
     };
 
     return user;

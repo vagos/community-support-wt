@@ -2,7 +2,7 @@
 const userComments = document.querySelectorAll(".imageAndName");
 
 for (user of userComments) {
-    pictureProfile = user.querySelector(".prof-image");
-    username = user.querySelector(".user-name").innerHTML;
-    drawProfilePicture(pictureProfile, username)
+    var pictureProfile = user.querySelector(".prof-image");
+    var targetName = user.querySelector(".user-name").innerHTML;
+    drawProfilePicture(pictureProfile, targetName)
 }

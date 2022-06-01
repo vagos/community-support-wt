@@ -1,10 +1,19 @@
 const buttonEditBio = document.getElementById("button-edit-bio");
 const textAreaBio = document.getElementById("text-area-bio");
 const textBio = document.getElementById("text-bio");
+const profileCard = document.getElementById("profilePictureCanvas");
 
 textBio.innerHTML = marked.parse(textAreaBio.value)
 
-buttonEditBio.addEventListener("click", (e) => {
+profileCard.addEventListener("click", (e) => {
+
+    textAreaBio.classList.add("invisible");
+    textBio.classList.remove("invisible");
+
+    console.log("hey")
+});
+
+textBio.addEventListener("click", (e) => {
 
     if ( textAreaBio.value != textBio.innerHTML ) { // user edited their bio.
     
@@ -25,5 +34,4 @@ buttonEditBio.addEventListener("click", (e) => {
     textAreaBio.classList.toggle("invisible");
     textBio.classList.toggle("invisible");
 });
-
 

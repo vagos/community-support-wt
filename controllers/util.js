@@ -65,10 +65,13 @@ function drawProfilePicture(node, username) {
 
 function getRandomColorRGB(s) {
     
-    seed = numberifyString(s);
+    const seed = numberifyString(s);
+    
+    var r = rnd(seed)     % 100 + 70; 
+    var g = rnd(seed + 1) % 100 + 70;
+    var b = rnd(seed + 2) % 100 + 70;
 
-    return `rgb(${rnd(seed) % (255)}, ${rnd(seed + 1) % (255)},
-        ${rnd(seed + 2) % (255)})`;
+    return `rgb(${r}, ${g}, ${b})`;
 
 }
 
