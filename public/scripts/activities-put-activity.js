@@ -73,10 +73,13 @@ async function makeActivity(event) {
 
             // console.log("make activity response",response);
             // if response isnt an ok
-            if (response.status!=200){
+            if (response.status!=205){
                 // console.log("response wasnt ok, it was",response.status);
                 // let user know what happend
                 if(response.status==403) alert("Activity is already in DB.\nPlease Refresh your page or try another Title.");
+            }
+            else{
+                document.location.reload();
             }
         }
         else{

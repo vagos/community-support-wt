@@ -11,6 +11,7 @@ router.use((req , res, next) => {
 });
 
 const controller = require('../controllers/activites');
+const participationController = require('../controllers/participation');
 
 function getRandomColorRGB(s) { // TODO move this
 
@@ -48,7 +49,12 @@ router.get('/', (req, res) => {
             v.color = getRandomColorRGB(v.name);
         });
 
-        res.render('activities',{title:'activities', authenticated: req.isAuthenticated(), activities: activities});
+        // REMEMBER TO ADD CHECK FOR IF USER IS ADMIN
+        res.render('activities', {title:'activities', 
+            authenticated: req.isAuthenticated(), 
+            admin: false,
+            activities: activities
+        });
     });
 
 });
@@ -58,13 +64,31 @@ router.get('/:activityName', (req, res) => {
 
     // console.log(req);
     let activityName = req.params.activityName;
+    // let activityId ; Maybe we should store activityID on the html to reduce db queries?
 
-    controller.getExtendedPosts(activityName, (posts) => {
+
+    // watch out for the async
+    controller.getExtendedPosts(activityName, async (posts) => {
         
         // activityID is for testing
-        res.render('activity', { name : activityName, 
+
+        // check if user can create posts
+        // console.log(posts);
+        let authenticated = req.isAuthenticated();
+        let participant = false;
+        // only check if user is logged in
+        if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
+
+        // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
+        for(let post of posts){
+            // console.log(util.dateToTimeString(post.creation_time));
+            post.creation_time = util.dateToTimeString(post.creation_time);
+        }
+
+        res.render('activity', { ActivityName : activityName,
             posts: posts,
-            authenticated: req.isAuthenticated(),
+            authenticated: authenticated,
+            participant: participant
         });
     });
     
@@ -79,8 +103,7 @@ router.put('/createActivity', (req, res) => {
     // This is weird because it is a async function (https://www.valentinog.com/blog/throw-async/)
     controller.createActivity(req.body.name, req.body.description)
         .then(cb => {
-        // console.log("ok");
-            res.sendStatus(200);})
+            res.sendStatus(205);})
         .catch((err) => {
             console.error(err);
             res.sendStatus(403);});
@@ -118,8 +141,7 @@ router.put('/:activityName/createPost', (req, res) => {
 
     controller.createPost(postName, postBody, postActivity, postCreator, time).
     then(cb => {
-        res.sendStatus(200);
-        // Maybe refresh aswell?
+        res.sendStatus(205);
     })
     .catch((err) => {
         console.error(err);
@@ -127,4 +149,40 @@ router.put('/:activityName/createPost', (req, res) => {
 
 });
 
+// use get or put?
+router.put('/:activityName/join', (req, res) => {
+
+
+    // IF USER ISNT LOGGED IN
+    // console.log("req:",req);
+    if (req.isUnauthenticated()) {
+        //Send a response status as well?
+        res.redirect(`/${req.params.activityName}`);
+        return;
+    }
+
+
+    // Gather data to insert
+
+    // getting user
+    let participationUser = req.session.passport.user.id;
+
+    // get activity id
+    let participationActivity = req.params.activityName;
+    
+    let time = util.timeString();
+
+    
+    // console.log(`NOW PUTTING participant ${participationUser} for activity:${participationActivity} on:${time}\n`);
+
+    participationController.makeParticipant(participationUser, participationActivity, time).
+    then(cb => {
+        // STATUS 205 signals OK, Now refresh page
+        res.sendStatus(205);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(403);});
+
+});
 module.exports = router;

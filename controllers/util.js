@@ -1,22 +1,30 @@
 
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
-exports.timeString =  function timeString() {
+function timeString() {
 
 
     const currentDate = new Date();
 
-    let timeString = currentDate.getFullYear() + "-"
-    + (currentDate.getMonth()+1)  + "-"
-    + currentDate.getDate() + " " 
-    + currentDate.getHours() + ":"  
-    + currentDate.getMinutes() + ":" 
-    + currentDate.getSeconds();
-    
+    // Will convert to correct format
+    const dateTime = currentDate.toISOString().replace("T"," ").slice(0,-5);
 
-    return timeString;
+    return dateTime;
 
 
 }
+
+// returns this string format YYYY-MM-DD HH:MM:SS from a date obj
+function dateToTimeString(date) {
+
+
+    // Will convert to correct format
+    const dateTime = date.toISOString().replace("T"," ").slice(0,-5);
+
+    return dateTime;
+
+
+}
+
 function rnd(n) {
     
     for (let i = 0; i < 10; i++) {
@@ -68,5 +76,7 @@ function getRandomColorRGB(s) {
 }
 
 module.exports = {
-    getRandomColorRGB: getRandomColorRGB
+    getRandomColorRGB: getRandomColorRGB,
+    timeString: timeString,
+    dateToTimeString: dateToTimeString
 };
