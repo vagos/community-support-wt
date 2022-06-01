@@ -11,7 +11,9 @@ router.get('/:userId', async (req, res) => {
     userId = req.params.userId;
     user = await profileController.getUserObject(userId); 
 
-    res.render('profile', { title: 'other_profile' , 'user' : user, 'self': false });
+    res.render('profile', { title: 'other_profile' , 
+        'user' : user, 
+        'self': false });
 });
 
 
