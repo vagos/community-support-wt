@@ -2,10 +2,25 @@ node_modules
 .vscode
 workspace.code-workspace
 codeExamples
-testing
 
 db/mysql
 db/sqlite
 
 # jest coverage report
 coverage
+
+docs/report/build
+docs/presentation/build
+
+#All the latex aux files (Remember to make vscode latex create build folder for these files)
+main.aux
+main.bbl
+main.blg
+main.fls
+main.fdb_latexmk
+main.files
+main.log
+main.out
+main.synctex.gz
+main.pdf
+
