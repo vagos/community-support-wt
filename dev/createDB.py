@@ -94,9 +94,10 @@ CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL DEFAULT '',
     bio TEXT ,
-    join_date DATE,
+    join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     hashed_password BINARY(32),
-    salt BINARY(16)
+    salt BINARY(16),
+    UNIQUE(name)
 ) ENGINE=INNODB;
 """
 
@@ -183,6 +184,27 @@ CREATE TABLE IF NOT EXISTS participation (
     UNIQUE(user, activity)
 ) ENGINE=INNODB;
 """
+
+# trigger_user_join = """
+# DELIMITER $$
+# 
+# CREATE TRIGGER user_join_date 
+# 
+# AFTER INSERT
+# 
+# ON user FOR EACH ROW 
+# BEGIN
+#     IF NEW.join_date IS NULL THEN
+#         UPDATE user 
+#         SET join_date = CURDATE()
+#         WHERE user.id = NEW.id;
+#     END IF;
+# 
+# END $$
+# 
+# 
+# DELIMITER ;
+# """
 
 N = 10000
 

@@ -30,8 +30,19 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/signup', function(req, res, next) { 
+
+    if (!req.body.username.length) {
+        res.redirect('signup');
+        return;
+    }
     
-    controller.signupUser(req.body.username, req.body.password, (user) => {
+    controller.signupUser(req.body.username, req.body.password, (err, user) => {
+
+        if (err) {
+            res.redirect('signup');
+            return;
+        }
+
         req.login(user, (err) => {
             if (err) { throw (err); }
             res.redirect('/profile');
