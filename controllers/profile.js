@@ -64,3 +64,32 @@ exports.getUserStats = async (id) => {
         participation: activity_participation,
     };
 };
+
+// This will check if the first user has the second user as a friend
+exports.isFriend = async function (firstUser, secondUser) { 
+
+    let result = await db.queryOne(`SELECT * FROM friendship
+        WHERE user_first = ?
+        AND user_second = ?`,[firstUser,secondUser]);
+
+    console.log("Result:",result);
+
+    // if first user has the second user as a friend
+    if (result.length !=0) return true;
+    else return false;
+
+};
+
+// Takes first user and adds second user as a friend
+exports.addFriend = async function (firstUser, secondUser) {
+
+    // check constraints 
+
+    // try to insert data if it passes constraint
+
+    let temp = await db.query(`INSERT INTO friendship(user_first, user_second) VALUES(?, ?)`, [firstUser, secondUser]);
+
+
+    console.log("made friend");
+
+};
