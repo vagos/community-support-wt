@@ -1,14 +1,7 @@
 <div class="PageContent">
 
-  {{!-- Printing if user is authenticated and a participant --}}
-  <span>AUTH: {{authenticated}}</span>
-  <span>participant: {{participant}}</span>
-
   <h1 class="activity-title">{{ActivityName}}</h1>
-
-  {{!-- Maybe we should store activityID on the html to reduce db queries? --}}
-  {{!-- <small class="activity-id d-hidden">{{ActivityId}}</small> --}}
-  
+  <hr>
 
   {{!-- If user is a participant --}}
   {{#if participant}}
@@ -16,22 +9,22 @@
       {{!-- REMINDER use name for correct formdata creation --}}
       {{!-- id is not used for the dataform --}}
       <div class="row">
-        <p class="mt-2 fs-3">Make post section</p>
+        <p class="mt-2 fs-3">New Post</p>
         <hr>
 
         <div class="col input-group">
           <span class="input-group-text" id="title">Title:</span>
-          <input class="form-control" type="text" id="post-title" name="name" placeholder="TEST POST TITLE" required>
+          <input class="form-control" type="text" id="post-title" name="name" placeholder="Title" required>
         </div>
 
         <div class="col input-group">
           <span class="input-group-text" id="body">Body:</span>
-          <input class="form-control" type="text" id="post-body" name="body" placeholder="TEST BODY" >
+          <textarea class="form-control" type="text" id="post-body" name="body" placeholder="Body" ></textarea>
         </div>
       </div>
       
       <div class="buttons row p-3">
-        {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
+        {{!-- ms-auto put margin = left margin needed for item to go to the right --}}
         <input class="btn btn-primary col-3 ms-auto" type="submit">
       </div>
       
@@ -43,7 +36,7 @@
   {{#unless participant}}
     {{!-- but the user is logged in --}}
     {{#if authenticated}}
-      <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">JOIN Activity</a>
+      <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">Join Activity</a>
 
       {{!-- Adding function to button --}}
       <script type="module" src="/scripts/join-activity-btn.js"></script>
@@ -51,17 +44,11 @@
   {{/unless}}
 
   <div>
-    {{#if posts}}
       {{#each posts}}
           <div class="card">
             <div class="card-header">
-              {{#if this.name}}
-                <h5 class="post-title">{{this.name}}  <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by:{{this.creator_name}}</a></small> <small class="post-time fs-6 fw-light">{{this.creation_time}}</small> <small class="fs-6 fw-light">ago</small></h5>
-              {{/if}}
-              {{!-- This shouldn't be allowed --}}
-              {{#unless this.name}}
-                <h5 class="post-title">NO POST TITLE!</h5>
-              {{/unless}}
+                <h5 class="post-title fs-4">{{this.name}}</h5> <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by: {{this.creator_name}}</a></small> 
+                <small class="post-time fs-6 fw-light">{{this.creation_time}}</small> <small class="fs-6 fw-light">ago</small>
             </div>
             <div class="card-body">
                 <p class="post-text post-body">{{this.body}}</p>
@@ -73,16 +60,12 @@
                 </div>
             </div>
           </div>
-      {{/each}}
-    {{/if}}
   </div>
-
-  {{#unless posts}}
+  {{else}}
     <div>
-      <p class="text-center">No posts yet!</p>
+      <h2 class="text-center">No posts yet!</h2>
     </div>
-  {{/unless}}
-
+  {{/each}}
 </div>
 
 {{!-- Scripts section --}}

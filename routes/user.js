@@ -11,6 +11,10 @@ router.get('/:userId', async (req, res) => {
     userId = req.params.userId;
     user = await profileController.getUserObject(userId); 
 
+    if (userId == req.session.passport.user.id) {
+        res.redirect('/profile');
+    }
+
     res.render('profile', { title: 'other_profile' , 
         'user' : user, 
         'self': false });
