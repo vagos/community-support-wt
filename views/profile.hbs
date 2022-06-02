@@ -78,7 +78,7 @@
                         {{#each user.posts}}
                             <div class="card-body">
                                 <h5 class="card-title">{{this.name}}</h5>
-                                <p class="card-text">{{this.creation_time}}</p>
+                                <p class="card-text fw-light">Posted on: {{this.creation_time}}</p>
                                 <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
                             </div>
                         {{/each}}
@@ -94,7 +94,7 @@
                     {{#each user.comments}}
                         <div class="card-body">
                             <h5 class="card-title">{{this.postName}}</h5>
-                            <p class="card-text">{{this.creation_time}}</p>
+                            <p class="card-text fw-light">Commented on: {{this.creation_time}}</p>
                             <a href="/posts/{{this.postId}}" class="btn btn-primary">view post</a>
                         </div>
                     {{/each}}
