@@ -12,6 +12,8 @@ coverage
 docs/report/build
 docs/presentation/build
 
+testing
+
 #All the latex aux files (Remember to make vscode latex create build folder for these files)
 main.aux
 main.bbl
