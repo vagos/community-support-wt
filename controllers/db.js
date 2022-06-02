@@ -2,19 +2,18 @@ const mysql = require('mysql');
 const util = require('util');
 const fs = require('fs');
 var readline = require('readline');
-const Pool = require('mysql/lib/Pool');
+const { Pool, Client } = require('pg')
 
-const options = {
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'admin',
-    database: process.env.DB_NAME || 'test',
-    port: process.env.DB_PORT,
-}
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+client.connect()
 
 // console.log(options);
-
-const connection = mysql.createConnection(options)
 
 const query = util.promisify(connection.query).bind(connection);
 
