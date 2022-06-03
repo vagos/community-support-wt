@@ -1,4 +1,5 @@
 const db = require('./db');
+const util = require('./util');
 
 exports.getAll = ( cb ) => {
     
@@ -12,19 +13,44 @@ exports.getPosts = (activityName, cb) => {
     (err, rows) => { if (err) throw err; cb(rows) });
 };
 
-
 // Returns extended activities (activity + total users + total posts) for all activities
 exports.getExtendedAll = ( cb ) => {
 
-    // console.log("getting extended post info")
+    db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
+    FROM activity JOIN (SELECT users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
+        ON activity.id = info.id `,
+    (err, rows) => { 
+        if (err) throw err; 
 
+        rows.forEach( (v) => {
+            v.color = util.getRandomColorRGB(v.name);
+        });
+
+        cb(rows); 
+
+    });
+
+};
+
+exports.getAllPaginated = ( page, cb ) => {
+
+    const postsPerPage = 5;
 
     db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
     FROM activity JOIN (SELECT users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
-        ON activity.id = info.id`,
-    (err, rows) => { if (err) throw err; cb(rows); });
+        ON activity.id = info.id
+        LIMIT ${page * postsPerPage}, ${postsPerPage}`,
+    (err, rows) => { 
+        if (err) throw err; 
 
+        rows.forEach( (v) => {
+            v.color = util.getRandomColorRGB(v.name);
+        });
+
+        cb(rows); 
+    });
 };
+
 
 // Returns extended info on posts + activityId
 exports.getExtendedPosts = (activityName, cb) => {
@@ -47,35 +73,16 @@ exports.createActivity = async (activityName, description, cb) => {
     let uniqueName = false;
     const result =  await db.query(`SELECT * FROM activity WHERE activity.name = ?`, activityName);
 
-    // console.log("result",result);
-
-
     // check if there are any activities with same name
-    if (result.length==0){
-        uniqueName = true;
-    }
-    else{
-        uniqueName = false;
-    } 
-    // console.log("check is ",uniqueName);
+    uniqueName = (result.length == 0);
 
     // Try to insert data if it passes constraint
     if (uniqueName){
         let temp = await db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-        // console.log(temp);
     }
     else{
-        // console.log("NAME NOT UNIQUE");
-        throw Error("I AM DISAPPOINTED IN YOU MY CHILD");
+        throw Error("Not unique activity name.");
     }
-
-
-
-    
-    // console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-
-    // db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-
 };
 
 

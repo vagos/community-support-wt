@@ -10,25 +10,30 @@ profileCard.addEventListener("click", (e) => {
     textAreaBio.classList.add("invisible");
     textBio.classList.remove("invisible");
 
-    console.log("hey")
+    updateBio(textAreaBio.value);
+    
 });
+
+function updateBio(bio) {
+
+    const data = { bio: bio };
+
+    fetch('/profile/change-bio', { 
+        method : 'PATCH',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+        });
+
+    textBio.innerHTML = marked.parse(bio)
+}
 
 textBio.addEventListener("click", (e) => {
 
     if ( textAreaBio.value != textBio.innerHTML ) { // user edited their bio.
-    
-        const data = { bio: textAreaBio.value };
-
-        fetch('/profile/change-bio', { 
-            method : 'PATCH',
-            body: JSON.stringify(data),
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-              },
-            });
-
-        textBio.innerHTML = marked.parse(textAreaBio.value)
+        updateBio(textAreaBio.value); 
     }
 
     textAreaBio.classList.toggle("invisible");

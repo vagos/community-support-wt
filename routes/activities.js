@@ -13,47 +13,24 @@ router.use((req , res, next) => {
 const controller = require('../controllers/activites');
 const participationController = require('../controllers/participation');
 
-function getRandomColorRGB(s) { // TODO move this
-
-    function rnd(n) {
-    
-    for (let i = 0; i < 10; i++) {
-        n = n ^ ( n * 19 );
-    }
-
-    return Math.abs(n);
-}
-
-    function numberifyString(s) {
-        let r = 0;
-
-        for (let i = 0; i < s.length; i++) {
-           r += s.codePointAt(i); 
-        }
-
-        return r;
-    }
-
-    seed = numberifyString(s);
-    return `rgb(${rnd(seed) % (255)}, ${rnd(seed + 1) % (255)},
-        ${rnd(seed + 2) % (255)})`;
-}
+router.get('/', (req, res) => {
+    res.redirect('/activities/all/0');
+});
 
 //define the home page route for activities
-router.get('/', (req, res) => {
+router.get('/all/:page', (req, res) => {
 
+    const page = parseInt(req.params.page);
 
-    controller.getExtendedAll( (activities) => {
-
-        activities.forEach( (v) => {
-            v.color = getRandomColorRGB(v.name);
-        });
+    controller.getAllPaginated( page, (activities) => {
 
         // REMEMBER TO ADD CHECK FOR IF USER IS ADMIN
-        res.render('activities', {title:'activities', 
+        res.render('activities', {
+            title:'activities', 
             authenticated: req.isAuthenticated(), 
             admin: false,
-            activities: activities
+            activities: activities,
+            pages: {next: page + 1, prev: Math.max(page - 1, 0)},
         });
     });
 
@@ -70,14 +47,12 @@ router.get('/:activityName', (req, res) => {
     // watch out for the async
     controller.getExtendedPosts(activityName, async (posts) => {
         
-        // activityID is for testing
-
         // check if user can create posts
         // console.log(posts);
         let authenticated = req.isAuthenticated();
         let participant = false;
         // only check if user is logged in
-        if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
+        if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id, activityName);
 
         // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
         for(let post of posts){
@@ -102,7 +77,7 @@ router.put('/createActivity', (req, res) => {
 
     // This is weird because it is a async function (https://www.valentinog.com/blog/throw-async/)
     controller.createActivity(req.body.name, req.body.description)
-        .then(cb => {
+        .then(() => {
             res.sendStatus(205);})
         .catch((err) => {
             console.error(err);
