@@ -1,70 +1,65 @@
-<div class="PageContent">
+<h1 class="activity-title">{{ActivityName}}</h1>
+<hr>
 
-  <h1 class="activity-title">{{ActivityName}}</h1>
-  <hr>
+{{!-- If user is a participant --}}
+{{#if participant}}
+<form class="make-post container border rounded px-3 my-2">
+  {{!-- REMINDER use name for correct formdata creation --}}
+  {{!-- id is not used for the dataform --}}
+  <div class="row">
+    <p class="mt-2 fs-3">New Post</p>
+    <hr>
 
-  {{!-- If user is a participant --}}
-  {{#if participant}}
-    <form class="make-post container border rounded px-3 my-2">
-      {{!-- REMINDER use name for correct formdata creation --}}
-      {{!-- id is not used for the dataform --}}
-      <div class="row">
-        <p class="mt-2 fs-3">New Post</p>
-        <hr>
-
-        <div class="col input-group">
-          <span class="input-group-text" id="title">Title:</span>
-          <input class="form-control" type="text" id="post-title" name="name" placeholder="Title" required>
-        </div>
-
-        <div class="col input-group">
-          <span class="input-group-text" id="body">Body:</span>
-          <textarea class="form-control" type="text" id="post-body" name="body" placeholder="Body" ></textarea>
-        </div>
-      </div>
-      
-      <div class="buttons row p-3">
-        {{!-- ms-auto put margin = left margin needed for item to go to the right --}}
-        <input class="btn btn-primary col-3 ms-auto" type="submit">
-      </div>
-      
-
-    </form>
-  {{/if}}
-
-  {{!-- if user isnt a participant --}}
-  {{#unless participant}}
-    {{!-- but the user is logged in --}}
-    {{#if authenticated}}
-      <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">Join Activity</a>
-
-      {{!-- Adding function to button --}}
-      <script type="module" src="/scripts/join-activity-btn.js"></script>
-    {{/if}}
-  {{/unless}}
-
-  <div>
-      {{#each posts}}
-          <div class="card">
-            <div class="card-header">
-                <h5 class="post-title fs-4">{{this.name}}</h5> <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by: {{this.creator_name}}</a></small> 
-                <small class="post-time fs-6 fw-light">{{this.creation_time}}</small> <small class="fs-6 fw-light">ago</small>
-            </div>
-            <div class="card-body">
-                <p class="post-text post-body">{{this.body}}</p>
-
-                {{!-- maybe put this in card footer? --}}
-                <div class="enter-post d-flex justify-content-between">
-                  <span class="p-2">Comments:{{this.commentCount}}</span>
-                  <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
-                </div>
-            </div>
-          </div>
-  </div>
-  {{else}}
-    <div>
-      <h2 class="text-center">No posts yet!</h2>
+    <div class="col input-group">
+      <span class="input-group-text" id="title">Title:</span>
+      <input class="form-control" type="text" id="post-title" name="name" placeholder="Title" required>
     </div>
+
+    <div class="col input-group">
+      <span class="input-group-text" id="body">Body:</span>
+      <textarea class="form-control" type="text" id="post-body" name="body" placeholder="Body" ></textarea>
+    </div>
+  </div>
+  
+  <div class="buttons row p-3">
+    {{!-- ms-auto put margin = left margin needed for item to go to the right --}}
+    <input class="btn btn-primary col-3 ms-auto" type="submit">
+  </div>
+  
+
+</form>
+{{/if}}
+
+{{!-- if user isnt a participant --}}
+{{#unless participant}}
+{{!-- but the user is logged in --}}
+{{#if authenticated}}
+  <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">Join Activity</a>
+
+  {{!-- Adding function to button --}}
+  <script type="module" src="/scripts/join-activity-btn.js"></script>
+{{/if}}
+{{/unless}}
+
+<div>
+  {{#each posts}}
+      <div class="card m-3">
+        <div class="card-header" style="background-color: {{randomColor this.name}}">
+            <h5 class="post-title fs-4">{{this.name}}</h5> <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by: {{this.creator_name}}</a></small> 
+            <small class="post-time fs-6 fw-light">{{this.creation_time}}</small> <small class="fs-6 fw-light">ago</small>
+        </div>
+        <div class="card-body">
+            <p class="post-text post-body">{{this.body}}</p>
+
+            {{!-- maybe put this in card footer? --}}
+            <div class="enter-post d-flex justify-content-between">
+              <span class="p-2">Comments:{{this.commentCount}}</span>
+              <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
+            </div>
+        </div>
+      </div>
+  {{else}}
+      <h2 class="text-center">No posts yet!</h2>
   {{/each}}
 </div>
 
