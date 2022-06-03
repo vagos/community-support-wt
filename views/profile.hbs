@@ -2,7 +2,6 @@
 
 <a href="/user/{{user.id}}" id="profileLink" class="invisible">{{user.id}}</a>
 
-<div class="PageContent">
     <div class="container-fluid" id="profileCard">
         <div class="card card-lg">
             <p class="card-header d-flex justify-content-between
@@ -44,8 +43,8 @@
                     </div>
                     <div id="allAct" class="accordion-collapse collapse" data-bs-parent="#userActivitiesAccordion">
                 {{#each user.activities}}
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.name}}</h5>
+                    <div class="card-body">
+                            <h5 class="card-title rounded" style="background-color: {{randomColor this.name}}">{{this.name}}</h5>
                             <p class="card-text">{{this.description}}</p>
                             <a href="/activities/{{this.name}}" class="btn btn-primary">view posts</a>
                         </div>
@@ -145,7 +144,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
