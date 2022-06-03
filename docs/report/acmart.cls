@@ -1395,7 +1395,7 @@
     \gdef\@acmEditors{#1}%
   \else
     \gdef\@editorsAbbrev{(Eds.)}%
-    \g@addto@macro\@acmEditors{\and#1}%
+    \g@addto@macro\@acmEditors{#1}%
 \fi}
 \def\subtitle#1{\def\@subtitle{#1}}
 \subtitle{}
@@ -1430,7 +1430,7 @@
     \expandafter\g@addto@macro\expandafter\addresses\expandafter{%
       \expandafter\and\expandafter\@author\expandafter{%
         \csname typeset@author\the\num@authors\endcsname{#2}}}%
-      \g@addto@macro\authors{\and#2}%
+      \g@addto@macro\authors{ #2 }%
     \fi
   \fi
   \if@ACM@anonymous
@@ -1445,7 +1445,7 @@
       \ifx\shortauthors\@empty
         \gdef\shortauthors{#2}%
       \else
-        \g@addto@macro\shortauthors{\and#2}%
+        \g@addto@macro\shortauthors{, #2 }%
       \fi
     \else
       \ifx\shortauthors\@empty
