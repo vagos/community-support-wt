@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS participation (
 ) ENGINE=INNODB;
 """
 
-N = 10000
+N = 10
 
 def fill_table(table_name, n=10):
     for _ in range(n):
