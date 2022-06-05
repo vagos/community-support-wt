@@ -15,7 +15,7 @@
       {{#if participant}}
         <form class="make-comment">
           <label for="userComment">Comment:</label>
-          <textarea class="form-control" name="body" id="userComment"></textarea>
+          <textarea class="form-control" name="body" id="userComment" required></textarea>
           <button type="submit" class="btn btn-primary m-2">submit</button>
           <input type="hidden" id="replies_to" name="replies_to" value="NULL">
         </form>
@@ -63,6 +63,8 @@
               </a>
             </div>
             <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+            {{!-- Comment-Time --}}
+            <small class="comment-time align-self-center ms-2 fs-6 fw-light">{{this.creation_time}}</small> <small class="align-self-center ms-1 fs-6 fw-light">ago</small>
 
             {{!-- Collapse button --}}
             {{!--ms-auto pushes the rest items into the left  --}}
@@ -128,6 +130,8 @@
 {{!-- script for enabling markdown syntax for posts/comments --}}
 <script src="/scripts/post-markdown.js"></script>
 
+{{!-- script for displaying time difference --}}
+<script type="module" src="/scripts/post-timeDifferences.js"></script>
 
 {{!-- script for making comments--}}
 {{#if participant}}

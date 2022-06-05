@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS post (
     name VARCHAR(255),
     activity INT,
     creator INT,
-    creation_time DATE,
+    creation_time DATETIME,
     body TEXT,
     FOREIGN KEY (activity)
         REFERENCES activity(id)
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS post (
 comment_table = """
 CREATE TABLE IF NOT EXISTS comment (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    creation_time DATE,
+    creation_time DATETIME,
     creator INT,
     post INT,
     replies_to INT DEFAULT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
     activity INT,
-    join_date DATE,
+    join_date DATETIME,
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE

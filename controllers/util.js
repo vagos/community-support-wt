@@ -1,15 +1,34 @@
-function timeString() {
+const moment = require("moment");
+
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
-    const currentDate = new Date();
-    // Will convert to correct format
-    const dateTime = currentDate.toISOString().replace("T"," ").slice(0,-5);
+function timeString() {
+
+    // Will convert to correct format (be careful for HH as hh is 12h and HH is 24h)
+    const dateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
     return dateTime;
 }
 
 // returns this string format YYYY-MM-DD HH:MM:SS from a date obj
 function dateToTimeString(date) {
-    const dateTime = date.toISOString().replace("T"," ").slice(0,-5);
+
+    // Will convert to correct format
+    // console.log(`date ${date}`);
+    const dateTime = moment(date).format("YYYY-MM-DD HH:mm:ss");
+    // console.log(`datetime ${dateTime}`);
+
     return dateTime;
+}
+
+// A list with all the userID OF admins
+const ADMINS = [51]
+
+// returns true if userId is an admin
+async function checkAdmin(userId) {
+
+    if (ADMINS.includes(userId)) return true;
+
+    return false;
 }
 
 function rnd(n) {
@@ -61,5 +80,6 @@ function getRandomColorRGB(s) {
 module.exports = {
     getRandomColorRGB: getRandomColorRGB,
     timeString: timeString,
-    dateToTimeString: dateToTimeString
+    dateToTimeString: dateToTimeString,
+    checkAdmin: checkAdmin
 };
