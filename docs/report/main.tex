@@ -3,7 +3,7 @@
 \usepackage{alphabeta}
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Use 8-bit encoding
-
+\usepackage{subcaption}
 
 \usepackage{tikz}
 \usepackage{dirtytalk}
@@ -72,7 +72,7 @@
   \postcode{}
 }
 
-\author{Απόστολος Παπαδημητρίου}
+\author{Απόστολοσ Παπαδημητρίου}
 \affiliation{%
   \institution{Πανεπιστήμιο Πατρών}
   \streetaddress{}
@@ -111,7 +111,7 @@
     \item Θα παρακινεί ο ένας τον άλλο
 \end{itemize}
 
-\section{Εννοιολογικός Σχεδιασμός}
+\section{Εννοιολογικόσ Σχεδιασμόσ}
 
 \subsection{Λειτουργικές Απαιτήσεις}
 
@@ -418,8 +418,7 @@ lists)}.
 δημιουργήσει νέες δημοσιεύσεις και σχόλια εφόσων έχει το δικαίωμα.
 
 Φροντίσαμε σε ορισμένα \en{text-fields} να δίνεται η δυνατότητα 
-στους χρήστες να εισάγουν κώδικα \src{markdown} διότι
-μας αρέσει το συντακτικό της γλώσσας. Στη συνέχεια 
+στους χρήστες να εισάγουν κώδικα \src{markdown}. Στη συνέχεια 
 θα θέλαμε να προσθέσουμε και τη δυνατότητα εισαγωγής \LaTeX κώδικα.
 
 Μία από τις δυσκολίες στην σχεδίαση ήταν ο μηχανισμός απάντησης
@@ -442,7 +441,25 @@ lists)}.
 \src{git} \cite{git} το οποίο χρησιμοποιήσαμε μέσα από την υπηρεσία
 \en{GitHub}.
 
-\begin{figure*}
+Σημεία της εφαρμογής στα οποία ένα μέλος της ομάδας ασχολήθηκε
+αποκλειστικά είναι: 
+
+\paragraph{Λάμπρου Ευάγγελος}
+\begin{itemize}
+    \item Λειτουργία \en{Login/Sessions}
+    \item Εισαγωγή \en{markdown} σε φόρμες
+    \item Δυναμική δημιουργία εικόνας προφίλ
+\end{itemize}
+
+\paragraph{Απόστολος Παπαδημητρίου}
+\begin{itemize}
+    \item Κατάλληλη παρουσίαση σελίδας σε συνδεδεμένους/μη χρήστες
+    \item Λειτουργία πρσθήκης δημοσιεύσεων
+    \item Λειτουργία προσθήκης σχολίων και 
+        λειτουργία απάντησης σε σχόλιο
+\end{itemize}
+
+\begin{figure*}[!htb]
 \begin{center}
     \input{work_timeline.tex}
 \end{center}
@@ -466,6 +483,40 @@ lists)}.
 Αναλυτικές οδηγίες βρίσκονται στο αποθετήριο: \en{\url{https://github.com/vagos/webdevproject}}.
 
 \section{Χρήση}
+
+Για την χρήση της εφαρμογής μπορεί κάποιος να εκτλέσει 
+τον \en{Node server} τοπικά στον υπολογιστή του ή 
+να χρησιμοποιήσει κάποια υπηρεσία φιλοξενίας 
+\en{web} εφαρμογών. Σαφώς, αν κάποιος έχει πρόσβαση
+σε κάποιον υλικό \en{server}, μπορεί να 
+βάλει την εφαρμογή να τρέξει εκεί.
+
+Σε αυτό το σημείο παραθέτουμε μερικά στιγμιότυπα 
+της εφαρμογής.
+
+\begin{figure}[htpb]
+    \foreach \image in {main_page.png, activities.png, post.png, single_activity.png}
+    {
+        \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+            \includegraphics[width=\textwidth]{./assets/\image}
+        \end{subfigure}
+    }
+    \caption{Μερικές από τις βασικές σελίδες της ιστοσελίδας.}
+    \label{fig:}
+\end{figure}
+
+\begin{figure}[htpb]
+    \foreach \image in {profile1.png, profile2.png, sign_in.png}
+    {
+        \begin{subfigure}[b]{0.4\textwidth}
+            \includegraphics[width=\textwidth]{./assets/\image}
+        \end{subfigure}
+    }
+    \caption{Μερικές από τις βασικές σελίδες της ιστοσελίδας.}
+    \label{fig:}
+\end{figure}
+
 
 \end{document}
 \endinput
