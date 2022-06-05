@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL DEFAULT '',
     bio TEXT ,
-    join_date DATE,
+    join_date DATETIME,
     hashed_password BINARY(32),
     salt BINARY(16)
 ) ENGINE=INNODB;
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS post (
     name VARCHAR(255),
     activity INT,
     creator INT,
-    creation_time DATE,
+    creation_time DATETIME,
     body TEXT,
     FOREIGN KEY (activity)
         REFERENCES activity(id)
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
     activity INT,
-    join_date DATE,
+    join_date DATETIME,
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS comment;
 
 CREATE TABLE IF NOT EXISTS comment (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    creation_time DATE,
+    creation_time DATETIME,
     creator INT,
     post INT,
     replies_to INT DEFAULT NULL,
