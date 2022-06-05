@@ -184,6 +184,27 @@ CREATE TABLE IF NOT EXISTS participation (
 ) ENGINE=INNODB;
 """
 
+trigger_post_insert = """
+DELIMITER $$
+
+CREATE TRIGGER post_insert
+AFTER INSERT
+ON post FOR EACH ROW
+BEGIN
+    IF NEW.creator NOT IN (
+    SELECT participation.user FROM participation
+    WHERE participation.activity = NEW.activity
+    ) THEN
+        INSERT INTO participation(user, activity) VALUES(NEW.creator, NEW.activity);
+    END IF;
+END$$
+
+DELIMITER ;
+"""
+
+def create_triggers():
+    print(trigger_post_insert)
+
 N = 10
 
 def fill_table(table_name, n=10):
@@ -234,6 +255,8 @@ def main():
             print(eval(t + "_table"))
         except Exception as e:
             comment(e)
+
+    create_triggers()
 
     for t in tables:
         fill_table(t, N)

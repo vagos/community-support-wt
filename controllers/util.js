@@ -1,28 +1,15 @@
-
-// returns the current time in this string format YYYY-MM-DD HH:MM:SS
 function timeString() {
-
-
+// returns the current time in this string format YYYY-MM-DD HH:MM:SS
     const currentDate = new Date();
-
     // Will convert to correct format
     const dateTime = currentDate.toISOString().replace("T"," ").slice(0,-5);
-
     return dateTime;
-
-
 }
 
 // returns this string format YYYY-MM-DD HH:MM:SS from a date obj
 function dateToTimeString(date) {
-
-
-    // Will convert to correct format
     const dateTime = date.toISOString().replace("T"," ").slice(0,-5);
-
     return dateTime;
-
-
 }
 
 function rnd(n) {
