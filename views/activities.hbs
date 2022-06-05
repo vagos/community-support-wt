@@ -56,4 +56,6 @@
 
 {{!-- this type="module" allows the scripts using it to import functions from other scripts (https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)  --}}
 {{!-- impoting in browser example (https://plnkr.co/edit/ln6J7wfdsJPUNzaEi3u6?preview) --}}
-<script type="module" src="/scripts/activities-put-activity.js"></script>
+{{#if admin}}
+  <script type="module" src="/scripts/activities-put-activity.js"></script>
+{{/if}}
