@@ -1,5 +1,8 @@
 const moment = require("moment");
 
+// A list with all the userID OF admins
+const ADMINS = [51]
+
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
 function timeString() {
 
@@ -7,13 +10,10 @@ function timeString() {
     const dateTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
     return dateTime;
-
-
 }
 
 // returns this string format YYYY-MM-DD HH:MM:SS from a date obj
 function dateToTimeString(date) {
-
 
     // Will convert to correct format
     // console.log(`date ${date}`);
@@ -21,12 +21,8 @@ function dateToTimeString(date) {
     // console.log(`datetime ${dateTime}`);
 
     return dateTime;
-
-
 }
 
-// A list with all the userID OF admins
-const ADMINS = [51]
 
 // returns true if userId is an admin
 async function checkAdmin(userId) {
@@ -37,21 +33,17 @@ async function checkAdmin(userId) {
 }
 
 function rnd(n) {
-    
     for (let i = 0; i < 10; i++) {
         n = n ^ ( n * 19 );
     }
-
     return Math.abs(n);
 }
 
 function numberifyString(s) {
     let r = 0;
-
     for (let i = 0; i < s.length; i++) {
        r += s.codePointAt(i); 
     }
-
     return r;
 }
 
@@ -79,8 +71,8 @@ function getRandomColorRGB(s) {
     const seed = numberifyString(s);
     
     var r = rnd(seed)     % 100 + 70; 
-    var g = rnd(seed + 1) % 100 + 70;
-    var b = rnd(seed + 2) % 100 + 70;
+    var g = rnd(seed + 1) % 100 + 80;
+    var b = rnd(seed + 2) % 100 + 90;
 
     return `rgb(${r}, ${g}, ${b})`;
 
