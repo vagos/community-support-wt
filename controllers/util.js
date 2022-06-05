@@ -26,7 +26,7 @@ function dateToTimeString(date) {
 }
 
 // A list with all the userID OF admins
-const ADMINS = [1]
+const ADMINS = [51]
 
 // returns true if userId is an admin
 async function checkAdmin(userId) {

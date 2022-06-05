@@ -33,7 +33,7 @@ router.get('/all/:page', (req, res) => {
         res.render('activities', {
             title:'activities', 
             authenticated: req.isAuthenticated(), 
-            admin: false,
+            admin: admin,
             activities: activities,
             pages: {next: page + 1, prev: Math.max(page - 1, 0)},
         });
