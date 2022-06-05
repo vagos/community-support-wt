@@ -43,7 +43,7 @@
     {{/if}}
   {{/unless}}
 
-  <div>
+  <div class="posts">
       {{#each posts}}
           <div class="card">
             <div class="card-header">
@@ -60,12 +60,14 @@
                 </div>
             </div>
           </div>
+      {{/each}}
   </div>
-  {{else}}
+
+  {{#unless posts}}
     <div>
       <h2 class="text-center">No posts yet!</h2>
     </div>
-  {{/each}}
+  {{/unless}}
 </div>
 
 {{!-- Scripts section --}}
