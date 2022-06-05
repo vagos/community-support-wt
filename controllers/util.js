@@ -1,12 +1,10 @@
+const moment = require("moment");
 
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
 function timeString() {
 
-
-    const currentDate = new Date();
-
     // Will convert to correct format
-    const dateTime = currentDate.toISOString().replace("T"," ").slice(0,-5);
+    const dateTime = moment().format("YYYY-MM-DD hh:mm:ss");
 
     return dateTime;
 
