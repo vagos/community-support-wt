@@ -1,0 +1,31 @@
+\begin{tikzpicture}[timespan=Ebdom`ada, timeline width=15, end week=10]
+    
+  \timeline{7}
+
+  \begin{phases}
+    \phase{between week=1 and 2 in 0.4,
+      involvement degree=2.5cm,phase color=red!40!black}
+    \phase{between week=3 and 5 in 0.5,
+      involvement degree=3.5cm,phase color=red!90!black}
+    \phase{between week=5 and 6 in 0.3,
+      involvement degree=4cm,phase color=red!40!yellow}
+    \phase{between week=6 and 7 in 0.3,
+      involvement degree=5cm,phase color=red!40!blue}
+  \end{phases}
+
+  \addmilestone{at=phase-1.120,direction=90:1cm, text={Επιλογή Θέματος}, text options={above}}
+  \addmilestone{at=phase-1.270,direction=270:1cm, text={Αναζήτηση Παρόμοιων Εφαρμογών}, text options={below}}
+
+  \addmilestone{at=phase-2.70, direction=90:1cm, text={Επιλογή Τεχνολογιών}, text options={above}}
+  \addmilestone{at=phase-2.150, direction=90:1.0cm, text={Σχεδιασμός \en{Front-End}}, text options={above}}
+  \addmilestone{at=phase-2.250, direction=270:2cm, text={Σχεδιασμός Βάσης}, text options={below}}
+
+  \addmilestone{at=phase-3.90,direction=90:1.2cm, text={Δημιουργία Πρώτων Σελίδων}, text options=above}
+  \addmilestone{at=phase-3.250,direction=270:0.8cm, text options=below, text={\en{Node App}}}
+  \addmilestone{at=phase-3.270,direction=270:2cm, text={Εισαγωγή Βάσης}}
+
+  \addmilestone{at=phase-4.50,direction=90:1.2cm, text={\en{Login,Sessions}}, text options=above}
+  \addmilestone{at=phase-4.250,direction=270:3cm, text options=below, text={Βελτίωση της διεπαφής}}
+  \addmilestone{at=phase-4.300,direction=270:5cm, text={Διεπαφή Βάσης, Τελικές Λειτουργίες}}
+
+\end{tikzpicture}
