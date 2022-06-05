@@ -20,6 +20,12 @@ router.get('/', (req, res) => {
 //define the home page route for activities
 router.get('/all/:page', (req, res) => {
 
+    // if page isn't a number
+    if (isNaN(req.params.page)){
+        res.send("Page number isn't a number Cowboy");
+        return;
+    }
+
     const page = parseInt(req.params.page);
 
     controller.getAllPaginated( page, async (activities) => {
