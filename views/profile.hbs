@@ -27,6 +27,17 @@
                     <a class ="btn btn-danger" href="/login/logout">Logout</a>
                 </div>
             {{/if}}
+            {{#unless self}}
+                {{#if authenticated}}
+                    {{#unless friend}}
+                    <div class="col-sm m-2">
+                        <a class ="make-friend-btn btn btn-success" href="/user/{{user.id}}/addFriend">Add user as friend</a>
+                    </div>
+                    {{!-- Adding function to button --}}
+                    <script type="module" src="/scripts/add-friend-btn.js"></script>
+                    {{/unless}}
+                {{/if}}
+            {{/unless}}
         </div>
     </div>
 
