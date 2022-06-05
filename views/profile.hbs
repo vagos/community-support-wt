@@ -27,6 +27,17 @@
                     <a class ="btn btn-danger" href="/login/logout">Logout</a>
                 </div>
             {{/if}}
+            {{#unless self}}
+                {{#if authenticated}}
+                    {{#unless friend}}
+                    <div class="col-sm m-2">
+                        <a class ="make-friend-btn btn btn-success" href="/user/{{user.id}}/addFriend">Add user as friend</a>
+                    </div>
+                    {{!-- Adding function to button --}}
+                    <script type="module" src="/scripts/add-friend-btn.js"></script>
+                    {{/unless}}
+                {{/if}}
+            {{/unless}}
         </div>
     </div>
 
@@ -78,7 +89,7 @@
                         {{#each user.posts}}
                             <div class="card-body">
                                 <h5 class="card-title">{{this.name}}</h5>
-                                <p class="card-text">{{this.creation_time}}</p>
+                                <p class="card-text fw-light">Posted on: {{this.creation_time}}</p>
                                 <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
                             </div>
                         {{/each}}
@@ -94,7 +105,7 @@
                     {{#each user.comments}}
                         <div class="card-body">
                             <h5 class="card-title">{{this.postName}}</h5>
-                            <p class="card-text">{{this.creation_time}}</p>
+                            <p class="card-text fw-light">Commented on: {{this.creation_time}}</p>
                             <a href="/posts/{{this.postId}}" class="btn btn-primary">view post</a>
                         </div>
                     {{/each}}
