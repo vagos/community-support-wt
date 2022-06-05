@@ -6,6 +6,8 @@ codeExamples
 db/mysql
 db/sqlite
 
+testing
+
 # jest coverage report
 coverage
 

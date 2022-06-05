@@ -16,7 +16,7 @@ services:
   app:
     depends_on:
       - mysqldb
-        # restart: unless-stopped
+    restart: unless-stopped
     build: .
     env_file: ./.env
     ports:

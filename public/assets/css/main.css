@@ -18,27 +18,46 @@
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #dc3545;
-  --light: #f8f9fa;
+  --light: #d3d3d3;
   --dark: #343a40;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --bs-body-font-family: "Source Code Pro";
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
+  --backgroundColor: var(--white);
+  --navbarColor: var(background-color);
+  /* --navbarColor: rgb(33, 37, 41); */
+
 }
+
 
 body {
     margin: 0 auto; 
     width: 90%; 
     max-width: 1280px;
     line-height: 1.4em; 
+    background-color: var(--backgroundColor);
 }
 
 .invisible {
     display: none;
     visibility: hidden;
 }
+
+.card-header {
+    color: black;
+}
+
+.bg-light {
+    background-color: var(--navbarColor) !important;
+} 
+
+#text-bio:hover {
+    cursor: pointer;
+}
+    
+

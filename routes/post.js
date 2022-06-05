@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const util = require('../controllers/util.js');
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
@@ -7,6 +8,7 @@ router.use((req , res, next) => {
 });
 
 const controller = require('../controllers/posts');
+const participationController = require('../controllers/participation');
 
 router.get('/:postId', (req, res) => {
 
@@ -15,15 +17,63 @@ router.get('/:postId', (req, res) => {
         // retrieve comments
         // console.log(`getting comments for post ${post.id}`);
 
-        controller.getExtendedComments(post.id,(comments) => {
-            // for (comment of comments){
-            //     console.log(comment);
-            // }
+        controller.getExtendedComments(post.id, async (comments) => {
+            
+            let authenticated = req.isAuthenticated();
+            let participant = false;
+            // only check if user is logged in
+            let activityName = await controller.getActivityName(req.params.postId);
+            // console.log(activityName);
+            if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
 
-            res.render('post', {authenticated: req.isAuthenticated(), post:post , comments:comments});
+
+            // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
+            for(let comment of comments){
+                // console.log(util.dateToTimeString(comment.creation_time));
+                comment.creation_time = util.dateToTimeString(comment.creation_time);
+            }
+
+            res.render('post', {authenticated: authenticated, participant:  participant, activityName:activityName, post:post , comments:comments});
             // console.log(postInfo);
         });
     });
+
+});
+
+router.put('/:postId/createComment', (req, res) => {
+
+    // IF USER ISNT LOGGED IN
+    // console.log("req:",req);
+    if (req.isUnauthenticated()) {
+        //Send a response status as well?
+        res.redirect(`/${req.params.activityName}`);
+        return;
+    }
+
+    // console.log("creating comment");
+    // Gather data to insert
+
+    // getting user
+    let commentCreator = req.session.passport.user.id;
+
+    let commentBody = req.body.body;
+    let commentReply = req.body.replies_to;
+
+    // get post id
+    let commentPost = req.params.postId;
+    
+    let time = util.timeString();
+
+    
+    // console.log(`NOW PUTTING COMMENT ${commentBody} \n created by:${commentCreator} for post:${commentPost} on:${time}, reply to:${commentReply}\n`);
+
+    controller.createComment(commentCreator, commentPost, commentBody, commentReply, time).
+    then(cb => {
+        res.sendStatus(205);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(403);});
 
 });
 

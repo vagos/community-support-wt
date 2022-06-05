@@ -31,6 +31,26 @@ After that we referance it using /assets/css/myfile.css
 
 - altering existing table to add constraint (https://pencilprogrammer.com/self-referencing-foreign-key-in-mysql/)
 
+- name attribute is important for forms(https://stackoverflow.com/questions/1397592/difference-between-id-and-name-attributes-in-html)
+
+- Puting data with form data and fetch (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+- nice custom form api (https://simonplend.com/how-to-use-fetch-to-post-form-data-as-json-to-your-api/)
+
+- throwing vs Rejection (https://www.valentinog.com/blog/throw-async/) (https://stackoverflow.com/questions/33445415/javascript-promises-reject-vs-throw) 
+
+- Reseting Auto-increamenting sql (https://www.techonthenet.com/mysql/auto_increment_reset.php)
+
+- Form validation bootstrap (https://getbootstrap.com/docs/5.0/forms/validation/) (https://www.w3schools.com/bootstrap5/bootstrap_form_validation.php)
+
+- More info on importing in browsers (https://javascript.info/modules-intro)
+
+- AutoRefreshing page for client (https://www.quackit.com/javascript/javascript_refresh_page.cfm)
+
+- HTTP CODE: 205 Reset Content
+    The server successfully processed the request, asks that the requester reset its document view, and is not returning any content.[14]
+
+- Reloading and resting forms (https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button)
 
 ### Styling notes
 
@@ -79,16 +99,23 @@ After that we referance it using /assets/css/myfile.css
 
 - hiding elements in bootstrap (https://getbootstrap.com/docs/5.0/utilities/display/)
 
+- Bootstrap 5 forms (https://getbootstrap.com/docs/5.0/forms/overview/)
+
+- Vertical ruler for comments (https://getbootstrap.com/docs/5.1/helpers/vertical-rule/)
 
 ### Express Handlebars notes
 
 - Helper functions (https://handlebarsjs.com/guide/builtin-helpers.html#lookup)
+
+- accesing value external of #each (https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop)
 
 ### Workspace Notes
 
 - intellisense for css extension reades all files os its slow. Use only when making css
 
 - Selecting multiple vars in vscode  (ctrl+f2 or ctrl+shift+L) (https://stackoverflow.com/questions/46539714/select-all-occurrences-of-selected-word-in-vscode)
+
+- Maybe look into php? (https://www.w3schools.com/php/)
 
 ### windows mysql poweruser problems
 

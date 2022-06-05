@@ -1,5 +1,7 @@
 <h1>Sign in</h1>
 
+<link rel="stylesheet" href="/assets/css/basic_preview.css">
+
 <form action="/login/password" method="post">
   <div class="form-group row">
     <label for="username" class="col-sm-2 col-form-label">Username</label>
@@ -21,3 +23,11 @@
     </div>
   </div>
 </form>
+
+{{#each errors}}
+    <div class="alert alert-danger m-2" role="alert">
+        {{this}}
+    </div>
+{{/each}}
+
+<script src="/scripts/login.js"></script>
