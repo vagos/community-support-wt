@@ -17,7 +17,7 @@ exports.getUserObject = async (id) => {
         post.id 
         WHERE comment.creator = ? ORDER BY comment.creation_time ASC LIMIT 5`,
         id);
-    console.log(comments)
+    // console.log(comments)
 
     const posts = await db.query(`
     SELECT post.id, post.name, DATE_FORMAT(post.creation_time, "%M %d %Y")
@@ -79,7 +79,7 @@ exports.isFriend = async function (firstUser, secondUser) {
         WHERE user_first = ?
         AND user_second = ?`,[firstUser,secondUser]);
 
-    console.log("Result:",result);
+    // console.log("Result:",result);
 
     // if first user has the second user as a friend
     if (result.length !=0) return true;
@@ -97,6 +97,6 @@ exports.addFriend = async function (firstUser, secondUser) {
     let temp = await db.query(`INSERT INTO friendship(user_first, user_second) VALUES(?, ?)`, [firstUser, secondUser]);
 
 
-    console.log("made friend");
+    // console.log("made friend");
 
 };

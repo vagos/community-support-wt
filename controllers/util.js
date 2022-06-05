@@ -25,6 +25,17 @@ function dateToTimeString(date) {
 
 }
 
+// A list with all the userID OF admins
+const ADMINS = [1]
+
+// returns true if userId is an admin
+async function checkAdmin(userId) {
+
+    if (ADMINS.includes(userId)) return true;
+
+    return false;
+}
+
 function rnd(n) {
     
     for (let i = 0; i < 10; i++) {
@@ -78,5 +89,6 @@ function getRandomColorRGB(s) {
 module.exports = {
     getRandomColorRGB: getRandomColorRGB,
     timeString: timeString,
-    dateToTimeString: dateToTimeString
+    dateToTimeString: dateToTimeString,
+    checkAdmin: checkAdmin
 };

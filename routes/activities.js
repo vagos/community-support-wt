@@ -22,9 +22,14 @@ router.get('/all/:page', (req, res) => {
 
     const page = parseInt(req.params.page);
 
-    controller.getAllPaginated( page, (activities) => {
+    controller.getAllPaginated( page, async (activities) => {
 
         // REMEMBER TO ADD CHECK FOR IF USER IS ADMIN
+        let authenticated = req.isAuthenticated();
+        let admin = false;
+        //check if user is admin
+        if (authenticated) admin = await util.checkAdmin(req.session.passport.user.id);
+
         res.render('activities', {
             title:'activities', 
             authenticated: req.isAuthenticated(), 
