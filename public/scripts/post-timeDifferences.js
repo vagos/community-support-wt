@@ -28,14 +28,14 @@ for (let commentDateTime of commentTimes){
   // if post was posted less than an minute ago
   if (timeDiff<oneMinute){
     // display how many seconds ago
-    commentDateTime.innerHTML = Math.round(timeDiff/oneSecond); 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneSecond) + " Seconds"; 
     continue;
   }
 
   // if post was posted less than an hour ago
   if (timeDiff<oneHour){
     // display how many minutes ago
-    commentDateTime.innerHTML = Math.round(timeDiff/oneMinute) + " Seconds"; 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneMinute) + " Minutes"; 
     continue;
   }
 
