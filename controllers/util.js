@@ -1,5 +1,8 @@
 const moment = require("moment");
 
+// A list with all the userID OF admins
+const ADMINS = [51]
+
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
 function timeString() {
 
@@ -20,8 +23,6 @@ function dateToTimeString(date) {
     return dateTime;
 }
 
-// A list with all the userID OF admins
-const ADMINS = [51]
 
 // returns true if userId is an admin
 async function checkAdmin(userId) {
