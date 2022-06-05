@@ -50,7 +50,6 @@ router.get('/all/:page', (req, res) => {
 // renamed from activityID to activityName to be more accurate
 router.get('/:activityName', (req, res) => {
 
-    // console.log(req);
     let activityName = req.params.activityName;
     // let activityId ; Maybe we should store activityID on the html to reduce db queries?
 
@@ -59,15 +58,12 @@ router.get('/:activityName', (req, res) => {
     controller.getExtendedPosts(activityName, async (posts) => {
         
         // check if user can create posts
-        // console.log(posts);
         let authenticated = req.isAuthenticated();
         let participant = false;
         // only check if user is logged in
         if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id, activityName);
 
-        // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
         for(let post of posts){
-            // console.log(util.dateToTimeString(post.creation_time));
             post.creation_time = util.dateToTimeString(post.creation_time);
         }
 
@@ -99,34 +95,22 @@ router.put('/createActivity', (req, res) => {
 
 router.put('/:activityName/createPost', (req, res) => {
 
-
-    // IF USER ISNT LOGGED IN
-    // console.log("req:",req);
     if (req.isUnauthenticated()) {
-        //Send a response status as well?
         res.redirect(`/${req.params.activityName}`);
         return;
     }
-
-
-    // Gather data to insert
-
-    // getting user
+    
     let postCreator = req.session.passport.user.id;
 
     let postName = req.body.name;
     let postBody = req.body.body;
 
-    // get activity id
     let postActivity = req.params.activityName;
     
     let time = util.timeString();
 
-    
-    // console.log(`NOW PUTTING POST ${postName} :${postBody} \n created by:${postCreator} for activity:${postActivity} on:${time}\n`);
-
     controller.createPost(postName, postBody, postActivity, postCreator, time).
-    then(cb => {
+    then(() => {
         res.sendStatus(205);
     })
     .catch((err) => {
@@ -135,35 +119,19 @@ router.put('/:activityName/createPost', (req, res) => {
 
 });
 
-// use get or put?
 router.put('/:activityName/join', (req, res) => {
 
-
-    // IF USER ISNT LOGGED IN
-    // console.log("req:",req);
     if (req.isUnauthenticated()) {
-        //Send a response status as well?
         res.redirect(`/${req.params.activityName}`);
         return;
     }
 
-
-    // Gather data to insert
-
-    // getting user
     let participationUser = req.session.passport.user.id;
-
-    // get activity id
     let participationActivity = req.params.activityName;
-    
     let time = util.timeString();
-
     
-    // console.log(`NOW PUTTING participant ${participationUser} for activity:${participationActivity} on:${time}\n`);
-
     participationController.makeParticipant(participationUser, participationActivity, time).
-    then(cb => {
-        // STATUS 205 signals OK, Now refresh page
+    then(() => {
         res.sendStatus(205);
     })
     .catch((err) => {

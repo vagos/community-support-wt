@@ -94,9 +94,10 @@ CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL DEFAULT '',
     bio TEXT ,
-    join_date DATETIME,
+    join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     hashed_password BINARY(32),
-    salt BINARY(16)
+    salt BINARY(16),
+    UNIQUE(name)
 ) ENGINE=INNODB;
 """
 
@@ -184,8 +185,28 @@ CREATE TABLE IF NOT EXISTS participation (
 ) ENGINE=INNODB;
 """
 
-N = 50
+trigger_post_insert = """
+DELIMITER $$
 
+CREATE TRIGGER post_insert
+AFTER INSERT
+ON post FOR EACH ROW
+BEGIN
+    IF NEW.creator NOT IN (
+    SELECT participation.user FROM participation
+    WHERE participation.activity = NEW.activity
+    ) THEN
+        INSERT INTO participation(user, activity) VALUES(NEW.creator, NEW.activity);
+    END IF;
+END$$
+
+DELIMITER ;
+"""
+
+def create_triggers():
+    print(trigger_post_insert)
+
+N = 10
 def fill_table(table_name, n=10):
     for _ in range(n):
         print(eval(f"create_{table_name}()"))
@@ -234,6 +255,8 @@ def main():
             print(eval(t + "_table"))
         except Exception as e:
             comment(e)
+
+    create_triggers()
 
     for t in tables:
         fill_table(t, N)

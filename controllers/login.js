@@ -45,14 +45,14 @@ module.exports.signupUser =  (name, password, cb) => {
             hashedPassword,
             salt
         ], function(err, result) {
-            if (err) { throw err; }
+            if (err) { cb(err, null); return; }
 
             var user = {
                 id: result.insertId,
                 username: name
             };
 
-            cb(user);
+            cb(null, user);
         });
     });
 }
