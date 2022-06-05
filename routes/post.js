@@ -26,6 +26,13 @@ router.get('/:postId', (req, res) => {
             // console.log(activityName);
             if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
 
+
+            // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
+            for(let comment of comments){
+                // console.log(util.dateToTimeString(comment.creation_time));
+                comment.creation_time = util.dateToTimeString(comment.creation_time);
+            }
+
             res.render('post', {authenticated: authenticated, participant:  participant, activityName:activityName, post:post , comments:comments});
             // console.log(postInfo);
         });

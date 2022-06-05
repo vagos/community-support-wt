@@ -1,25 +1,11 @@
-{{!-- testing info --}}
-{{!-- post id:
-{{post.id}}
-<br> 
-{{activityName}}
---}}
-
-{{!-- Printing if user is authenticated and a participant --}}
-  <span>AUTH: {{authenticated}}</span>
-  <span>participant: {{participant}}</span>
-
-
 <div class="PostContent mt-4">
   <div class="card card-lg">
 
     <div class="card-header"> 
-      {{#if post.name}}
-        <h1 class="text-start">{{post.name}}<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
-      {{/if}}
-      {{#unless post.name}}
-        <h1 class="text-start">NOTITLE!!!!<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
-      {{/unless}}
+        <h1 class="text-start">{{post.name}}</h1>
+            <small class="fs-5 fw-light m-1"> 
+                Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a>
+            </small>
     </div>
 
     <div class="card-body"><p class="post-body">{{post.body}}</p></div>
@@ -28,9 +14,9 @@
     <div class="userComment card-footer">
       {{#if participant}}
         <form class="make-comment">
-          <label for="userComment"> Comment:</label>
-          <textarea class="form-control" name="body" id="userComment"></textarea>
-          <button type="submit" class="btn btn-primary">submit</button>
+          <label for="userComment">Comment:</label>
+          <textarea class="form-control" name="body" id="userComment" required></textarea>
+          <button type="submit" class="btn btn-primary m-2">submit</button>
           <input type="hidden" id="replies_to" name="replies_to" value="NULL">
         </form>
       {{/if}}
@@ -77,11 +63,13 @@
               </a>
             </div>
             <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+            {{!-- Comment-Time --}}
+            <small class="comment-time align-self-center ms-2 fs-6 fw-light">{{this.creation_time}}</small> <small class="align-self-center ms-1 fs-6 fw-light">ago</small>
 
             {{!-- Collapse button --}}
             {{!--ms-auto pushes the rest items into the left  --}}
             {{!-- Pay attention at id --}}
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
+            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/Show</button> 
           </div>
           {{!-- Collapsible part --}}
           {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
@@ -142,6 +130,8 @@
 {{!-- script for enabling markdown syntax for posts/comments --}}
 <script src="/scripts/post-markdown.js"></script>
 
+{{!-- script for displaying time difference --}}
+<script type="module" src="/scripts/post-timeDifferences.js"></script>
 
 {{!-- script for making comments--}}
 {{#if participant}}

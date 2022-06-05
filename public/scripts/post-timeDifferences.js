@@ -1,6 +1,6 @@
 
-const postTimes = document.querySelectorAll(".post-time");
-// console.log(postTimes);
+const commentTimes = document.querySelectorAll(".comment-time");
+// console.log(commentTimes);
 
 // get current time in ms
 const currentTime = new Date().getTime();
@@ -14,13 +14,13 @@ const oneDay = oneHour * 24;
 const oneYear = oneDay * 365;
 
 
-for (let postDateTime of postTimes){
+for (let commentDateTime of commentTimes){
 
-  // get post time in ms
-  let postTime = new Date(postDateTime.innerHTML);
+  // get comment time in ms
+  let commentTime = new Date(commentDateTime.innerHTML);
 
-  let timeDiff = currentTime - postTime;
-  // console.log("time diff=", timeDiff);
+  let timeDiff = currentTime - commentTime;
+//   console.log("time diff=", timeDiff);
 
   // if timeDiff <0 (meaning post is in the future, or client time is old for some reason)
   if (timeDiff<0) {console.log("Time difference is negative. Maybe Client time is behind?"); continue;}
@@ -28,34 +28,34 @@ for (let postDateTime of postTimes){
   // if post was posted less than an minute ago
   if (timeDiff<oneMinute){
     // display how many seconds ago
-    postDateTime.innerHTML = Math.round(timeDiff/oneSecond) + " Seconds"; 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneSecond) + " Seconds"; 
     continue;
   }
 
   // if post was posted less than an hour ago
   if (timeDiff<oneHour){
     // display how many minutes ago
-    postDateTime.innerHTML = Math.round(timeDiff/oneMinute) + " Minutes"; 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneMinute) + " Minutes"; 
     continue;
   }
 
   // if post was posted less than an day ago
   if (timeDiff<oneDay){
     // display how many hours ago
-    postDateTime.innerHTML = Math.round(timeDiff/oneHour)+ " Hours"; 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneHour)+ " Hours"; 
     continue;
   }
 
   // if post was posted less than an year ago
   if (timeDiff<oneYear){
     // display how many days ago
-    postDateTime.innerHTML = Math.round(timeDiff/oneDay) + " Days"; 
+    commentDateTime.innerHTML = Math.round(timeDiff/oneDay) + " Days"; 
     continue;
   }
 
   // if post was posted more than an Year ago
     
   // display how many years ago
-  postDateTime.innerHTML = Math.round(timeDiff/oneYear)+ " Years";
+  commentDateTime.innerHTML = Math.round(timeDiff/oneYear)+ " Years";
 
 }

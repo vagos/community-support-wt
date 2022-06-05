@@ -53,7 +53,7 @@ app.listen(port, async () => {
 
     db.connection.connect((err) => {
         if (err) throw err;
-        db.fill();
+        // db.fill();
     });
     
 

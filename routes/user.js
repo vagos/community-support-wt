@@ -18,6 +18,14 @@ router.get('/:userId', async (req, res) => {
     // only check if user is logged in
         if (authenticated) friend = await profileController.isFriend(req.session.passport.user.id, userId);
 
+    try {
+        if (userId == req.session.passport.user.id) {
+            res.redirect('/profile');
+        }
+    }
+    catch {
+    }
+
     res.render('profile', { title: 'other_profile' , 
         'user' : user, 
         'self': false,
