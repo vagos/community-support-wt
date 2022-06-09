@@ -11,7 +11,7 @@ exports.getPost = (postId, cb) => {
 exports.getComments = (postId, cb) => {
     // Why is the "?" there? its for safety
     db.connection.query(`SELECT * FROM comment WHERE 
-    comment.post = ?`, postId,
+    comment.post = ${postId},
     (err, rows) => {if (err) throw err; cb(rows); });
 };
 
