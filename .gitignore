@@ -5,3 +5,26 @@ codeExamples
 
 db/mysql
 db/sqlite
+
+testing
+
+# jest coverage report
+coverage
+
+docs/report/build
+docs/presentation/build
+
+testing
+
+#All the latex aux files (Remember to make vscode latex create build folder for these files)
+main.aux
+main.bbl
+main.blg
+main.fls
+main.fdb_latexmk
+main.files
+main.log
+main.out
+main.synctex.gz
+main.pdf
+

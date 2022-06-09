@@ -1,14 +1,15 @@
 <h1>Productivity/Community Website</h1>
 
+<hr>
+
 <h3>Popular Activities</h3>
 
 {{#each activities}}
-    <div class="card mb-2" style="width: 80%;">
+    <div class="card mb-2">
         <p class="card-header d-flex justify-content-between
             align-content-end" style="background-color:
             {{randomColor this.name}};">
-          {{!-- <span>Users:{{this.userCount}}</span> --}}
-          <span>Recent Posts:{{this.postCount}}</span>
+          <span>Recent Posts: {{this.postCount}}</span>
         </p>
       <div class="card-body">
           <h5 class="card-title">{{this.name}}</h5>
@@ -20,10 +21,9 @@
 
 <h3>Top Users</h3>
 
-
 {{#each users}}
-  <div class="imageAndName d-inline-flex ">
-    <div class="card mb-2" style="width: 80%;">
+  <div class="imageAndName d-inline-flex">
+    <div class="card mb-2">
         <p class="card-header d-flex justify-content-between
             align-content-end" style="background-color:
             {{randomColor this.name}};">

@@ -12,12 +12,27 @@ exports.getUserObject = async (id) => {
 
     const info = await db.queryOne(`SELECT name, join_date, bio FROM user WHERE id = ?`, id);
 
+    const comments = await db.query(`SELECT DATE_FORMAT(comment.creation_time, "%M %d %Y") as creation_time, post.id as
+    postId, post.name as postName FROM comment JOIN post ON comment.post =
+        post.id 
+        WHERE comment.creator = ? ORDER BY comment.creation_time ASC LIMIT 5`,
+        id);
+    // console.log(comments)
+
+    const posts = await db.query(`
+    SELECT post.id, post.name, DATE_FORMAT(post.creation_time, "%M %d %Y")
+    as creation_time 
+    FROM post 
+     WHERE post.creator = ? ORDER BY post.creation_time ASC LIMIT 5`, id);
+    
     user = {
         'name': info.name,
         'id': id,
         'bio': info.bio,
         'activities': activities,
-        'friends' : friends
+        'friends' : friends,
+        'comments' : comments,
+        'posts' : posts,
     };
 
     return user;
@@ -55,4 +70,33 @@ exports.getUserStats = async (id) => {
         posts: posts_per_month,
         participation: activity_participation,
     };
+};
+
+// This will check if the first user has the second user as a friend
+exports.isFriend = async function (firstUser, secondUser) { 
+
+    let result = await db.queryOne(`SELECT * FROM friendship
+        WHERE user_first = ?
+        AND user_second = ?`,[firstUser,secondUser]);
+
+    // console.log("Result:",result);
+
+    // if first user has the second user as a friend
+    if (result.length !=0) return true;
+    else return false;
+
+};
+
+// Takes first user and adds second user as a friend
+exports.addFriend = async function (firstUser, secondUser) {
+
+    // check constraints 
+
+    // try to insert data if it passes constraint
+
+    let temp = await db.query(`INSERT INTO friendship(user_first, user_second) VALUES(?, ?)`, [firstUser, secondUser]);
+
+
+    // console.log("made friend");
+
 };

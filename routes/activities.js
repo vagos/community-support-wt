@@ -1,5 +1,9 @@
+const { Router } = require('express');
 const express = require('express');
 const router = express.Router();
+const util = require('../controllers/util.js');
+
+// why cant use this instead? (import { timeString } from '../controllers/util.js')
 
 //middleware that is specific to this router
 router.use((req , res, next) => {
@@ -7,59 +11,132 @@ router.use((req , res, next) => {
 });
 
 const controller = require('../controllers/activites');
+const participationController = require('../controllers/participation');
 
-function getRandomColorRGB(s) { // TODO move this
-
-    function rnd(n) {
-    
-    for (let i = 0; i < 10; i++) {
-        n = n ^ ( n * 19 );
-    }
-
-    return Math.abs(n);
-}
-
-    function numberifyString(s) {
-        let r = 0;
-
-        for (let i = 0; i < s.length; i++) {
-           r += s.codePointAt(i); 
-        }
-
-        return r;
-    }
-
-    seed = numberifyString(s);
-    return `rgb(${rnd(seed) % (255)}, ${rnd(seed + 1) % (255)},
-        ${rnd(seed + 2) % (255)})`;
-}
+router.get('/', (req, res) => {
+    res.redirect('/activities/all/0');
+});
 
 //define the home page route for activities
-router.get('/', (req, res) => {
+router.get('/all/:page', (req, res) => {
 
+    // if page isn't a number
+    if (isNaN(req.params.page)){
+        res.send("Page number isn't a number Cowboy");
+        return;
+    }
 
-    controller.getExtendedAll( (activities) => {
+    const page = parseInt(req.params.page);
 
-        activities.forEach( (v) => {
-            v.color = getRandomColorRGB(v.name);
+    controller.getAllPaginated( page, async (activities) => {
+
+        // REMEMBER TO ADD CHECK FOR IF USER IS ADMIN
+        let authenticated = req.isAuthenticated();
+        let admin = false;
+        //check if user is admin
+        if (authenticated) admin = await util.checkAdmin(req.session.passport.user.id);
+
+        res.render('activities', {
+            title:'activities', 
+            authenticated: req.isAuthenticated(), 
+            admin: admin,
+            activities: activities,
+            pages: {next: page + 1, prev: Math.max(page - 1, 0)},
         });
-
-        res.render('activities',{title:'activities', authenticated: req.isAuthenticated(), activities: activities});
     });
 
 });
 
-router.get('/:activityId', (req, res) => {
+// renamed from activityID to activityName to be more accurate
+router.get('/:activityName', (req, res) => {
 
-    activityName = req.params.activityId;
+    let activityName = req.params.activityName;
+    // let activityId ; Maybe we should store activityID on the html to reduce db queries?
 
-    controller.getExtendedPosts(activityName, (posts) => {
+
+    // watch out for the async
+    controller.getExtendedPosts(activityName, async (posts) => {
         
-        res.render('activity', { name : activityName, 
+        // check if user can create posts
+        let authenticated = req.isAuthenticated();
+        let participant = false;
+        // only check if user is logged in
+        if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id, activityName);
+
+        for(let post of posts){
+            post.creation_time = util.dateToTimeString(post.creation_time);
+        }
+
+        res.render('activity', { ActivityName : activityName,
             posts: posts,
-            authenticated: req.isAuthenticated(),
+            authenticated: authenticated,
+            participant: participant
         });
     });
+    
 });
 
+// Putting requests
+
+router.put('/createActivity', (req, res) => {
+
+    // create activity with values given in request
+
+    // This is weird because it is a async function (https://www.valentinog.com/blog/throw-async/)
+    controller.createActivity(req.body.name, req.body.description)
+        .then(() => {
+            res.sendStatus(205);})
+        .catch((err) => {
+            console.error(err);
+            res.sendStatus(403);});
+
+
+});
+
+router.put('/:activityName/createPost', (req, res) => {
+
+    if (req.isUnauthenticated()) {
+        res.redirect(`/${req.params.activityName}`);
+        return;
+    }
+    
+    let postCreator = req.session.passport.user.id;
+
+    let postName = req.body.name;
+    let postBody = req.body.body;
+
+    let postActivity = req.params.activityName;
+    
+    let time = util.timeString();
+
+    controller.createPost(postName, postBody, postActivity, postCreator, time).
+    then(() => {
+        res.sendStatus(205);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(403);});
+
+});
+
+router.put('/:activityName/join', (req, res) => {
+
+    if (req.isUnauthenticated()) {
+        res.redirect(`/${req.params.activityName}`);
+        return;
+    }
+
+    let participationUser = req.session.passport.user.id;
+    let participationActivity = req.params.activityName;
+    let time = util.timeString();
+    
+    participationController.makeParticipant(participationUser, participationActivity, time).
+    then(() => {
+        res.sendStatus(205);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(403);});
+
+});
 module.exports = router;

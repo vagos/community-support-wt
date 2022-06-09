@@ -48,12 +48,15 @@ app.set('views', './views')
 
 app.use('/', index_router);
 
-server = app.listen(port, () => {
+server = app.listen(port, async () => {
     console.log(`Example app listening on port ${port}`);
 
     db.connection.connect((err) => {
         if (err) throw err;
+        // db.fill();
     });
+    
+
 });
 
 module.exports = { 

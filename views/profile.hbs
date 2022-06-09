@@ -2,33 +2,41 @@
 
 <a href="/user/{{user.id}}" id="profileLink" class="invisible">{{user.id}}</a>
 
-<div class="PageContent">
-    <div class="container-fluid">
+    <div class="container-fluid" id="profileCard">
         <div class="card card-lg">
+            <p class="card-header d-flex justify-content-between
+                align-content-end" style="background-color:
+                {{randomColor user.name}};">
+            </p>
             <div class="row">
-                <!--                <img src="/assets/img/logo.png" class="rounded col-sm-3"> -->
-                <canvas class="col-sm-4 profile-picture" id="profilePictureCanvas"></canvas>
+                <canvas class="col-4 mx-auto text-center profile-picture" style="height: 10%" id="profilePictureCanvas"></canvas>
                 <div class="col-sm-8">
                     <h2 class="col-sm" id="userName" >{{user.name}}</h2>
                     <div class="input-group">
-                      <div class="input-group-prepend" id="button-edit-bio">
-                        <p style="height: 100%;" class="col-sm btn btn-secondary">Bio</p>
-                      </div>
-                      <span class="form-control" aria-label="Bio" id="text-bio">{{user.bio}}</span>
-                      <textarea class="form-control invisible" aria-label="Bio" id="text-area-bio">{{user.bio}}</textarea>
+                      <span class="form-control m-2" id="text-bio">{{user.bio}}</span>
+                      <textarea class="form-control invisible m-2" id="text-area-bio">{{user.bio}}</textarea>
                     </div>
                 </div>
             </div>
             {{#if user.join_date}}
                 <p class="small text-muted">Joined on {{user.join_date}}</p>
             {{/if}}
-            {{!-- This shouldnt be allowed --}}
-            {{#unless user.join_date}}
-                <p class="small text-muted">NO JOIN DATE!</p>
-            {{/unless}}
             {{#if self}}
-                <a class ="btn btn-danger" href="/login/logout">Logout</a>
+                <div class="col-sm m-2">
+                    <a class ="btn btn-danger" href="/login/logout">Logout</a>
+                </div>
             {{/if}}
+            {{#unless self}}
+                {{#if authenticated}}
+                    {{#unless friend}}
+                    <div class="col-sm m-2">
+                        <a class ="make-friend-btn btn btn-success" href="/user/{{user.id}}/addFriend">Add user as friend</a>
+                    </div>
+                    {{!-- Adding function to button --}}
+                    <script type="module" src="/scripts/add-friend-btn.js"></script>
+                    {{/unless}}
+                {{/if}}
+            {{/unless}}
         </div>
     </div>
 
@@ -40,14 +48,14 @@
                 <h1>Activities</h1> 
             </div>
             <div class="userActivities accordion" id="#userActivitiesAccordion">
-                <div class="activityFact accordion-item">
+                <div class="activityFact accordion-item m-2">
                     <div class="accordion-header" id="headingOne"> 
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#allAct">All Activities</button>
                     </div>
                     <div id="allAct" class="accordion-collapse collapse" data-bs-parent="#userActivitiesAccordion">
                 {{#each user.activities}}
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.name}}</h5>
+                    <div class="card-body">
+                            <h5 class="card-title rounded" style="background-color: {{randomColor this.name}}">{{this.name}}</h5>
                             <p class="card-text">{{this.description}}</p>
                             <a href="/activities/{{this.name}}" class="btn btn-primary">view posts</a>
                         </div>
@@ -68,61 +76,50 @@
         <div class="container-fluid">
             <div class="ActivitiesHeader d-flex">
                 <h1>Summary</h1> 
-                <div class="mx-1 badge bg-secondary align-self-center" style="font-size: 1em;">60</div>
-                <div class="p-2" style="margin-left: auto;">Total points:1234</div>
             </div>
 
             <div class="ActivitiesFacts accordion" id="myaccordion">
 
-                <div class="ActivityFact accordion-item">
+                <div class="ActivityFact accordion-item m-2">
                     <div class="accordion-header" id="headingOne"> 
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LongestAct">Longest activity</button>
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LongestAct">Posts</button>
                     </div>
                     <div id="LongestAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
-                        <div class="card-body">
-                            <h5 class="card-title">Activity name</h5>
-                            <p class="card-text">ActivityDescription</p>
-                            <a href="" class="btn btn-primary">view posts</a>
-                        </div>
+                        {{#each user.posts}}
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.name}}</h5>
+                                <p class="card-text fw-light">Posted on: {{this.creation_time}}</p>
+                                <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
+                            </div>
+                        {{/each}}
                     </div>
                 </div>
 
-                <div class="ActivityFact accordion-item">
+                <div class="ActivityFact accordion-item m-2">
                     <div class="accordion-header" id="headingTwo"> 
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LatestAct">Latest activity</button>
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#LatestAct">Comments</button>
                     </div>
+
                     <div id="LatestAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
+                    {{#each user.comments}}
                         <div class="card-body">
-                            <h5 class="card-title">Activity name</h5>
-                            <p class="card-text">ActivityDescription</p>
-                            <a href="" class="btn btn-primary">view posts</a>
+                            <h5 class="card-title">{{this.postName}}</h5>
+                            <p class="card-text fw-light">Commented on: {{this.creation_time}}</p>
+                            <a href="/posts/{{this.postId}}" class="btn btn-primary">view post</a>
                         </div>
-                    </div>
-                </div>
-
-
-                <div class="ActivityFact accordion-item">
-                    <div class="accordion-header" id="headingThree"> 
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#MostAct">Most active</button>
-                    </div>
-                    <div id="MostAct" class="accordion-collapse collapse" data-bs-parent="#myaccordion">
-                        <div class="card-body">
-                            <h5 class="card-title">Activity name</h5>
-                            <p class="card-text">ActivityDescription</p>
-                            <a href="" class="btn btn-primary">view posts</a>
-                        </div>
+                    {{/each}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row-sm-8">
-      <canvas id="barChart"></canvas>
+    <div class="row-sm-8 invisible" id="barChartDiv">
+      <canvas id="barChart" class=profileGraph></canvas>
     </div>
     
-    <div class="row-sm-8">
-      <canvas id="pieChart"></canvas>
+    <div class="row-sm-8 invisible" id="pieChartDiv">
+      <canvas id="pieChart" class="profileGraph"></canvas>
     </div>
 
     <hr> 
@@ -137,12 +134,20 @@
             <div class="friendsList">
                 <div class="list-group">
                     {{#each user.friends}}
-                        <a href="/user/{{this.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 h-100">
-                            <img src="/assets/img/logo.png" alt="" class="FriendPicture rounded">
-                            <h5 class="m-2 align-self-center">{{this.name}}</h5>
+                      <div class="imageAndName d-inline-flex ">
+                        <div class="card mb-2" style="width: 80% max-height:100px;">
+                            <p class="card-header d-flex justify-content-between
+                                align-content-end" style="background-color:
+                                {{randomColor this.name}};">
+                            </p>
+                            <div class="align-self-start me-1" style="width:50%; height:50%;">
+                              <a href="/user/{{this.id}}">
+                                <canvas class="mw-100 mh-100 prof-image border rounded"></canvas>
+                              </a>
+                            </div>
+                            <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.id}}">{{this.name}}</a>
                         </div>
-                    </a>
+                      </div>
                     {{else}}
                         No friends!
                     {{/each}}
@@ -150,13 +155,13 @@
             </div>
         </div>
     </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="/scripts/util.js"></script>
 <script src="/scripts/profile.js"></script>
+<script src="/scripts/post-profile-pics.js"></script>
 
 {{#if self}}
     <script src="/scripts/profile-edit.js"></script>
