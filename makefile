@@ -7,5 +7,5 @@ run:
 	find . -name '*.js' | entr -r node index.js
 
 test:
-	./$(BIN)/jshint ./ --exclude node_modules || true
-	./$(BIN)/jest --forceExit || true
+	./$(BIN)/jshint ./ --exclude node_modules 
+	./$(BIN)/jest --forceExit
