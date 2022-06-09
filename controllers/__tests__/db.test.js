@@ -1,8 +1,7 @@
 const db = require('../db');
 
-afterAll(() => {
-    db.connection.end();
-    console.log("ASDASD")
+afterAll( async () => {
+   db.connection.end();
 });
 
 test('db connection and simple query', async () => {

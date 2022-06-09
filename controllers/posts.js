@@ -2,8 +2,9 @@ const db = require('./db');
 
 // returns post for given id
 exports.getPost = (postId, cb) => {
-    db.connection.query(`SELECT post.*, user.name as creatorName FROM post JOIN (SELECT id,name FROM user) as user ON user.id=post.creator WHERE 
-    post.id = ?`, postId,
+    db.connection.query(`SELECT post.*, user.name as creatorName FROM post JOIN
+    (SELECT id,name FROM user) as user ON user.id=post.creator WHERE 
+    post.id = ?`, [postId],
     (err, rows) => { if (err) throw err; cb(rows[0]); });
 };
 
@@ -11,7 +12,7 @@ exports.getPost = (postId, cb) => {
 exports.getComments = (postId, cb) => {
     // Why is the "?" there? its for safety
     db.connection.query(`SELECT * FROM comment WHERE 
-    comment.post = ${postId},
+    comment.post = ?`, postId,
     (err, rows) => {if (err) throw err; cb(rows); });
 };
 
