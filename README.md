@@ -2,6 +2,8 @@
 
 This is an implementation of a simple forum website.
 
+![The forum home page.](/docs/media/home.png)
+
 ## Features
 
 * User Login/Register
