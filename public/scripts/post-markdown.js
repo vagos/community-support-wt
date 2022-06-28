@@ -1,12 +1,12 @@
 const comments = document.querySelectorAll('.comment-body');
 
-for (comment of comments) {
+for (var comment of comments) {
     comment.innerHTML = marked.parse(comment.innerHTML);
 }
 
 const posts = document.querySelectorAll('.post-body');
 
-for (post of posts) {
+for (var post of posts) {
 
     post.innerHTML = marked.parse(post.innerHTML);
 }
