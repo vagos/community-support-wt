@@ -1,58 +1,61 @@
-<div class="PageContent">
+  {{!-- Printing if user is authenticated and a admin --}}
+  {{!-- <span>AUTH: {{authenticated}}</span>
+  <span>admin: {{admin}}</span> --}}
 
-  
+  {{#if admin}}
+    <form class="make-activity container border rounded px-3 my-2">
+      {{!-- REMINDER use name for correct formdata creation --}}
+      {{!-- id is not used for the dataform --}}
+      <div class="row">
+        <p class="mt-2 fs-3">Create Activity</p>
+        <hr>
 
-  <form class="make-activity container border rounded px-3 my-2">
-    {{!-- REMINDER use name for correct formdata creation --}}
-    {{!-- id is not used for the dataform --}}
-    <div class="row">
-      <p class="mt-2 fs-3">Make activity section</p>
-      <hr>
+        <div class="col input-group">
+          <span class="input-group-text" id="title">Title:</span>
+          <input class="form-control" type="text" id="activity-title" name="name" placeholder="Name" required>
+        </div>
 
-      <div class="col input-group">
-        <span class="input-group-text" id="title">Title:</span>
-        <input class="form-control" type="text" id="activity-title" name="name" placeholder="TEST ACTIVITY" required>
+        <div class="col input-group">
+          <span class="input-group-text" id="description">Description:</span>
+          <input class="form-control" type="text" id="activity-description" name="description" placeholder="Description" >
+        </div>
       </div>
-
-      <div class="col input-group">
-        <span class="input-group-text" id="description">Description:</span>
-        <input class="form-control" type="text" id="activity-description" name="description" placeholder="TEST DESCRIPTION" >
+      
+      <div class="buttons row p-3">
+        {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
+        <input class="btn btn-primary col-3 ms-auto" type="submit" value="Make Activity">
       </div>
-    </div>
-    
-    <div class="buttons row p-3">
-      {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
-      <input class="btn btn-primary col-3 ms-auto" type="submit">
-    </div>
-    
-
-  </form>
+    </form>
+  {{/if}}
     
     
 
     {{!-- Maybe change clas names in cards later? --}}
-    <div class="accordion" id="accordionActivity">
         {{#each activities}}
-            <div class="card mb-2" style="width: 80%;">
+            <div class="card mb-2">
               {{!-- <span>ACTIVITY ID{{this.id}}</span> --}}
                 <p class="card-header d-flex justify-content-between
                     align-content-end" style="background-color:
                     {{randomColor this.name}};">
                   {{!-- REMEMBER TO QUERRY AS INPUT --}}
-                  <span class="activity-users">Users:{{this.userCount}}</span> 
-                  <span class="activity-posts">Total Posts:{{this.postCount}}</span>
+                  <span class="activity-users">Users: {{this.userCount}}</span> 
+                  <span class="activity-posts">Total Posts: {{this.postCount}}</span>
                 </p>
               <div class="card-body">
-                <h5 class="card-title">{{this.name}}</h5>
+                <h3 class="card-title">{{this.name}}</h3>
                 <p class="card-text">{{this.description}}</p>
                 <a href="/activities/{{this.name}}" class="btn btn-primary" style="background-color: {{randomColor this.name}}">view posts</a>
               </div>
             </div>
         {{/each}}
-    </div>
 
-</div>
+    <div class="d-flex justify-content-center">
+        <a class="col-3 m-3 btn btn-primary" href="/activities/all/{{pages.prev}}">Previous</a>
+        <a class="col-3 m-3 btn btn-primary" href="/activities/all/{{pages.next}}">Next</a>
+    </div>
 
 {{!-- this type="module" allows the scripts using it to import functions from other scripts (https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)  --}}
 {{!-- impoting in browser example (https://plnkr.co/edit/ln6J7wfdsJPUNzaEi3u6?preview) --}}
-<script type="module" src="/scripts/activities-put-activity.js"></script>
+{{#if admin}}
+  <script type="module" src="/scripts/activities-put-activity.js"></script>
+{{/if}}

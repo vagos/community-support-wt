@@ -8,6 +8,7 @@ router.use((req , res, next) => {
 });
 
 const controller = require('../controllers/posts');
+const participationController = require('../controllers/participation');
 
 router.get('/:postId', (req, res) => {
 
@@ -16,12 +17,23 @@ router.get('/:postId', (req, res) => {
         // retrieve comments
         // console.log(`getting comments for post ${post.id}`);
 
-        controller.getExtendedComments(post.id,(comments) => {
-            // for (comment of comments){
-            //     console.log(comment);
-            // }
+        controller.getExtendedComments(post.id, async (comments) => {
+            
+            let authenticated = req.isAuthenticated();
+            let participant = false;
+            // only check if user is logged in
+            let activityName = await controller.getActivityName(req.params.postId);
+            // console.log(activityName);
+            if (authenticated) participant = await participationController.isParticipant(req.session.passport.user.id,activityName);
 
-            res.render('post', {authenticated: req.isAuthenticated(), post:post , comments:comments});
+
+            // convert time string to correct format for display (JS Has a bad date time system) //!Make this into a function later
+            for(let comment of comments){
+                // console.log(util.dateToTimeString(comment.creation_time));
+                comment.creation_time = util.dateToTimeString(comment.creation_time);
+            }
+
+            res.render('post', {authenticated: authenticated, participant:  participant, activityName:activityName, post:post , comments:comments});
             // console.log(postInfo);
         });
     });
@@ -57,8 +69,7 @@ router.put('/:postId/createComment', (req, res) => {
 
     controller.createComment(commentCreator, commentPost, commentBody, commentReply, time).
     then(cb => {
-        res.sendStatus(200);
-        // Maybe refresh aswell?
+        res.sendStatus(205);
     })
     .catch((err) => {
         console.error(err);

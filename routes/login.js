@@ -6,8 +6,18 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.render('login', { title: 'login', errors: req.session.flash.error });
-    req.session.flash.error = []
+
+    var errors = []
+
+    if (req.session.flash) {
+        errors = req.session.flash.error;
+    }
+
+    res.render('login', { title: 'login', errors: errors });
+
+    if (req.session.flash) {
+        req.session.flash.error = [];
+    }
 });
 
 router.get('/signup', (req, res) => {
@@ -20,8 +30,19 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/signup', function(req, res, next) { 
+
+    if (!req.body.username.length) {
+        res.redirect('signup');
+        return;
+    }
     
-    controller.signupUser(req.body.username, req.body.password, (user) => {
+    controller.signupUser(req.body.username, req.body.password, (err, user) => {
+
+        if (err) {
+            res.redirect('signup');
+            return;
+        }
+
         req.login(user, (err) => {
             if (err) { throw (err); }
             res.redirect('/profile');

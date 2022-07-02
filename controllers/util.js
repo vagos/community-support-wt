@@ -1,38 +1,49 @@
+const moment = require("moment");
+
+// A list with all the userID OF admins
+const ADMINS = [51]
 
 // returns the current time in this string format YYYY-MM-DD HH:MM:SS
-exports.timeString =  function timeString() {
+function timeString() {
 
+    // Will convert to correct format (be careful for HH as hh is 12h and HH is 24h)
+    const dateTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
-    const currentDate = new Date();
-
-    let timeString = currentDate.getFullYear() + "-"
-    + (currentDate.getMonth()+1)  + "-"
-    + currentDate.getDate() + " " 
-    + currentDate.getHours() + ":"  
-    + currentDate.getMinutes() + ":" 
-    + currentDate.getSeconds();
-    
-
-    return timeString;
-
-
+    return dateTime;
 }
+
+// returns this string format YYYY-MM-DD HH:MM:SS from a date obj
+function dateToTimeString(date) {
+
+    // Will convert to correct format
+    // console.log(`date ${date}`);
+    const dateTime = moment(date).format("YYYY-MM-DD HH:mm:ss");
+    // console.log(`datetime ${dateTime}`);
+
+    return dateTime;
+}
+
+
+// returns true if userId is an admin
+async function checkAdmin(userId) {
+
+    if (ADMINS.includes(userId)) return true;
+
+    return false;
+}
+
 function rnd(n) {
-    
     for (let i = 0; i < 10; i++) {
         n = n ^ ( n * 19 );
     }
-
     return Math.abs(n);
 }
 
 function numberifyString(s) {
     let r = 0;
-
     for (let i = 0; i < s.length; i++) {
        r += s.codePointAt(i); 
     }
-
     return r;
 }
 
@@ -60,13 +71,16 @@ function getRandomColorRGB(s) {
     const seed = numberifyString(s);
     
     var r = rnd(seed)     % 100 + 70; 
-    var g = rnd(seed + 1) % 100 + 70;
-    var b = rnd(seed + 2) % 100 + 70;
+    var g = rnd(seed + 1) % 100 + 80;
+    var b = rnd(seed + 2) % 100 + 90;
 
     return `rgb(${r}, ${g}, ${b})`;
 
 }
 
 module.exports = {
-    getRandomColorRGB: getRandomColorRGB
+    getRandomColorRGB: getRandomColorRGB,
+    timeString: timeString,
+    dateToTimeString: dateToTimeString,
+    checkAdmin: checkAdmin
 };

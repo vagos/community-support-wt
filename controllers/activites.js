@@ -1,4 +1,5 @@
 const db = require('./db');
+const util = require('./util');
 
 exports.getAll = ( cb ) => {
     
@@ -12,26 +13,55 @@ exports.getPosts = (activityName, cb) => {
     (err, rows) => { if (err) throw err; cb(rows) });
 };
 
-
 // Returns extended activities (activity + total users + total posts) for all activities
 exports.getExtendedAll = ( cb ) => {
 
-    // console.log("getting extended post info")
-
-
     db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
-    FROM activity JOIN (select users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
-        ON activity.id = info.id`,
-    (err, rows) => { if (err) throw err; cb(rows); });
+    FROM activity JOIN (SELECT users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
+        ON activity.id = info.id `,
+    (err, rows) => { 
+        if (err) throw err; 
+
+        rows.forEach( (v) => {
+            v.color = util.getRandomColorRGB(v.name);
+        });
+
+        cb(rows); 
+
+    });
 
 };
 
+exports.getAllPaginated = ( page, cb ) => {
+
+    const postsPerPage = 5;
+
+    db.connection.query(`SELECT activity.* ,info.userCount, info.postCount 
+    FROM activity JOIN (SELECT users.id ,users.userCount, posts.postCount FROM (SELECT activity.id , COUNT(participation.activity) AS userCount FROM activity LEFT JOIN participation ON participation.activity = activity.id GROUP BY activity.id) AS users JOIN (SELECT activity.id , COUNT(post.activity) AS postCount FROM activity LEFT JOIN post ON post.activity = activity.id GROUP BY activity.id) AS posts ON users.id = posts.id) AS info 
+        ON activity.id = info.id
+        LIMIT ${page * postsPerPage}, ${postsPerPage}`,
+    (err, rows) => { 
+        if (err) throw err; 
+
+        rows.forEach( (v) => {
+            v.color = util.getRandomColorRGB(v.name);
+        });
+
+        cb(rows); 
+    });
+};
+
+
+// Returns extended info on posts + activityId
 exports.getExtendedPosts = (activityName, cb) => {
 
-    // maybe later return creatorname and say time of posting?
-    db.connection.query(`SELECT post.id, post.name , post.body, post.commentCount FROM (SELECT post.*, count(comment.post) AS commentCount FROM post LEFT JOIN comment on post.id = comment.post GROUP BY post.id) as post JOIN activity ON activity.id = 
-    post.activity WHERE activity.name = ?`, activityName,
-    (err, rows) => { if (err) throw err; cb(rows) });
+    db.connection.query(`SELECT post.id, post.name , post.body, post.creation_time, post.commentCount, post.creator, post.creator_name
+        FROM (SELECT post.*, count(comment.post) AS commentCount 
+            FROM (SELECT post.*,user.name AS creator_name FROM post JOIN user ON post.creator=user.id) AS post 
+            LEFT JOIN comment ON post.id= comment.post group by post.id) AS post
+        JOIN activity ON activity.id = post.activity
+        WHERE activity.name = ? `, activityName,
+        (err, rows) => { if (err) throw err; cb(rows) });
 };
 
 // do we need async?
@@ -43,35 +73,16 @@ exports.createActivity = async (activityName, description, cb) => {
     let uniqueName = false;
     const result =  await db.query(`SELECT * FROM activity WHERE activity.name = ?`, activityName);
 
-    // console.log("result",result);
-
-
     // check if there are any activities with same name
-    if (result.length==0){
-        uniqueName = true;
-    }
-    else{
-        uniqueName = false;
-    } 
-    // console.log("check is ",uniqueName);
+    uniqueName = (result.length == 0);
 
     // Try to insert data if it passes constraint
     if (uniqueName){
         let temp = await db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-        // console.log(temp);
     }
     else{
-        // console.log("NAME NOT UNIQUE");
-        throw Error("I AM DISAPPOINTED IN YOU MY CHILD");
+        throw Error("Not unique activity name.");
     }
-
-
-
-    
-    // console.log(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-
-    // db.query(`INSERT INTO activity(name,description) VALUES(?, ?)`, [activityName, description]);
-
 };
 
 
@@ -79,7 +90,7 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
 
     // get id for activity
 
-    const Activity = await db.queryOne(`SELECT activity.id from activity where activity.name = ?`, postActivity);
+    const Activity = await db.queryOne(`SELECT activity.id FROM activity where activity.name = ?`, postActivity);
 
 
     // dont forget the .id because it is a row data packet
@@ -99,7 +110,7 @@ exports.createPost = async (postName, postBody, postActivity, postCreator, postC
 exports.getPopularActivities = async () => {
 
     return db.query(`
-SELECT activity.id, activity.name, COUNT(activity.id) as postCount
+SELECT activity.id, activity.name, COUNT(activity.id) AS postCount
 FROM activity 
 JOIN post ON post.activity = activity.id
 -- WHERE post.creation_time >= DATE(NOW() - INTERVAL 1 MONTH)

@@ -1,36 +1,33 @@
-{{!-- testing info --}}
-{{!-- post id:
-{{post.id}}
-<br>
-comments:
-{{#each comments}}
-  {{this}}
-  <br>
-{{/each}} --}}
-
-
 <div class="PostContent mt-4">
   <div class="card card-lg">
 
     <div class="card-header"> 
-      {{#if post.name}}
-        <h1 class="text-start">{{post.name}}<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
-      {{/if}}
-      {{#unless post.name}}
-        <h1 class="text-start">NOTITLE!!!!<small class="fs-5 fw-light"> Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a></small> </h1>
-      {{/unless}}
+        <h1 class="text-start">{{post.name}}</h1>
+            <small class="fs-5 fw-light m-1"> 
+                Posted by: <a class="text-decoration-none text-body" href="/user/{{post.creator}}">{{post.creatorName}}</a>
+            </small>
     </div>
 
-    <div class="card-body"> <p class="text-center">{{post.body}}</p></div>
+    <div class="card-body"><p class="post-body">{{post.body}}</p></div>
   
     {{!-- Comment are for logged in user --}}
     <div class="userComment card-footer">
-      <form class="make-comment">
-        <label for="userComment"> Comment:</label>
-        <textarea class="form-control" name="body" id="userComment"></textarea>
-        <button type="submit" class="btn btn-primary">submit</button>
-        <input type="hidden" id="replies_to" name="replies_to" value="NULL">
-      </form>
+      {{#if participant}}
+        <form class="make-comment">
+          <label for="userComment">Comment:</label>
+          <textarea class="form-control" name="body" id="userComment" required></textarea>
+          <button type="submit" class="btn btn-primary m-2">submit</button>
+          <input type="hidden" id="replies_to" name="replies_to" value="NULL">
+        </form>
+      {{/if}}
+      {{#unless participant}}
+        {{#if authenticated}}
+          <span>You must join activity to comment <a href="/activities/{{activityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">JOIN Activity</a></span>
+        {{/if}}
+        {{#unless authenticated}}
+          <span>You must sign in to comment <a href="/login" class="sign-in-button btn btn-success w-100 m-2">Sign in here</a></span>
+        {{/unless}}
+      {{/unless}}
     </div>
 
   </div>
@@ -62,24 +59,23 @@ comments:
             {{!-- REMINDER CHANGE CANVAS SIZE --}}
             <div class="align-self-start me-1" style="width:8%; height:10%;">
               <a href="/user/{{this.creator}}">
-                <canvas class="mw-100 mh-100 prof-image border rounded">image</canvas>
+                <canvas class="img-fluid prof-image border rounded">image</canvas>
               </a>
             </div>
             <a class="user-name align-self-center text-decoration-none text-body" href="/user/{{this.creator}}">{{this.creatorName}}</a>
+            {{!-- Comment-Time --}}
+            <small class="comment-time align-self-center ms-2 fs-6 fw-light">{{this.creation_time}}</small> <small class="align-self-center ms-1 fs-6 fw-light">ago</small>
 
             {{!-- Collapse button --}}
             {{!--ms-auto pushes the rest items into the left  --}}
             {{!-- Pay attention at id --}}
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/show</button> 
+            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#comment-{{this.id}}-body"  >Hide/Show</button> 
           </div>
           {{!-- Collapsible part --}}
           {{!-- Watch out if a comment has character without empty space it will mess us the website width, otherwise it is fine--}}
           <div class="comment-collapsible collapse show" id="comment-{{this.id}}-body">
             <div class="bodyAndButtons d-flex flex-column ps-4">
-              <div class="comment-body flex-grow-1 p-2 ">
-                {{this.body}}
-                {{!-- random comment ,thas asfh asdfjh sdgkhsd ksjdhhf kksdhf kisudhf iusdfuh sdeiufhy kiusdhfd iushy sweiuh sidfiuhiusd fiuhsiudf iuhiuhsdf kljh sdf iuhsd fsdifuhiusd fioushdgisdguh --}}
-              </div>
+              <div class="comment-body flex-grow-1 p-2">{{this.body}}</div>
               <div class="comment-buttons d-inline-flex align-items-stretch">
                 <button type="button" class="" data-bs-toggle="collapse" data-bs-target="#reply-{{this.id}}">Reply</button> 
               </div>
@@ -87,12 +83,22 @@ comments:
             {{!-- Reply Section --}}
             {{!-- maybe another way to do it? --}}
             <div class="reply container mt-2 collapse" id="reply-{{this.id}}">
-              <form class="make-reply">
-                <label for="userReply"> Reply:</label>
-                <textarea class="form-control" name="body" id="userReply"></textarea>
-                <input type="hidden" id="replies_to" name="replies_to" value="{{this.id}}">
-                <button type="submit" class="btn btn-primary">submit</button>
-              </form>
+              {{#if ../participant}}
+                <form class="make-reply">
+                  <label for="userReply"> Reply:</label>
+                  <textarea class="form-control" name="body" id="userReply"></textarea>
+                  <input type="hidden" id="replies_to" name="replies_to" value="{{this.id}}">
+                  <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+              {{/if}}
+              {{#unless ../participant}}
+                {{#if ../authenticated}}
+                  <span class="text-center">You must join activity to reply <a href="/activities/{{../activityName}}/join" class="join-activity-btn btn btn-success w-auto m-2">JOIN Activity</a></span>
+                {{/if}}
+                {{#unless ../authenticated}}
+                  <span>You must sign in to reply <a href="/login" class="sign-in-button btn btn-success w-auto m-2">Sign in here</a></span>
+                {{/unless}}
+              {{/unless}}
             </div>
 
             <div class="reply-comments ms-4 mt-1 " id="reply-comments-{{this.id}}">
@@ -111,6 +117,8 @@ comments:
   {{/unless}}
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script src="/scripts/util.js"></script>
 
 {{!-- script for drawing profile pictures --}}
@@ -119,5 +127,23 @@ comments:
 {{!-- script for putting replies under their respective comment --}}
 <script src="/scripts/post-comments-order.js"></script>
 
+{{!-- script for enabling markdown syntax for posts/comments --}}
+<script src="/scripts/post-markdown.js"></script>
+
+{{!-- script for displaying time difference --}}
+<script type="module" src="/scripts/post-timeDifferences.js"></script>
+
 {{!-- script for making comments--}}
-<script type="module" src="/scripts/post-put-comment.js"></script>
+{{#if participant}}
+  <script type="module" src="/scripts/post-put-comment.js"></script>
+{{/if}}
+
+{{#unless participant}}
+  {{#if authenticated}}
+    {{!-- Adding function to join activity buttons --}}
+    <script type="module" src="/scripts/join-activity-btn.js"></script>
+  {{/if}}
+  {{#unless authenticated}}
+    {{!-- Adding function to sign in buttons --}}
+  {{/unless}}
+{{/unless}}

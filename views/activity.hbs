@@ -1,75 +1,82 @@
-<div class="PageContent">
+<h1 class="activity-title">{{ActivityName}}</h1>
+<hr>
+  {{!-- If user is a participant --}}
+  {{#if participant}}
+    <form class="make-post container border rounded px-3 my-2">
+      {{!-- REMINDER use name for correct formdata creation --}}
+      {{!-- id is not used for the dataform --}}
+      <div class="row">
+        <p class="mt-2 fs-3">Create New Post</p>
+        <hr>
 
-  <h1 class="activity-title">{{name}}</h1>
+        <div class="col input-group">
+          <span class="input-group-text" id="title">Title:</span>
+          <input class="form-control" type="text" id="post-title" name="name" placeholder="Title" required>
+        </div>
 
-  <form class="make-post container border rounded px-3 my-2">
-    {{!-- REMINDER use name for correct formdata creation --}}
-    {{!-- id is not used for the dataform --}}
-    <div class="row">
-      <p class="mt-2 fs-3">Make post section</p>
-      <hr>
-
-      <div class="col input-group">
-        <span class="input-group-text" id="title">Title:</span>
-        <input class="form-control" type="text" id="post-title" name="name" placeholder="TEST POST TITLE" required>
+        <div class="col input-group">
+          <span class="input-group-text" id="body">Body:</span>
+          <textarea class="form-control" type="text" id="post-body" name="body" placeholder="Body" ></textarea>
+        </div>
       </div>
-
-      <div class="col input-group">
-        <span class="input-group-text" id="body">Body:</span>
-        <input class="form-control" type="text" id="post-body" name="body" placeholder="TEST BODY" >
+      
+      <div class="buttons row p-3">
+        {{!-- ms-auto put margin = left margin needed for item to go to the right --}}
+        <input class="btn btn-primary col-3 ms-auto" type="submit" value="Make Post">
       </div>
-    </div>
+      
 
-    {{!-- this is temporary for now --}}
-    {{!-- <div class="row d-hidden hidden-info">
-        <input class="form-control" type="text" id="post-creator" name="creator" value="21" required>
-        <input class="form-control" type="text" id="post-activity" name="activity" value="{{name}}" required>
-      </div> --}}
-    
-    <div class="buttons row p-3">
-      {{!-- ms-auto put margin = left margin needed for item to go tot the right --}}
-      <input class="btn btn-primary col-3 ms-auto" type="submit">
-    </div>
-    
+    </form>
+  {{/if}}
 
-  </form>
-    
+  {{!-- if user isnt a participant --}}
+  {{#unless participant}}
+    {{!-- but the user is logged in --}}
+    {{#if authenticated}}
+      <a href="/activities/{{ActivityName}}/join" class="join-activity-btn btn btn-success w-100 m-2">Join Activity</a>
 
-  <div>
-    {{#if posts}}
+      {{!-- Adding function to button --}}
+      <script type="module" src="/scripts/join-activity-btn.js"></script>
+    {{/if}}
+  {{/unless}}
+
+  <div class="posts">
       {{#each posts}}
           <div class="card">
             <div class="card-header">
-              {{#if this.name}}
-                <h5 class="post-title">{{this.name}}</h5>
-              {{/if}}
-              {{!-- This shouldn't be allowed --}}
-              {{#unless this.name}}
-                <h5 class="post-title">NO POST TITLE!</h5>
-              {{/unless}}
+                <h5 class="post-title fs-4">{{this.name}}</h5> <small class="post-creator fs-6 fw-light"><a class="text-decoration-none text-body" href="/user/{{this.creator}}">Posted by: {{this.creator_name}}</a></small> 
+                <small class="post-time fs-6 fw-light">{{this.creation_time}}</small> <small class="fs-6 fw-light">ago</small>
             </div>
             <div class="card-body">
-                <p class="post-text">{{this.body}}</p>
+                <p class="post-text post-body">{{this.body}}</p>
 
                 {{!-- maybe put this in card footer? --}}
                 <div class="enter-post d-flex justify-content-between">
-                  <span class="p-2">Comments:{{this.commentCount}}</span>
+                  <span class="p-2">Comments: {{this.commentCount}}</span>
                   <a href="/posts/{{this.id}}" class="btn btn-primary">view post</a>
                 </div>
             </div>
           </div>
       {{/each}}
-    {{/if}}
   </div>
 
   {{#unless posts}}
     <div>
-      <p class="text-center">No posts yet!</p>
+      <h2 class="text-center">No posts yet!</h2>
     </div>
   {{/unless}}
-
 </div>
 
 {{!-- Scripts section --}}
 
-<script type="module" src="/scripts/activity-put-post.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+{{!-- script for enabling markdown syntax for posts/comments --}}
+<script src="/scripts/post-markdown.js"></script>
+
+{{#if participant}}
+  <script type="module" src="/scripts/activity-put-post.js"></script>
+{{/if}}
+
+{{!-- script for displaying time difference --}}
+<script type="module" src="/scripts/activity-timeDifferences.js"></script>
