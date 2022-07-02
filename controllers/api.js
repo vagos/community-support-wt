@@ -11,9 +11,17 @@ exports.getUserStats = async (id) => {
     if (user.length === 0) {
         return {};
     }
-    allComments = await db.query(`SELECT COUNT(*) as cnt , body
+    allComments = await db.query(`SELECT post, body
     FROM comment WHERE comment.creator = ?`, [id]);
-
+    // console.log(allComments)
+    let comments = []
+    for (let i of allComments) {
+        let comment = {
+            postId: i.post,
+            body: i.body
+        }
+        comments.push(comment)
+    }
     allPosts = await db.query(`SELECT COUNT(*) as cnt
     FROM post WHERE post.creator = ?
         `, [id]);
@@ -37,11 +45,11 @@ exports.getUserStats = async (id) => {
         ORDER BY monthYear`, [id]);
     console.log(posts_per_month);
     return {
-        AllTimeComments: allComments,
-        AllTimePosts: allPosts,
+        AllTimeComments: comments,
+        AllTimePosts: allPosts[0].cnt,
         AllTimeParticipation: allActivity,
-        PastMonthComments: pastMonthComments,
-        PastMonthPosts: pastMonthPosts,
+        PastMonthComments: pastMonthComments[0].cnt,
+        PastMonthPosts: pastMonthPosts[0].cnt,
         // PostsPerMonth: posts_per_month,
     };
 }
@@ -54,17 +62,23 @@ exports.getAllPosts = async () => {
 }
 
 exports.getPostStats = async (id) => {
-    post = await db.queryOne('SELECT body, creation_time FROM post WHERE id = ?', [id]);
+    post = await db.queryOne('SELECT body, creator, creation_time FROM post WHERE id = ?', [id]);
     if (post.length === 0) {
         return {}
     }
+    creatorId = post.creator;
+    // console.log(post)
     numberOfComments = await db.query('SELECT COUNT(*) as cnt FROM comment WHERE post = ?', [id]);
     mostRecentComment = await db.query('SELECT body, creation_time FROM comment WHERE post = ? ORDER BY creation_time DESC LIMIT 1', [id]);
-    creatorName = await db.query('SELECT name FROM user WHERE id = ?', [id]);
+    creatorName = await db.query('SELECT name FROM user WHERE id = ?', [creatorId]);
+    creator = {
+        name: creatorName[0].name,
+        id: creatorId,
+    }
     return {
-        numberOfComments: numberOfComments,
-        mostRecentComment: mostRecentComment,
-        creatorName: creatorName,
+        numberOfComments: numberOfComments[0].cnt,
+        mostRecentComment: mostRecentComment[0],
+        creator: creator,
     }
 }
 
@@ -84,10 +98,14 @@ exports.getActivityStats = async (id) => {
     numberOfPosts = await db.query('SELECT COUNT(*) as cnt FROM post WHERE activity = ?', [id]);
     postsIds = await db.query('SELECT id FROM post WHERE activity = ?', [id]);
     mostRecentPost = await db.query('SELECT id , body, creation_time FROM post WHERE activity = ? ORDER BY creation_time DESC LIMIT 1', [id]);
+    let postIds = []
+    for (let i of postsIds) {
+        postIds.push(i.id)
+    }
     return {
-        activityName: activityName,
-        numberOfPosts: numberOfPosts,
-        postsIds: postsIds,
-        mostRecentPost: mostRecentPost,
+        activityName: activityName[0].name,
+        numberOfPosts: numberOfPosts[0].cnt,
+        postsIds: postIds,
+        mostRecentPost: mostRecentPost[0],
     }
 }

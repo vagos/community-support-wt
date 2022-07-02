@@ -50,19 +50,18 @@ router.get('/users', async (req, res) => {
  *             schema:
  *               example:
  *                   AllTimeComments:
- *                    - cnt: 2
- *                      body: "This contains the first ever comment of the user"
- *                   AllTimePosts:
- *                    - cnt: 1
+ *                    - postId: 1
+ *                      body: "User comment"
+ *                    - postId: 1
+ *                      body: "another comment"
+ *                   AllTimePosts: 1
  *                   AllTimeParticipation:
  *                    - name: "First Joined Activity"
  *                      points: 2
  *                    - name: "Second Joined Activity"
  *                      points: 1
- *                   PastMonthComments:
- *                    - cnt: 3
- *                   PastMonthPosts:
- *                    - cnt: 2  
+ *                   PastMonthComments: 3
+ *                   PastMonthPosts: 1  
  */
 router.get('/users/:id', async (req, res) => {
     stats = await controller.getUserStats(req.params.id);
@@ -82,8 +81,10 @@ router.get('/users/:id', async (req, res) => {
  *           application/json:
  *             schema:
  *               example:
- *                  id: 1
+ *                - id: 1
  *                  name: "Post title here"
+ *                - id: 2
+ *                  name: "Second Post title here"
  */
 router.get('/posts', async (req, res) => {
     posts = await controller.getAllPosts();
@@ -110,24 +111,72 @@ router.get('/posts', async (req, res) => {
  *           application/json:
  *             schema:
  *               example:
- *                   numberOfComments:
- *                      cnt: 1
+ *                   numberOfComments: 1
  *                   mostRecentComment:
  *                      body: "Comment body here"
  *                      creation_time: "2022-04-17T21:00:00.000Z"
- *                   creatorName:
+ *                   creator:
  *                      name: "Post creator name here" 
+ *                      id: 2
  */
 router.get('/posts/:id', async (req, res) => {
     stats = await controller.getPostStats(req.params.id);
     res.json(stats);
 })
 
+/**
+ * @swagger
+ * /api/activity:
+ *   get:
+ *     summary: Returns all activities
+ *     tags: [Activities]
+ *     responses:
+ *       200:
+ *         description: list of all activities
+ *         content:
+ *           application/json:
+ *             schema:
+ *               example:
+ *                - name: "Activity Name"
+ *                  id: 1
+ *                - name: "Another Activity Name"
+ *                  id: 2
+ */
 router.get('/activity', async (req, res) => {
     activities = await controller.getAllActivities();
     res.json(activities);
 })
 
+/**
+ * @swagger
+ * /api/activity/{activityId}:
+ *   get:
+ *     summary: Return data for a specific activity
+ *     tags: [Activities]
+ *     parameters:
+ *     - in: path
+ *       name: activityId
+ *       description: Activity id to retrieve
+ *       required: true
+ *       schema:
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: data of a specific activity
+ *         content:
+ *           application/json:
+ *             schema:
+ *               example:
+ *                   activityName: "Name here"
+ *                   numberOfPosts: 2
+ *                   postsIds:
+ *                    - 1
+ *                    - 2
+ *                   mostRecentPost:
+ *                      id: 2
+ *                      body: "This is the body of the most recent post in this activity"
+ *                      creation_time: "2022-12-05T22:00:00.000Z"
+ */
 router.get('/activity/:id', async (req, res) => {
     stats = await controller.getActivityStats(req.params.id);
     res.json(stats);
