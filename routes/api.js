@@ -61,7 +61,7 @@ router.get('/users', async (req, res) => {
  *                      points: 1
  *                   PastMonthComments:
  *                    - cnt: 3
- *                   PastMonthComments:
+ *                   PastMonthPosts:
  *                    - cnt: 2  
  */
 router.get('/users/:id', async (req, res) => {

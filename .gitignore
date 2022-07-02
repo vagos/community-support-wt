@@ -16,6 +16,7 @@ docs/presentation/build
 
 testing
 
+dev/schema.sql
 #All the latex aux files (Remember to make vscode latex create build folder for these files)
 main.aux
 main.bbl
