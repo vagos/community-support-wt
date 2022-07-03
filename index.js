@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
 const flash = require('connect-flash');
+var fs = require('fs')
+var path = require('path')
 
 const SQLiteStore = require('connect-sqlite3')(session); // store for sessions
 
@@ -21,7 +23,10 @@ const port = process.env.NODE_DOCKER_PORT || 8080;
 // Intermediary for public files 
 app.use(express.static(__dirname + '/public'));
 
-app.use(logger('dev'));
+// Logging
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'dev/access.log'), { flags: 'a' })
+app.use(logger('dev', { stream: accessLogStream }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
