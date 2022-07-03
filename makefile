@@ -2,4 +2,7 @@ all:
 	npm install
 
 run:
-	find . -name '*.js' | entr -r node index.js
+	find . -not \( -path "./db/*" -prune \) -name '*.js' | entr -r node index.js
+
+docker:
+	docker-compose start
