@@ -22,14 +22,27 @@ exports.getUserStats = async (id) => {
         }
         comments.push(comment)
     }
-    allPosts = await db.query(`SELECT COUNT(*) as cnt
-    FROM post WHERE post.creator = ?
-        `, [id]);
-
+    allPosts = await db.query(`SELECT id, name, creation_time FROM post 
+    WHERE creator = ?`, [id]);
+    let posts = [];
+    for (let i of allPosts) {
+        let post = {
+            postId: i.id,
+            name: i.name,
+            creation_time: i.creation_time,
+        }
+        posts.push(post);
+    }
     allActivity = await db.query(`SELECT activity.name, COUNT(*) as points
-        FROM post JOIN activity ON post.activity = activity.id WHERE creator =
+        FROM post JOIN activity ON post.activity = activity.id  WHERE creator =
         ? GROUP BY post.activity;`
         , [id]);
+    joinedActivities = await db.query(`SELECT activity.name, activity.id, participation.join_date
+    FROM activity JOIN participation ON activity.id = participation.activity
+    WHERE participation.user = ?;`, [id]);
+
+
+    // joinedActivity = await db.query(`SELECT name, joined_date FROM activity WHERE `)sssssssssssssssss
     pastMonthComments = await db.query(`SELECT COUNT(*) as cnt FROM comment WHERE comment.creator = ? 
     AND DATEDIFF(comment.creation_time, CURDATE()) <= 31`, [id]);
     pastMonthPosts = await db.query(`SELECT COUNT(*) as cnt FROM post WHERE post.creator = ? 
@@ -43,11 +56,12 @@ exports.getUserStats = async (id) => {
         FROM comment WHERE comment.creator = ?
         GROUP BY monthYear
         ORDER BY monthYear`, [id]);
-    console.log(posts_per_month);
+    // console.log(posts_per_month);
     return {
         AllTimeComments: comments,
-        AllTimePosts: allPosts[0].cnt,
+        AllTimePosts: posts,
         AllTimeParticipation: allActivity,
+        JoinedActivities: joinedActivities,
         PastMonthComments: pastMonthComments[0].cnt,
         PastMonthPosts: pastMonthPosts[0].cnt,
         // PostsPerMonth: posts_per_month,
