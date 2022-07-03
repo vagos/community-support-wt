@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS participation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user INT,
     activity INT,
-    join_date DATETIME,
+    join_date DATETIME NOT NULL DEFAULT CURDATE(),
     FOREIGN KEY (user)
         REFERENCES user(id)
             ON UPDATE CASCADE
@@ -230,8 +230,8 @@ def create_post():
     return sql
 
 def create_participation():
-    row = (create_fk("user", "id"), create_fk("activity", "id"))
-    sql = "INSERT INTO participation(user, activity) VALUES(%s, %s);" % row
+    row = (create_fk("user", "id"), create_fk("activity", "id") , create_date())
+    sql = "INSERT INTO participation(user, activity, join_date) VALUES(%s, %s, '%s');" % row
     return sql
 
 def create_comment():
