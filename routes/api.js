@@ -54,12 +54,25 @@ router.get('/users', async (req, res) => {
  *                      body: "User comment"
  *                    - postId: 1
  *                      body: "another comment"
- *                   AllTimePosts: 1
+ *                   AllTimePosts: 
+ *                    - postId: 1
+ *                      name: "Post name created by this user"
+ *                      creation_time: "2022-07-25T21:00:00.000Z"
+ *                    - postId: 2
+ *                      name: "Another post created by this user"
+ *                      creation_time: "2021-07-25T21:00:00.000Z"
  *                   AllTimeParticipation:
  *                    - name: "First Joined Activity"
  *                      points: 2
  *                    - name: "Second Joined Activity"
  *                      points: 1
+ *                   JoinedActivities:
+ *                    - name: "First Joined Activity"
+ *                      id: 1
+ *                      join_date: "2020-07-25T21:00:00.000Z"
+ *                    - name: "Second Joined Activity"
+ *                      id: 2
+ *                      join_date: "2020-08-25T21:00:00.000Z"
  *                   PastMonthComments: 3
  *                   PastMonthPosts: 1  
  */
