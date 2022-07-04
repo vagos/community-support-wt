@@ -1,5 +1,7 @@
 BIN = "node_modules/.bin"
 
+.PHONY: clean run test docker
+
 all:
 	npm install
 
@@ -13,3 +15,6 @@ test:
 docker:
 	docker-compose build
 	docker-compose start
+
+clean:
+	rm -r node_modules
