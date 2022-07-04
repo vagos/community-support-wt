@@ -29,3 +29,5 @@ services:
       - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
       - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=3306
+    volumes:
+      - ./dev/access.log:access.log

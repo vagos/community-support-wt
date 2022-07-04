@@ -25,7 +25,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Logging
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'dev/access.log'), { flags: 'a' })
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(logger('dev', { stream: accessLogStream }));
 
 app.use(express.json());
