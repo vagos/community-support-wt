@@ -10,5 +10,8 @@ test:
 	./$(BIN)/jshint ./ --exclude node_modules,db
 	./$(BIN)/jest --forceExit
 
+test-win:
+	npm run test
+
 docker:
 	docker-compose start
