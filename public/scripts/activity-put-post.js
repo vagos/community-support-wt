@@ -8,7 +8,7 @@ function getAllPostTitles(){
 
     const all_posts = document.querySelectorAll(".post-title");
 
-    const all_post_titles = new Array();
+    const all_post_titles = [];
 
     for (let activity of all_posts){
         all_post_titles.push(activity.innerHTML);

@@ -1,4 +1,9 @@
 BIN = "node_modules/.bin"
+SETTING = "production"
+
+.PHONY: clean run test docker
+
+export $(SETTING)
 
 all:
 	npm install
@@ -14,4 +19,8 @@ test-win:
 	npm run test
 
 docker:
+	docker-compose build
 	docker-compose start
+
+clean:
+	rm -r node_modules

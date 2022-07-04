@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 
     res.render('home', {title:'home', 
         activities: activities,
-        users, users,
+        users: users,
         authenticated: req.isAuthenticated()});
 });
 
