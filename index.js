@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
 const flash = require('connect-flash');
+var fs = require('fs')
+var path = require('path')
 
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
@@ -24,7 +26,10 @@ const port = process.env.NODE_DOCKER_PORT || 8080;
 // Intermediary for public files 
 app.use(express.static(__dirname + '/public'));
 
-app.use(logger('dev'));
+// Logging
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(logger('dev', { stream: accessLogStream }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -60,9 +65,10 @@ if (process.env.NODE_ENV !== 'test') {
             // db.fill();
         });
 
+server = app.listen(port, async () => {
+    console.log(`Example app listening on port ${port}`);
 
     });
-}
 
 const options = {
     definition: {
@@ -93,4 +99,7 @@ const specs = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 
-module.exports = app;
+module.exports = { 
+    app: app,
+    server: server,
+}

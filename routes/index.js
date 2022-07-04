@@ -35,9 +35,8 @@ router.get('/', async (req, res) => {
     res.render('home', {
         title: 'home',
         activities: activities,
-        users, users,
-        authenticated: req.isAuthenticated()
-    });
+        users: users,
+        authenticated: req.isAuthenticated()});
 });
 
 module.exports = router;

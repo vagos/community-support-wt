@@ -20,7 +20,7 @@ const query = util.promisify(connection.query).bind(connection);
 
 async function queryOne(sql, args) {
     rows = await query(sql, args);
-    return rows.length ? rows[0] : new Array();
+    return rows.length ? rows[0] : [];
 }
 
 async function fill() {

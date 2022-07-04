@@ -8,7 +8,7 @@ function getAllActivityTitles(){
 
     const all_activities = document.querySelectorAll(".activity-title");
 
-    const all_activity_titles = new Array();
+    const all_activity_titles = [];
 
     for (let activity of all_activities){
         all_activity_titles.push(activity.innerHTML);

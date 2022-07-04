@@ -16,8 +16,10 @@ services:
   app:
     depends_on:
       - mysqldb
-    restart: unless-stopped
+    image: "ghcr.io/vagos/webdevproject:latest"
     build: .
+    restart: unless-stopped
+    container_name: app
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
@@ -27,3 +29,5 @@ services:
       - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
       - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=3306
+    volumes:
+      - ./dev/access.log:access.log

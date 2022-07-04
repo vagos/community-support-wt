@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "jest": "^28.1.0",
+    "jshint": "^2.13.4",
     "supertest": "^6.2.3"
   }
 }
