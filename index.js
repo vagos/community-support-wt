@@ -55,21 +55,19 @@ app.set('view engine', 'hbs');
 app.set('views', './views')
 
 app.use('/', index_router);
+var server = null;
 if (process.env.NODE_ENV !== 'test') {
 
-    app.listen(port, async () => {
+    server = app.listen(port, async () => {
         console.log(`Example app listening on port ${port}`);
+    });
 
-        db.connection.connect((err) => {
-            if (err) throw err;
-            // db.fill();
-        });
-    })
+    db.connection.connect((err) => {
+        if (err) throw err;
+        // db.fill();
+    });
 }
-server = app.listen(port, async () => {
-    console.log(`Example app listening on port ${port}`);
 
-});
 
 const options = {
     definition: {
