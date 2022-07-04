@@ -39,3 +39,7 @@ If you want an easier time setting up the application, you can deploy it using D
 $ docker-compose build
 $ docker-compose up
 ```
+## Public API Documentation
+
+The api can be accessed by making requests at 'https:/site.url/api'
+The available data that can be accessed is:

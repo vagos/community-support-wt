@@ -8,6 +8,9 @@ const flash = require('connect-flash');
 var fs = require('fs')
 var path = require('path')
 
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+
 const SQLiteStore = require('connect-sqlite3')(session); // store for sessions
 
 require('dotenv').config();
@@ -52,17 +55,49 @@ app.set('view engine', 'hbs');
 app.set('views', './views')
 
 app.use('/', index_router);
+if (process.env.NODE_ENV !== 'test') {
+
+    app.listen(port, async () => {
+        console.log(`Example app listening on port ${port}`);
+
+        db.connection.connect((err) => {
+            if (err) throw err;
+            // db.fill();
+        });
 
 server = app.listen(port, async () => {
     console.log(`Example app listening on port ${port}`);
 
-    db.connection.connect((err) => {
-        if (err) throw err;
-        // db.fill();
     });
-    
 
-});
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Library API",
+            version: "1.0.0",
+            description: "A simple Express Library API",
+            // termsOfService: "http://example.com/terms/",
+            contact: {
+                name: "API Support",
+                // url: "http://www.exmaple.com/support",
+                email: "konstanto.k@upnet.gr",
+            },
+        },
+
+        servers: [
+            {
+                url: "http://localhost:8080",
+                description: "My API Documentation",
+            },
+        ],
+    },
+    apis: ["./routes/api.js"],
+};
+
+const specs = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
 
 module.exports = { 
     app: app,
