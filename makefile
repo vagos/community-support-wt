@@ -1,6 +1,9 @@
 BIN = "node_modules/.bin"
+SETTING = "production"
 
 .PHONY: clean run test docker
+
+export $(SETTING)
 
 all:
 	npm install
