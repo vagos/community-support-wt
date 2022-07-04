@@ -124,10 +124,13 @@ router.get('/posts', async (req, res) => {
  *           application/json:
  *             schema:
  *               example:
- *                   numberOfComments: 1
- *                   mostRecentComment:
- *                      body: "Comment body here"
+ *                   comments:
+ *                    - body: "Comment body here"
  *                      creation_time: "2022-04-17T21:00:00.000Z"
+ *                      creator: 1
+ *                    - body: "Another Comment body here"
+ *                      creation_time: "2022-04-17T21:00:00.000Z"
+ *                      creator: 2
  *                   creator:
  *                      name: "Post creator name here" 
  *                      id: 2
