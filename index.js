@@ -64,11 +64,12 @@ if (process.env.NODE_ENV !== 'test') {
             if (err) throw err;
             // db.fill();
         });
-
+    })
+}
 server = app.listen(port, async () => {
     console.log(`Example app listening on port ${port}`);
 
-    });
+});
 
 const options = {
     definition: {
@@ -99,7 +100,7 @@ const specs = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 
-module.exports = { 
+module.exports = {
     app: app,
     server: server,
 }

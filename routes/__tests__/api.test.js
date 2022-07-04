@@ -1,6 +1,8 @@
 const request = require('supertest');
-const app = require('../../index');
+const index = require('../../index');
 
+const app = index.app;
+const server = index.server;
 
 test('return users', async () => {
 
