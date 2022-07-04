@@ -92,3 +92,7 @@ $ make run
 $ docker-compose build
 $ docker-compose up
 ```
+## Public API Documentation
+
+The api can be accessed by making requests at 'https:/site.url/api'
+The available data that can be accessed is:
