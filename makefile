@@ -11,4 +11,5 @@ test:
 	./$(BIN)/jest --forceExit
 
 docker:
+	docker-compose build
 	docker-compose start

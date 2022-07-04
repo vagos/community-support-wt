@@ -16,8 +16,10 @@ services:
   app:
     depends_on:
       - mysqldb
-    restart: unless-stopped
+    image: "ghcr.io/vagos/webdevproject:latest"
     build: .
+    restart: unless-stopped
+    container_name: app
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
