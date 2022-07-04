@@ -62,8 +62,7 @@ exports.getUserStats = async (id) => {
 
     activity_participation = await db.query(`SELECT activity.name, COUNT(*) as points
         FROM post JOIN activity ON post.activity = activity.id WHERE creator =
-        ? GROUP BY post.activity;`
-        , [id]);
+        ? GROUP BY post.activity;`, [id]);
 
     return {
         comments: comments_per_month,

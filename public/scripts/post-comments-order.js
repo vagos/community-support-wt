@@ -21,7 +21,7 @@ function putReplyUnderComment(reply) {
     comment.querySelector(".reply-comments").appendChild(reply);
 }
 
-for (reply of replyComments){
+for (var reply of replyComments){
 
     putReplyUnderComment(reply);
 }
