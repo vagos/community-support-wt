@@ -160,7 +160,7 @@ test('get data for an activity with id 1', async () => {
     expect(data).toBeDefined();
     expect(data.activityName).toEqual(expect.any(String))
     expect(data.numberOfPosts).toEqual(expect.any(Number))
-    if (data.postsIds > 0) {
+    if (data.postsIds.length > 0) {
         expect(data.postsIds).toEqual(
             expect.arrayContaining([
                 expect.any(Number)

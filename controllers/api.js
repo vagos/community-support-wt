@@ -35,8 +35,7 @@ exports.getUserStats = async (id) => {
     }
     allActivity = await db.query(`SELECT activity.name, COUNT(*) as points
         FROM post JOIN activity ON post.activity = activity.id  WHERE creator =
-        ? GROUP BY post.activity;`
-        , [id]);
+        ? GROUP BY post.activity;`, [id]);
     joinedActivities = await db.query(`SELECT activity.name, activity.id, participation.join_date
     FROM activity JOIN participation ON activity.id = participation.activity
     WHERE participation.user = ?;`, [id]);
