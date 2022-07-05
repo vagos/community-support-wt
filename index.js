@@ -89,6 +89,10 @@ const options = {
                 url: "http://localhost:8080",
                 description: "My API Documentation",
             },
+            {
+                url: "http://gerousia.xyz:8080",
+                description: "API DOCS EPIC?",
+            },
         ],
     },
     apis: ["./routes/api.js"],
