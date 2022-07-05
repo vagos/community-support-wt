@@ -40,6 +40,13 @@ $ docker-compose build
 $ docker-compose up
 ```
 ## Public API Documentation
-
-The api can be accessed by making requests at 'https:/site.url/api'
+The API Docs are available at 'https://site.url/api-docs'
+The api can be accessed by making requests at 'https:/site.url/api/{data}'
 The available data that can be accessed is:
+- /users
+- /users/{id}
+- /posts
+- /posts/{id}
+- /activity
+- /activity/{id}
+How the data is returned can be found at the docs with examples.
