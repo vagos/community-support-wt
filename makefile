@@ -11,12 +11,15 @@ all:
 run:
 	find . -not \( -path "./db/*" -prune \) -name '*.js' | entr -r node index.js
 
+run-win:
+	npm start
+
 test:
 	./$(BIN)/jshint ./ --exclude node_modules,db
 	./$(BIN)/jest --forceExit
 
 test-win:
-	npm run test
+	npm test
 
 docker:
 	docker-compose build

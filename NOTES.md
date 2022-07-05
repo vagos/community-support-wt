@@ -52,6 +52,8 @@ After that we referance it using /assets/css/myfile.css
 
 - Reloading and resting forms (https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button)
 
+- Weird Problem with default values not being able to be current date in mysql, workaround in link (https://stackoverflow.com/questions/20461030/current-date-curdate-not-working-as-default-date-value)
+
 ### Styling notes
 
 - badges in bootstrap are a nice way to add notificcations (https://getbootstrap.com/docs/5.1/components/badge/)

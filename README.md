@@ -21,8 +21,23 @@ This is an implementation of a simple forum website.
 * SQL (MySQL)
 * Handlebars
 * Bootstrap 
+* Swagger
+* Docker
+
+## Setting up the database
+
+Go to dev folder and run db.sh
+
+_If you want to create new data run the python script. (But be careful if you are not using mariadb, you need to alter the default value in participation)_
 
 ## Running
+
+### Windows
+
+```
+$ make
+$ make run-win
+```
 
 ### Linux
 
