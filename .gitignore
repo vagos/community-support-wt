@@ -13,6 +13,7 @@ coverage
 
 docs/report/build
 docs/presentation/build
+docs/presentation-apt/build
 
 testing
 
