@@ -30,4 +30,4 @@ services:
       - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=3306
     volumes:
-      - ./dev/access.log:access.log
+      - ./dev/access.log:/access.log

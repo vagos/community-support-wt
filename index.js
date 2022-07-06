@@ -64,7 +64,7 @@ if (process.env.NODE_ENV !== 'test') {
 
     db.connection.connect((err) => {
         if (err) throw err;
-        // db.fill();
+        db.fill();
     });
 }
 
