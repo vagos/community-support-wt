@@ -2,6 +2,8 @@
 
 This is an implementation of a simple forum website.
 
+Read the [Documentation](https://github.com/vagos/webdevproject/blob/master/docs/Documentation.pdf) (in Greek).
+
 ![The forum home page.](/docs/media/home.png)
 
 ## Features
